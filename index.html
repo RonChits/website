@@ -21,6 +21,12 @@
     align-items: center;
     transition: height 1s ease-in-out;
     }
+  .icon-container {
+    position: absolute;
+    bottom: 20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+  }
   .curtain-text {
     position: absolute;
     bottom: 18px;
@@ -175,8 +181,8 @@ html {
 <body style="background-color: #ADD8E6;">
 <div class="curtain">
   <div class="curtain-text">
-    <div id="intro"><h1>My Portfolio</h1>
-      <i class="fa-solid fa-arrow-down"></i>
+    <div id="intro"><h1>My Portfolio</h1></div>
+      <div><i class="fa-solid fa-arrow-down"></i>
       </div>
     </div>
 </div>
