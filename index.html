@@ -6,8 +6,34 @@
 <title>About Section</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <style>
+  .curtain {
+    position: fixed; /* This is crucial to make the curtain stay in place while scrolling */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Use viewport width for full coverage */
+    height: 100vh; /* Use viewport height for full coverage */
+    background-color: #102034;
+    z-index: 9999; /* Ensure it's above other elements */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: height 0.5s ease-in-out;
+    }
+  .curtain-text {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    }
+  .arrow-container {
+    text-align: center; /* Center the icon */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    }
   .about-section {
     text-align: center;
     padding: 50px 0;
@@ -147,7 +173,21 @@ html {
 
 </head>
 <body style="background-color: #ADD8E6;">
+<div class="curtain">
+  <div class="curtain-text">
+    <div id="intro"><h1>My Portfolio</h1>
+      <i class="fa-solid fa-arrow-down"></i>
+      </div>
+    </div>
+</div>
+<script>
+    const curtain = document.querySelector('.curtain');
 
+    curtain.addEventListener('click', () => {
+      curtain.style.height = '0';
+    });
+  </script>
+  
 <section id='about' class="about-section">
   <div class="container" style="background-color: #ADD8E6;">
     <h2>About</h2>
