@@ -1,504 +1,332 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Section</title>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-<style>
-  .curtain {
-    position: fixed; /* This is crucial to make the curtain stay in place while scrolling */
-    top: 0;
-    left: 0;
-    width: 100vw; /* Use viewport width for full coverage */
-    height: 98vh; /* Use viewport height for full coverage */
-    background-color: hsla(210, 50%, 20%, 0.95);
-    z-index: 9999; /* Ensure it's above other elements */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: height 1s ease-in-out;
-    }
-  
-  .curtain-text {
-    position: absolute;
-    bottom: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: white;
-    font-size: 18px;
-    }
-  .dark-purple-paragraph {
-    color: white;
-    background-color: #28004B;
-    text-align: center;
-    padding: 50px 0;
-    max-width: 70%; /* Adjust this value as needed */
-    margin: 0 auto;
-  }
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>About Ronald</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
 
-  .arrow-container {
-    text-align: center; /* Center the icon */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    }
-  .about-section {
-    text-align: center;
-    padding: 50px 0;
-    max-width: 70%; /* Adjust this value as needed */
-    margin: 0 auto;
-  }
-  .about-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: white;
-  }
-  .about-section img {
-    width: 200px; /* Adjust the size as needed */
-    height: 180px;
-    border-radius: 50%; /* Makes the image round */
-    margin-bottom: 20px;
-  }
-  .about-section p {
-    background-color:#28004B ;
-    color: white;
-  }
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
 
-  /* Additional CSS for Projects Section */
-.projects-section h2 {
-  margin-bottom: 40px;
-  font-size: 2.5rem;
-  color: white;
-}
-.card {
-  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Adds a subtle shadow around the card */
-}
-.card-img-top {
-  max-height: 180px; /* Adjust this value to fit the image properly in the card */
-  object-fit: cover; /* This makes sure the image covers the area properly */
-  background-color: #333399;
-}
-.card-body {
-  padding: 15px;
-}
-.card-title {
-  font-size: 1.25rem;
-}
-.card-text {
-  margin-bottom: 15px;
-}
+				<!-- Intro -->
+					<div id="intro">
+						<h1>Welcome!</h1>
+						<p>My Machine learning and Other projects</p>
+						<ul class="actions">
+							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
 
-/* Additional CSS for Skills Section */
-.skills-section h2 {
-  margin-bottom: 40px;
-  font-size: 2.5rem;
-  color: white;
-}
-.skills-section .card {
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-.skills-section .card-img-top {
-  padding: 20px; /* Add padding around your images if needed */
-  background-color: #343a40; /* Adjust the background color if your images have transparent areas */
-  height: 180px; /* Fixed height for consistency */
-  object-fit: contain; /* This will make sure the image is scaled properly within the container */
-}
-.skills-section .card-body {
-  padding: 15px;
-}
-.skills-section .card-title {
-  font-size: 1.25rem;
-  margin-bottom: 15px;
-}
-.skills-section .btn-outline-primary {
-  color: #007bff;
-  border-color: #007bff;
-}
-.skills-section .btn-outline-primary:hover {
-  color: #ADD8E6;
-  background-color: #007bff;
-  border-color: #007bff;
-}
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">My journey</a>
+					</header>
 
-/* Additional CSS for Contact Section */
-.contact-section {
-  padding: 50px 0;
-}
-.contact-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-}
-.contact-section p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-.social-icon {
-  width: 50px; /* Size of your icons */
-  margin-bottom: 10px;
-}
-/* Hover effect for icons */
-.social-icon:hover {
-  opacity: 0.7;
-}
-/* Style for links in the Contact section */
-.contact-section a {
-  color: #fff;
-  text-decoration: none; /* Removes underline from links */
-  display: inline-block; /* Allows for margin on the bottom */
-  margin-bottom: 10px;
-}
-.contact-section a:hover {
-  color: #ddd; /* Color when hovering over the link */
-}
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="index.html">My projects and skills.</a></li>
+							<li class="active"><a href="generic.html">My story.</a></li>
 
-/* CSS for Sticky Navbar */
-.navbar {
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Adds a shadow for depth */
-}
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" class="icon brands fa-linkedin"><span class="label">Instagram</span></a></li>
+							<li><a href="https://github.com/RonChits" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="mailto:r.i.chitsatso@gmail.com" class="icon fa-envelope"><span class="label">Gmail</span></a></li>
+							<li><a href="https://twitter.com/Ronald35032455" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="https://www.youtube.com/@RonaldChitsatso" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
+						</ul>
+					</nav>
 
-/* Ensure padding is added to body to avoid content being hidden behind the navbar */
-body {
-  padding-top: 56px; /* Adjust this value based on the height of your navbar */
-}
+				<!-- Main -->
+					<div id="main">
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
-}
+						<!-- Featured Post -->
+							<article class="post featured">
+								<header class="major">
+									<h3><a href="#">Hi! My name is Ronald<br />
+									and welcome to my page.</a></h3>
+									<p>Financial Engineering student at Harare Institute of Technology.<br />
+										As Financial Engineer I believe in data and numbers since there are reasons behind them.<br />
+                                   This belief has grown into a deep passion over the past few years to find hidden patterns in big data. <br />
+										Now, looking for an opportunity to work with my passion until I retire.</p>
+								</header>
+								<a href="#" class="image main"><img src="images/me.png" alt="" /></a>
+								<header class="major">
+								<p> My Background<br />
+										-Bachelor's of Financial Engineering at Harare Institute of Technology <br />
+										-Applied Data Science lab holder at WorldQuant University</p>
+								<ul class="actions special">
+									<li><a href="generic.html" class="button large">Full Story</a></li>
+								</ul>
+								</header>
+							</article>
+							<section>
+								<header>
+										<h2><a href="#">Projects.<br/></a></h2>
+									</header>
 
-/* Style for navigation bar links */
-.navbar-nav .nav-link {
-  color: white;
-}
+								</section>
+						<!-- Posts -->
+							<section class="posts">
+								<article>
+									<header>
+										<h3><a href="#">HOUSING IN MEXICO.<br/></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/mexico.png" alt="" /></a>
+									<p>I used a dataset of 21,000 properties to determine if real estate prices are
+										influenced more by property size or location. Importing and cleaning data from a
+										CSV file, build data visualizations, and examine the relationship between two
+										variables using correlation.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="https://github.com/RonChits/Default-Probabaility">Loan classification.<br/></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/loan.jpg" alt="" /></a>
+									<p>This project aims to predict loan applicant defaulting for a company using
+										machine learning techniques. Problem statement: Financial institutions face
+										significant risks due to loan defaults. Accurately predicting probability of
+										default on loans is critical for risk management and strategic planning..</p>
+									<ul class="actions special">
+										<li><a href="https://github.com/RonChits/Default-Probabaility" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">VOLATILITY FORECASTING IN INDIA.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/india.png" alt="" /></a>
+									<p>I created a GARCH time series model to predict asset volatility. I acquired
+										stock data through an API, clean and store it in a SQLite database, and build
+										API to serve model predictions.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">A/B TESTING AT WORLDQUANT UNIVERSITY.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/WQU_logo_color.png" alt="" /></a>
+									<p>I conducted a chi-square test to determine if sending an email can increase
+										program enrollment at WQU. I build custom Python classes to implement an ETL
+										process, and creating an interactive data application following a three-tiered
+										design pattern..</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">CUSTOMER SEGMENTATION IN THE US.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/us.png" alt="" /></a>
+									<p>I built a k-means model to cluster US consumers into groups. I used principal
+										component analysis (PCA) for data visualization, and I created an interactive
+										dashboard with Plotly Dash.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">BANKRUPTCY IN POLAND.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/poland.png" alt="" /></a>
+									<p>I built random forest and gradient boosting models to predict whether a company
+										will go bankrupt. I navigated the Linux command line, address imbalanced data
+										through resampling, and consider the impact of performance metrics precision and
+										recall.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">EARTHQUAKE DAMAGE IN NEPAL.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/nepal.png" alt="" /></a>
+									<p>I built logistic regression and decision tree models to predict earthquake damage
+										to buildings. I extracted data from a SQLite database, and reveal the biases in
+										data that can lead to discrimination.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">AIR QUALITY IN NAIROBI.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/nairobi.png" alt="" /></a>
+									<p>I built an ARMA time-series model to predict particulate matter levels in Kenya.
+										I extracted data from a MongoDB database using pymongo, and improve model
+										performance through hyperparameter tuning.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">APARTMENT SALES IN BUENOS AIRES.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/buenos.png" alt="" /></a>
+									<p>I built a linear regression model to predict apartment prices in Argentina. I created
+										a data pipeline to impute missing values and encode categorical features, and
+										they improve model performance by reducing over-fitting.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="https://github.com/RonChits">Barrier option pricing with Pade Scheme(Thesis.)<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/hit4001.png" alt="" /></a>
+									<p>Pricing of options is essential, path-depended options face challenge on solving
+										PDE's or SDE's, barrier options face same problem as the barrier is introduced.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
 
-.navbar-nav .nav-link:hover {
-  color: #f8f9fa; /* Slightly lighter white when hovering over links */
-}
+								</article>
+								<article>
+									<header>
+										<h3><a href="https://github.com/RonChits/Titanic-Survival">Unsinkable Titanic.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/tita.png" alt="" /></a>
+									<p>The project is on famous 1912 titanic accident, deducing an explanation on what made
+										other people to survive and others failing. Problem statement : What sorts of
+										people were more likely to survive?</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
 
-/* Media query for responsive navbar collapsing */
-@media (max-width: 992px) {
-  .navbar-collapse {
-    background-color: #343a40; /* Same as navbar color for seamless look */
-  }
-}
+								</article>
+							</section>
+							<section>
+								<header>
+										<h2><a href="#">Skills.<br/></a></h2>
+									</header>
 
+								</section>
+							<section class="posts">
+								<article>
+									<header>
+										<h3><a href="#"> Python.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/1.png" alt="" /></a>
+									<p>Proficient in Python programming, with experience in [data analysis,machine learning].
+										Skilled in utilizing Python libraries and frameworks for [specific tasks, e.g.,
+										data manipulation, web application development, model building].</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
 
-</style>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">Data Visualization.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/2.png" alt="" /></a>
+									<p>Proficient in Python programming with a strong emphasis on data analysis and visualization.
+										Experienced in utilizing Python libraries such as NumPy, Pandas, Matplotlib, and
+										Seaborn for data manipulation, exploration, and creating compelling visual
+										representations. Skilled in crafting informative and aesthetically pleasing
+										visualizations to uncover trends, patterns, and insights within complex datasets.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
 
-</head>
-<body style="background-color: #28004B;">
-<div class="curtain">
-  <div class="curtain-text">
-    <div id="intro">
-      <h3>My Portfolio</h3>
-      <i class="fas fa-arrow-circle-down"></i>
-    </div>
-  </div>
-</div>
-<script>
-    const curtain = document.querySelector('.curtain');
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">SQL.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/3.png" alt="" /></a>
+									<p>Proficient in SQL for data retrieval and management. Capable of writing efficient
+										SQL queries to extract, clean, and transform data from relational databases.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
 
-    curtain.addEventListener('click', () => {
-      curtain.style.height = '0';
-    });
-  </script>
-  
-<section id='about' class="about-section text-center"  style="background-color: #28004B;>
-  <div class="dark-purple-paragraph">
-    <h2>About</h2>
-    <img src="images/abt.png" alt="About Me">
-    <p>I am a 24-year-old financial engineering graduate with a strong interest in the intersection of finance and
-      technology. My analytical mind and passion for problem-solving drive me to excel in this field.I have a competitive spirit, often comparing financial challenges to a chess game. I enjoy strategizing,
-      anticipating market movements, and calculating risks with precision. </p>
-      <p>My financial acumen is complemented by a solid foundation in data analysis and Python coding. I am skilled at extracting valuable insights from
-      data and building sophisticated models to optimize financial outcomes. Furthermore, my proficiency in software
-      and system development allows me to create innovative solutions to industry challenges.As a young professional, I am eager to explore new opportunities and continuously expand my knowledge.
-      I am excited about the prospect of applying my skills in financial modeling, risk management,
-      or Data Science.</p>
-  </div>
-</section>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">Excel VBA.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/vba.png" alt="" /></a>
+									<p>Excel VBA skills for automating tasks, creating custom functions, and enhancing
+										data analysis capabilities within the Excel environment. Experienced in developing
+										VBA macros to streamline workflows and improve productivity.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
 
-<!-- Projects Section -->
-<section class="projects-section" id="projects" style="background-color: #28004B;">
-  <div class="container" style="background-color: #28004B;" >
-    <h2 class="text-center">Projects..</h2>
-    <div class="row" >
-      <!-- Project 1 -->
-      <div class="col-md-4 mb-4" style="background-color: #28004B;" >
-        <div class="card" >
-          <img src="images/mexico.png" class="card-img-top" alt="Project 1">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">HOUSING IN MEXICO</h5>
-            <p class="card-text"> I used a dataset of 21,000 properties to determine if real
-              estate prices are influenced more by property size or location.  Importing and cleaning data from a CSV
-              file, build data visualizations, and examine the relationship between two variables using correlation.</p>
-            <a href="#" class="btn btn-primary">Blog post</a>
-            <a href="#" class="btn btn-secondary">Link to course or bootcamp</a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 2 -->
-      <div class="col-md-4 mb-4" style="background-color: #28004B;">
-        <div class="card">
-          <img src="images/buenos.png" class="card-img-top" alt="Project 2">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">APARTMENT SALES IN BUENOS AIRES</h5>
-            <p class="card-text">I built a linear regression model to predict
-              apartment prices in Argentina. I created a data pipeline to impute missing values and encode categorical
-              features, and they improve model performance by reducing over-fitting.</p>
-            <a href="#" class="btn btn-primary">Blog post</a>
-            <a href="#" class="btn btn-secondary">Link to course or bootcamp</a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 3 -->
-      <div class="col-md-4 mb-4" style="background-color: #28004B;" >
-        <div class="card" style="background-color: #FFA07A;" >
-          <img src="images/nairobi.png" class="card-img-top" alt="Project 3">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">AIR QUALITY IN NAIROBI</h5>
-            <p class="card-text"> I built an ARMA time-series model to predict
-              particulate matter levels in Kenya. I extracted data from a MongoDB database using pymongo, and improve
-              model performance through hyperparameter tuning.</p>
-            <a href="#" class="btn btn-primary">Blog post</a>
-            <a href="#" class="btn btn-secondary">Link to course or bootcamp</a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 4 -->
-      <div class="col-md-4 mb-4" style="background-color: #28004B;">
-        <div class="card">
-          <img src="images/nepal.png" class="card-img-top" alt="Project 4">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">EARTHQUAKE DAMAGE IN NEPAL</h5>
-            <p class="card-text"> I built logistic regression and decision tree models
-              to predict earthquake damage to buildings. I extracted data from a SQLite database, and reveal the biases
-              in data that can lead to discrimination.</p>
-            <a href="#" class="btn btn-primary">Blog Post</a>
-            <a href="#" class="btn btn-secondary">Link to course or bootcamp</a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 5 -->
-      <div class="col-md-4 mb-4" style="background-color: #28004B;">
-        <div class="card">
-          <img src="images/poland.png" class="card-img-top" alt="Project 5">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">BANKRUPTCY IN POLAND</h5>
-            <p class="card-text">I built random forest and gradient boosting models to
-              predict whether a company will go bankrupt. I navigated the Linux command line, address imbalanced data
-              through resampling, and consider the impact of performance metrics precision and recall.</p>
-            <a href="#" class="btn btn-primary">Blog post</a>
-            <a href="#" class="btn btn-secondary">Link to course or bootcamp</a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 6 -->
-      <div class="col-md-4 mb-4" style="background-color: #28004B;">
-        <div class="card">
-          <img src="images/us.png" class="card-img-top" alt="Project 6">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">CUSTOMER SEGMENTATION IN THE US</h5>
-            <p class="card-text"> I built a k-means model to cluster US consumers
-              into groups. I used principal component analysis (PCA) for data visualization, and I created an
-              interactive dashboard with Plotly Dash.</p>
-            <a href="#" class="btn btn-primary">Blog post</a>
-            <a href="#" class="btn btn-secondary">Link to course or bootcamp</a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 7 -->
-      <div class="col-md-4 mb-4" style="background-color: #28004B;">
-        <div class="card">
-          <img src="images/WQU_logo_color.png" class="card-img-top" alt="Project 7">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">A/B TESTING AT WORLDQUANT UNIVERSITY</h5>
-            <p class="card-text"> I conducted a chi-square test to determine
-              if sending an email can increase program enrollment at WQU. I build custom Python classes to implement
-              an ETL process, and creating an interactive data application following a three-tiered design pattern.</p>
-            <a href="#" class="btn btn-primary">Blog post</a>
-            <a href="#" class="btn btn-secondary">Link to course or bootcamp</a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 8 -->
-      <div class="col-md-4 mb-4" style="background-color: #28004B;">
-        <div class="card">
-          <img src="images/india.png" class="card-img-top" alt="Project 8">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">VOLATILITY FORECASTING IN INDIA</h5>
-            <p class="card-text"> I created a GARCH time series model to predict
-              asset volatility. I acquired stock data through an API, clean and store it in a SQLite database, and
-              build API to serve model predictions.</p>
-            <a href="#" class="btn btn-primary">Blog post</a>
-            <a href="#" class="btn btn-secondary">Link to course or bootcamp</a>
-          </div>
-        </div>
-      </div>
-      <!-- Project 9 -->
-      <div class="col-md-4 mb-4" style="background-color: #28004B;">
-        <div class="card">
-          <img src="images/claxon.png" class="card-img-top" alt="Project 9">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">Claxon Actuaries</h5>
-            <p class="card-text"> This project aims to predict loan applicant defaulting
-              for a company using machine learning techniques. Problem statement: Financial institutions face
-              significant risks due to loan defaults. Accurately predicting probability of default on loans is critical
-              for risk management and strategic planning.</p>
-            <a href="#" class="btn btn-primary">Blog post</a>
-            <a href="https://github.com/RonChits/Default-Probability" class="btn btn-secondary">Source Code</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+								</article>
+
+								</section>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section class="split contact">
+							<section class="alt">
+								<h3>Address</h3>
+								<p>Crowborough North<br />
+								834, Mufakose Harare </p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="#">+263 782522493</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="mailto:r.i.chitsatso@gmail.com">r.i.chitsatso@gmail.com</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="https://github.com/RonChits" class="icon brands alt fa-github"><span class="label">Github</span></a></li>
+									<li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
+									<li><a href="mailto:r.i.chitsatso@gmail.com" class="icon fa-envelope"><span class="label">Gmail</span></a></li>
+									<li><a href="https://twitter.com/Ronald35032455" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="https://www.youtube.com/@RonaldChitsatso" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Ronald</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
 
 
-<!-- Skills Section -->
-<section class="skills-section" id="skills" style="background-color: #28004B;">
-  <div class="container" style="background-color:  #28004B;">
-    <h2 class="text-center">Skills..</h2>
-    <div class="row">
-      <!-- Skill 1 -->
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card">
-          <img src="images/1.png" class="card-img-top" alt="Python">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">Python</h5>
-            <p class="card-text">Proficient in Python programming, with experience in [data
-              analysis,machine learning]. Skilled in utilizing Python libraries and frameworks
-              for [specific tasks, e.g., data manipulation, web application development, model building].</p>
-            <a href="https://github.com/RonChits/Default-Probability" class="btn btn-outline-primary">Link to a sample project</a>
-          </div>
-        </div>
-      </div>
-      <!-- Skill 2 -->
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card">
-          <img src="images/2.png" class="card-img-top" alt="Data Visualization">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">Data Visualization</h5>
-            <p class="card-text">Proficient in Python programming with a strong emphasis on data analysis and
-              visualization. Experienced in utilizing Python libraries such as NumPy, Pandas, Matplotlib, and Seaborn
-              for data manipulation, exploration, and creating compelling visual representations. Skilled in crafting
-              informative and aesthetically pleasing visualizations to uncover trends, patterns, and insights within
-              complex datasets.</p>
-            <a href="https://github.com/RonChits/Default-Probability" class="btn btn-outline-primary">Link to a sample project</a>
-          </div>
-        </div>
-      </div>
-      <!-- Skill 3 -->
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card">
-          <img src="images/3.png" class="card-img-top" alt="SQL">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">SQL</h5>
-            <p class="card-text">Proficient in SQL for data retrieval and management. Capable of writing efficient SQL
-              queries to extract, clean, and transform data from relational databases.</p>
-            <a href="#" class="btn btn-outline-primary">Link to course or bootcamp</a>
-          </div>
-        </div>
-      </div>
-      <!-- Skill 4 -->
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card">
-          <img src="images/vba.png" class="card-img-top" alt="Excel VBA">
-          <div class="card-body" style="background-color: #FFA07A;" >
-            <h5 class="card-title">Excel VBA</h5>
-            <p class="card-text">Excel VBA skills for automating tasks, creating custom functions, and enhancing data
-              analysis capabilities within the Excel environment. Experienced in developing VBA macros to streamline
-              workflows and improve productivity.</p>
-            <a href="#" class="btn btn-outline-primary">Link to course or bootcamp</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 
-<!-- Contact Me Section -->
-<section id="contact" class="contact-section text-center text-white bg-dark">
-  <div class="container">
-    <h2>Contact Me</h2>
-    <div class="row">
-      <div class="col-lg-6">
-        <p><i class="fas fa-envelope"></i> r.i.chitsatso@gmail.com</p>
-      </div>
-      <div class="col-lg-6">
-        <p><i class="fas fa-phone"></i>+263782522493</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-2 col-md-4 mb-4">
-        <a href="https://linkedin.com/in/ronald-chitsatso-6b491a237" target="_blank">
-          <img src="images/linkedin.png" alt="LinkedIn" class="social-icon">
-          LinkedIn
-        </a>
-      </div>
-      <div class="col-lg-2 col-md-4 mb-4">
-        <a href="https://twitter.com/Ronald35032455" target="_blank">
-          <img src="images/twitter.png" alt="Twitter" class="social-icon">
-          Twitter
-        </a>
-      </div>
-      <div class="col-lg-2 col-md-4 mb-4">
-        <a href="https://github.com/RonChits/Default-Probability" target="_blank">
-          <img src="images/github.png" alt="GitHub" class="social-icon">
-          GitHub
-        </a>
-      </div>
-      <div class="col-lg-2 col-md-4 mb-4">
-        <a href="https://medium.com/@r.i.chitsatso" target="_blank">
-          <img src="images/medium.png" alt="Medium" class="social-icon">
-          Medium
-        </a>
-      </div>
-      <div class="col-lg-2 col-md-4 mb-4">
-        <a href="https://youtube.com/@RonaldChitsatso" target="_blank">
-          <img src="images/youtube.png" alt="YouTube" class="social-icon">
-          YouTube
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Sticky Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#home">Ronald Chitsatso: Portfolio</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#home">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#projects">Projects</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#skills">Skills</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#contact">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
-<!-- Bootstrap JS and dependencies (jQuery and Popper) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.5/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+	</body>
 </html>
