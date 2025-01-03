@@ -148,7 +148,7 @@ input, select, textarea {
 	}
 
 	body, input, select, textarea {
-		font-family: "Georgia", Merriweather, serif;
+		font-family: sans-serif, Merriweather, serif;
 		font-weight: 300;
 		font-size: 1rem;
 		line-height: 2.375;
