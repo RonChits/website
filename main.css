@@ -32,7 +32,20 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 2;
 }
+.circular-logo {
+    display: inline-block; /* Allows width/height and padding */
+    background-color: #f0f0f0; /* Choose your background color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 20px; /* Adjust the radius for circular edges */
+    text-decoration: none; /* Remove underline from link */
+    color: #333; /* Choose your text color */
+    font-size: 1.5em; /*Adjust font size*/
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
 
+.circular-logo:hover {
+    background-color: #e0e0e0; /* Change background color on hover */
+}
 ol, ul {
 	list-style: none;
 }
