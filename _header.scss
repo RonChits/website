@@ -40,7 +40,7 @@
 			padding: 1rem 1.75rem;
 			text-transform: uppercase;
 			visibility: visible;
-			border-radius: 100px;
+			
 
 			&:hover {
 				border-color: _palette(invert, accent) !important;
@@ -61,6 +61,7 @@
 			.logo {
 				font-size: 1.75rem;
 				border-width: 3px !important;
+				border-radius: 100px;
 			}
 		}
 	}
