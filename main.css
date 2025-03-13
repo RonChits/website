@@ -33,8 +33,6 @@ body {
 	line-height: 2;
 }
 
-.circular-logo:hover {
-    background-color: #e0e0e0; /* Change background color on hover */
 }
 ol, ul {
 	list-style: none;
