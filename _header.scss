@@ -47,9 +47,7 @@
 				color: _palette(invert, accent) !important;
 			}
 		}
-		.circular-logo {
-			@extend .logo; // Inherit styles from .logo
-			border-radius: 100px; // Add circular edges
+		
 		}
 
 		@include breakpoint('<=medium') {
