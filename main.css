@@ -167,9 +167,7 @@ input, select, textarea {
 		a:hover {
 			border-bottom-color: transparent;
 		}
-	.circular-logo {
-			@extend .a; // Inherit styles from .a
-			border-radius: 100px; // Add circular edges
+
 
 	strong, b {
 		font-weight: 600;
