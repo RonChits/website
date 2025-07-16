@@ -30,6 +30,8 @@
             color: var(--dark);
             line-height: 1.8;
             overflow-x: hidden;
+            /* Added padding-bottom to account for the fixed bottom ad */
+            padding-bottom: 90px; /* Default padding for bottom ad */
         }
 
         h1, h2, h3, h4 {
@@ -437,7 +439,47 @@
         .delay-3 { animation-delay: 0.6s; }
         .delay-4 { animation-delay: 0.8s; }
 
-        /* Responsive Design */
+        /* --- Ad Styles --- */
+        .ad-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto; /* Margin for ads within content flow */
+            background-color: var(--light-gray); /* Light background to make ads stand out */
+            padding: 10px 0;
+            border-radius: 8px;
+            overflow: hidden; /* Hide anything that goes outside */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            min-height: 70px; /* Minimum height for banner ad */
+            max-width: 728px; /* Max width for common banner sizes */
+            text-align: center;
+        }
+
+        .ad-container.fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999; /* Below header, above most content */
+            background-color: var(--dark); /* Darker background for fixed bottom */
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+            border-radius: 0; /* No border radius for full width */
+            padding: 5px 0;
+            min-height: 70px; /* Standard mobile banner height */
+            max-height: 100px; /* Maximum height to prevent it from being too large */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Specific adjustments for the iframe ad (if it has a fixed size) */
+        .ad-container iframe {
+            display: block; /* Remove extra space below iframe */
+            margin: 0 auto; /* Center the iframe */
+        }
+
+        /* --- Responsive Design --- */
         @media (max-width: 992px) {
             .projects-grid {
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -482,6 +524,17 @@
             .footer-social {
                 justify-content: center;
             }
+            
+            /* Adjust body padding for smaller screens if bottom ad is smaller */
+            body {
+                padding-bottom: 70px; /* Adjust for common mobile banner heights */
+            }
+
+            .ad-container.fixed-bottom {
+                min-height: 50px; /* Smaller min-height for mobile fixed ad */
+                max-height: 90px; /* Smaller max-height for mobile fixed ad */
+                padding: 5px 0;
+            }
         }
 
         @media (max-width: 576px) {
@@ -500,11 +553,15 @@
             .btn {
                 padding: 12px 25px;
             }
+
+            .ad-container.fixed-bottom {
+                min-height: 50px; /* Smallest min-height for very small screens */
+                max-height: 70px; /* Smallest max-height for very small screens */
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header id="header">
         <div class="container">
             <nav>
@@ -522,7 +579,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
             <img src="images/IMG-20241215-WA0026.jpg" alt="Ronald Chitsatso" class="hero-image fade-in">
@@ -532,7 +588,19 @@
         </div>
     </section>
 
-    <!-- Intro Section -->
+    <div class="ad-container">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '4d26941499f506497efcb4527b651831',
+                'format' : 'iframe',
+                'height' : 60,
+                'width' : 468,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/4d26941499f506497efcb4527b651831/invoke.js"></script>
+    </div>
+
     <section class="intro">
         <div class="container">
             <p class="fade-in">A recent Financial Engineering student at Harare Institute of Technology. As a Financial Engineer I believe in data and numbers since there are reasons behind them. This belief has grown into a deep passion over the past few years to find hidden patterns in big data. Now, looking for an opportunity to work with my passion until I retire.</p>
@@ -542,12 +610,10 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section class="projects">
         <div class="container">
             <h2 class="section-title fade-in">Featured Projects</h2>
             <div class="projects-grid">
-                <!-- Project 1 -->
                 <div class="project-card fade-in delay-1">
                     <img src="images/mexico.png" alt="Housing in Mexico" class="project-image">
                     <div class="project-content">
@@ -557,7 +623,6 @@
                     </div>
                 </div>
 
-                <!-- Project 2 -->
                 <div class="project-card fade-in delay-2">
                     <img src="images/loan.jpg" alt="Loan Classification" class="project-image">
                     <div class="project-content">
@@ -567,7 +632,6 @@
                     </div>
                 </div>
 
-                <!-- Project 3 -->
                 <div class="project-card fade-in delay-3">
                     <img src="images/india.png" alt="Volatility Forecasting in India" class="project-image">
                     <div class="project-content">
@@ -577,7 +641,13 @@
                     </div>
                 </div>
 
-                <!-- Project 4 -->
+                <div class="ad-container project-card" style="background-color: var(--primary-dark); color: white;">
+                    <p style="font-size: 1.1rem; margin-bottom: 10px;">Advertisement</p>
+                    <div style="max-width: 300px; margin: 0 auto;">
+                        <script type="text/javascript" src='//pl27172845.profitableratecpm.com/1e/9b/0b/1e9b0bcd368fdf0f475a77e224f32234.js'></script>
+                    </div>
+                </div>
+
                 <div class="project-card fade-in delay-4">
                     <img src="images/WQU_logo_color.png" alt="A/B Testing at WorldQuant University" class="project-image">
                     <div class="project-content">
@@ -587,7 +657,6 @@
                     </div>
                 </div>
 
-                <!-- Project 5 -->
                 <div class="project-card fade-in delay-1">
                     <img src="images/us.png" alt="Customer Segmentation in the US" class="project-image">
                     <div class="project-content">
@@ -597,7 +666,6 @@
                     </div>
                 </div>
 
-                <!-- Project 6 -->
                 <div class="project-card fade-in delay-2">
                     <img src="images/poland.png" alt="Bankruptcy in Poland" class="project-image">
                     <div class="project-content">
@@ -607,7 +675,6 @@
                     </div>
                 </div>
 
-                <!-- Project 7 -->
                 <div class="project-card fade-in delay-3">
                     <img src="images/nepal.png" alt="Earthquake Damage in Nepal" class="project-image">
                     <div class="project-content">
@@ -617,7 +684,6 @@
                     </div>
                 </div>
 
-                <!-- Project 8 -->
                 <div class="project-card fade-in delay-4">
                     <img src="images/nairobi.png" alt="Air Quality in Nairobi" class="project-image">
                     <div class="project-content">
@@ -627,7 +693,6 @@
                     </div>
                 </div>
 
-                <!-- Project 9 -->
                 <div class="project-card fade-in delay-1">
                     <img src="images/buenos.png" alt="Apartment Sales in Buenos Aires" class="project-image">
                     <div class="project-content">
@@ -637,7 +702,6 @@
                     </div>
                 </div>
 
-                <!-- Project 10 -->
                 <div class="project-card fade-in delay-2">
                     <img src="images/hit4001.png" alt="Barrier Option Pricing" class="project-image">
                     <div class="project-content">
@@ -647,7 +711,6 @@
                     </div>
                 </div>
 
-                <!-- Project 11 -->
                 <div class="project-card fade-in delay-3">
                     <img src="images/tita.png" alt="Titanic Survival Analysis" class="project-image">
                     <div class="project-content">
@@ -660,12 +723,10 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section class="skills">
         <div class="container">
             <h2 class="section-title fade-in">Technical Skills</h2>
             <div class="skills-grid">
-                <!-- Skill 1 -->
                 <div class="skill-card fade-in delay-1">
                     <div class="skill-icon">
                         <i class="fab fa-python"></i>
@@ -674,7 +735,6 @@
                     <p>Proficient in Python programming with experience in data analysis and machine learning. Skilled in utilizing Python libraries for data manipulation and model building.</p>
                 </div>
 
-                <!-- Skill 2 -->
                 <div class="skill-card fade-in delay-2">
                     <div class="skill-icon">
                         <i class="fas fa-chart-line"></i>
@@ -683,7 +743,6 @@
                     <p>Experienced in creating compelling visual representations using Matplotlib, Seaborn, and other visualization libraries to uncover trends and insights.</p>
                 </div>
 
-                <!-- Skill 3 -->
                 <div class="skill-card fade-in delay-3">
                     <div class="skill-icon">
                         <i class="fas fa-database"></i>
@@ -692,7 +751,6 @@
                     <p>Proficient in SQL for data retrieval and management. Capable of writing efficient queries to extract, clean, and transform data from relational databases.</p>
                 </div>
 
-                <!-- Skill 4 -->
                 <div class="skill-card fade-in delay-4">
                     <div class="skill-icon">
                         <i class="fas fa-file-excel"></i>
@@ -704,7 +762,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -730,10 +787,14 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Ronald Chitsatso. All rights reserved.</p>
+                <p>© 2023 Ronald Chitsatso. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <div class="ad-container fixed-bottom" id="fixedBottomAd">
+        <script type='text/javascript' src='//pl27172845.profitableratecpm.com/1e/9b/0b/1e9b0bcd368fdf0f475a77e224f32234.js'></script>
+    </div>
 
     <script>
         // Header scroll effect
@@ -767,6 +828,32 @@
 
             // Check on scroll
             window.addEventListener('scroll', fadeInOnScroll);
+        });
+
+        // Dynamic padding for fixed bottom ad (Important for user-friendliness)
+        document.addEventListener('DOMContentLoaded', function() {
+            const fixedBottomAd = document.getElementById('fixedBottomAd');
+            const body = document.body;
+
+            function adjustBodyPadding() {
+                if (fixedBottomAd && fixedBottomAd.offsetHeight > 0) {
+                    // Give a slight delay to ensure ad content renders and height is accurate
+                    setTimeout(() => {
+                        const adHeight = fixedBottomAd.offsetHeight;
+                        body.style.paddingBottom = `${adHeight + 15}px`; // Add a small buffer
+                    }, 200); 
+                } else {
+                    body.style.paddingBottom = '0';
+                }
+            }
+
+            // Initial adjustment on load
+            adjustBodyPadding();
+            // Adjust on window resize (e.g., orientation change on mobile)
+            window.addEventListener('resize', adjustBodyPadding);
+
+            // You might want a close button for the fixed ad too, but it wasn't provided in the ad scripts.
+            // If you add one, remember to call adjustBodyPadding() when it's closed.
         });
     </script>
 </body>
