@@ -425,10 +425,11 @@
         footer {
             background: linear-gradient(135deg, var(--primary-dark), var(--dark));
             color: white;
-            padding: 70px 0 30px;
+            padding: 70px 0 30px; /* Adjust padding as needed */
             box-shadow: 0 -5px 20px rgba(0,0,0,0.3); /* Top shadow for footer */
             position: relative; /* For the background elements */
             overflow: hidden; /* Hide anything that spills */
+            text-align: center; /* Center footer content by default */
         }
 
         /* Decorative background elements for the footer */
@@ -464,13 +465,13 @@
         }
 
         /* --- Refined Footer Layout: Icon-focused --- */
-        footer .main-footer-content {
+        footer .footer-content-wrapper {
             display: flex;
-            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-            justify-content: center; /* Center items when they wrap */
-            gap: 40px 60px; /* Vertical and horizontal gap */
+            flex-wrap: wrap;
+            justify-content: center; /* Center the entire set of sections */
+            gap: 40px 60px; /* Vertical and horizontal gap between sections */
             margin-bottom: 40px;
-            max-width: 900px; /* A bit narrower to focus content */
+            max-width: 900px; /* Constrain width for a compact look */
             margin-left: auto;
             margin-right: auto;
             padding: 0 20px;
@@ -478,7 +479,7 @@
             z-index: 1;
         }
         
-        /* Individual footer sections (Address, Phone, Email, Social) */
+        /* Individual footer sections */
         footer .footer-section {
             display: flex;
             flex-direction: column;
@@ -488,9 +489,9 @@
         }
 
         footer .footer-section h3 {
-            margin-bottom: 15px; /* Less margin as icons are compact */
-            font-size: 1.3rem; /* Slightly smaller title for more compact look */
-            color: var(--accent);
+            margin-bottom: 1em; /* Spacing for heading */
+            font-size: 1.4rem; 
+            color: var(--accent); 
             position: relative;
             display: inline-block;
         }
@@ -506,87 +507,70 @@
             background: white;
         }
 
-        /* Contact items with icons (Address, Phone, Email) */
-        footer .contact-item-icon {
+        /* Styling for icon links (address, phone, email, social) */
+        footer .footer-icon-link {
             display: flex;
+            flex-direction: column; /* Stack icon above text */
             align-items: center;
-            justify-content: center; /* Center icon and text */
-            gap: 10px;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 10px; /* Spacing between contact lines */
+            justify-content: center;
             text-decoration: none; /* No underline */
-            transition: color 0.3s ease;
-            flex-direction: column; /* Stack icon and text */
-            margin-top: 10px; /* Spacing from heading */
+            color: white; /* Default icon/text color */
+            transition: all 0.3s ease;
+            margin-top: 15px; /* Spacing from heading */
         }
 
-        footer .contact-item-icon:hover {
+        footer .footer-icon-link:hover {
             color: var(--accent); /* Accent color on hover */
+            transform: translateY(-5px); /* Lift on hover */
         }
 
-        footer .contact-item-icon i {
-            font-size: 2rem; /* Larger icons for these contact details */
-            color: white; /* Make them white like social icons */
-            width: 45px;
-            height: 45px;
+        footer .footer-icon-link i {
+            font-size: 2.2rem; /* Larger icons for impact */
+            width: 55px; /* Fixed width for consistent circle size */
+            height: 55px; /* Fixed height */
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            background-color: rgba(255,255,255,0.1); /* Consistent background */
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3); /* Consistent shadow */
+            border-radius: 50%; /* Make them perfectly round */
+            background-color: rgba(255,255,255,0.1); /* Subtle transparent background */
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3); /* Soft shadow for depth */
+            margin-bottom: 10px; /* Space between icon and text */
             transition: all 0.3s ease;
         }
 
-        footer .contact-item-icon i:hover {
-            background-color: rgba(255,255,255,0.2);
-            transform: translateY(-5px); /* Lift icon on hover */
+        footer .footer-icon-link:hover i {
+            background-color: rgba(255,255,255,0.2); /* Slightly more opaque background on hover */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4); /* Stronger shadow on hover */
         }
 
-        footer .contact-item-icon .text-content {
-            font-size: 0.95rem; /* Text size for address/phone/email */
+        footer .footer-icon-link .text-content {
+            font-size: 0.95rem; /* Text size for details */
             line-height: 1.4;
+            max-width: 150px; /* Constrain text width for multi-line address */
         }
-        
-        /* Social Icons specific styling (more prominent) */
+
+        /* Specific styles for the social icons list */
         footer .social-icons-list {
             display: flex;
             list-style: none;
             padding: 0;
             margin: 0;
             gap: 15px; /* Space between icons */
-            margin-top: 15px; /* Space from 'Social' title */
+            margin-top: 15px; /* Spacing from heading */
         }
 
         footer .social-icons-list li {
             margin: 0;
         }
 
-        footer .social-icons-list li a {
-            font-size: 1.8rem; /* Larger icons for impact */
-            color: white; /* Default icon color */
-            text-decoration: none; /* No underline */
-            transition: all 0.3s ease;
-            width: 45px; /* Fixed width for consistent circle size */
-            height: 45px; /* Fixed height */
-            display: flex; /* Flex for centering the icon */
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%; /* Make them perfectly round */
-            background-color: rgba(255,255,255,0.1); /* Subtle transparent background */
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3); /* Soft shadow for depth */
-        }
-
-        footer .social-icons-list li a:hover {
-            color: var(--accent); /* Accent color on hover */
-            transform: translateY(-7px) scale(1.15); /* More pronounced lift and scale */
-            background-color: rgba(255,255,255,0.2); /* Slightly more opaque background on hover */
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4); /* Stronger shadow on hover */
+        footer .social-icons-list li a { /* Inherit .footer-icon-link styles */
+            font-size: 1.8rem; /* Slightly smaller for general social list */
+            width: 45px;
+            height: 45px;
         }
         
-        /* Hide the text labels for screen readers */
-        footer .social-icons-list li a .label,
-        footer .contact-item-icon .label { /* Added label hiding for contact icons too */
+        /* Hide the text labels for screen readers (accessibility) */
+        .label {
             position: absolute;
             width: 1px;
             height: 1px;
@@ -742,7 +726,7 @@
             .fixed-bottom-ad .close-ad-btn { width: 35px; height: 35px; font-size: 1.4rem;}
             
             /* Footer adjustments for mobile */
-            footer .main-footer-content {
+            footer .footer-content-wrapper {
                 flex-direction: column; /* Stack sections vertically */
                 gap: 2em; /* Adjusted gap */
             }
@@ -973,27 +957,27 @@
     </section>
 
     <footer id="footer">
-        <section class="split contact">
-            <section class="alt footer-section">
+        <div class="footer-content-wrapper">
+            <section class="footer-section">
                 <h3>Address</h3>
-                <div class="contact-item-icon">
+                <a href="#" class="footer-icon-link" aria-label="Our Address">
                     <i class="fas fa-map-marker-alt"></i>
                     <div class="text-content">
                         <p>Crowborough North</p>
                         <p>834, Mufakose Harare</p>
                     </div>
-                </div>
+                </a>
             </section>
             <section class="footer-section">
                 <h3>Phone</h3>
-                <a href="tel:+263782522493" class="contact-item-icon">
+                <a href="tel:+263782522493" class="footer-icon-link" aria-label="Call me at +263 782522493">
                     <i class="fas fa-phone"></i>
                     <span class="text-content">+263 782522493</span>
                 </a>
             </section>
-            <section class class="footer-section">
+            <section class="footer-section">
                 <h3>Email</h3>
-                <a href="mailto:r.i.chitsatso@gmail.com" class="contact-item-icon">
+                <a href="mailto:r.i.chitsatso@gmail.com" class="footer-icon-link" aria-label="Email me at r.i.chitsatso@gmail.com">
                     <i class="fas fa-envelope"></i>
                     <span class="text-content">r.i.chitsatso@gmail.com</span>
                 </a>
@@ -1008,7 +992,7 @@
                     <li><a href="https://www.youtube.com/@RonaldChitsatso" target="_blank" class="icon brands alt fa-youtube" aria-label="YouTube"></a></li>
                 </ul>
             </section>
-        </section>
+        </div>
         <div class="copyright">
             <p>© 2023 Ronald Chitsatso. All rights reserved.</p>
         </div>
