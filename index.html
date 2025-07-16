@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ronald Chitsatso | Data Science Projects</title>
+    <title>Ronald Chitsatso | My Story</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -30,8 +30,8 @@
             color: var(--dark);
             line-height: 1.8;
             overflow-x: hidden;
-            /* Added padding-bottom to account for the fixed bottom ad */
-            padding-bottom: 90px; /* Default padding for bottom ad */
+            padding-top: 90px; /* Adjust based on your header height */
+            padding-bottom: 0; /* No fixed bottom ad, so no padding needed */
         }
 
         h1, h2, h3, h4 {
@@ -133,125 +133,22 @@
             transform: translateY(-3px);
         }
 
-        /* Hero Section */
-        .hero {
-            padding: 180px 0 100px;
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            position: relative;
-            overflow: hidden;
-            color: white;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(76, 201, 240, 0.1) 0%, rgba(255,255,255,0) 70%);
-            z-index: 0;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: white;
-            line-height: 1.2;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            opacity: 0.9;
-        }
-
-        .hero-image {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid rgba(255,255,255,0.2);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-            margin: 0 auto 30px;
-            display: block;
-            transition: all 0.5s ease;
-        }
-
-        .hero-image:hover {
-            transform: rotate(5deg) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border-color: var(--accent);
-        }
-
-        .btn {
-            display: inline-block;
-            background: white;
-            color: var(--primary);
-            padding: 15px 35px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            background: var(--light-gray);
-        }
-
-        .btn:active {
-            transform: translateY(1px);
-        }
-
-        /* Intro Section */
-        .intro {
-            padding: 100px 0;
+        /* Generic Page Content */
+        .my-story-section {
+            padding: 80px 0; /* Adjusted padding to accommodate header */
             background-color: white;
             text-align: center;
         }
 
-        .intro p {
-            max-width: 800px;
-            margin: 0 auto 30px;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #444;
-        }
-
-        .intro strong {
+        .my-story-section h2 {
+            font-size: 3rem;
             color: var(--primary);
-        }
-
-        /* Projects Section */
-        .projects {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 70px;
-            font-size: 2.8rem;
-            color: var(--primary);
+            margin-bottom: 40px;
             position: relative;
             display: inline-block;
         }
 
-        .section-title:after {
+        .my-story-section h2:after {
             content: '';
             position: absolute;
             bottom: -15px;
@@ -262,96 +159,34 @@
             border-radius: 3px;
         }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+        .story-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: left; /* Align text left for readability */
+            color: #444;
+            font-size: 1.1rem;
+            line-height: 1.9;
         }
 
-        .project-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+        .story-content p {
+            margin-bottom: 25px;
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        .story-content strong {
+            color: var(--primary);
         }
 
-        .project-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .project-card:hover .project-image {
-            transform: scale(1.05);
-        }
-
-        .project-content {
+        .story-highlight {
+            background-color: var(--light-gray);
             padding: 25px;
-        }
-
-        .project-title {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .project-description {
-            margin-bottom: 20px;
-            color: #555;
-            line-height: 1.7;
-        }
-
-        /* Skills Section */
-        .skills {
-            padding: 100px 0;
-            background-color: white;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .skill-card {
-            background: linear-gradient(135deg, rgba(10, 31, 68, 0.05), rgba(76, 201, 240, 0.05));
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(10, 31, 68, 0.1);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-color: var(--accent);
-        }
-
-        .skill-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .skill-card:hover .skill-icon {
-            color: var(--secondary);
-            transform: scale(1.1);
-        }
-
-        .skill-title {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--primary);
+            border-left: 5px solid var(--accent);
+            margin-top: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--primary-dark);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         /* Footer */
@@ -439,124 +274,42 @@
         .delay-3 { animation-delay: 0.6s; }
         .delay-4 { animation-delay: 0.8s; }
 
-        /* --- Ad Styles --- */
-        .ad-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 30px auto; /* Margin for ads within content flow */
-            background-color: var(--light-gray); /* Light background to make ads stand out */
-            padding: 10px 0;
-            border-radius: 8px;
-            overflow: hidden; /* Hide anything that goes outside */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            min-height: 70px; /* Minimum height for banner ad */
-            max-width: 728px; /* Max width for common banner sizes */
-            text-align: center;
-        }
-
-        .ad-container.fixed-bottom {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 999; /* Below header, above most content */
-            background-color: var(--dark); /* Darker background for fixed bottom */
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
-            border-radius: 0; /* No border radius for full width */
-            padding: 5px 0;
-            min-height: 70px; /* Standard mobile banner height */
-            max-height: 100px; /* Maximum height to prevent it from being too large */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        /* Specific adjustments for the iframe ad (if it has a fixed size) */
-        .ad-container iframe {
-            display: block; /* Remove extra space below iframe */
-            margin: 0 auto; /* Center the iframe */
-        }
-
-        /* --- Responsive Design --- */
+        /* Responsive Design */
         @media (max-width: 992px) {
-            .projects-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            .story-content {
+                padding: 15px;
             }
         }
 
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                display: none; /* Hide nav links for mobile */
             }
-
-            .hero h1 {
-                font-size: 2.8rem;
+            body {
+                padding-top: 80px; /* Adjust for potentially smaller mobile header */
             }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
+            .my-story-section h2 {
                 font-size: 2.2rem;
             }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
             .footer-content {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-
             .footer-column h3:after {
                 left: 50%;
                 transform: translateX(-50%);
             }
-
             .footer-social {
                 justify-content: center;
-            }
-            
-            /* Adjust body padding for smaller screens if bottom ad is smaller */
-            body {
-                padding-bottom: 70px; /* Adjust for common mobile banner heights */
-            }
-
-            .ad-container.fixed-bottom {
-                min-height: 50px; /* Smaller min-height for mobile fixed ad */
-                max-height: 90px; /* Smaller max-height for mobile fixed ad */
-                padding: 5px 0;
             }
         }
 
         @media (max-width: 576px) {
-            .hero {
-                padding: 150px 0 80px;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .section-title {
+            .my-story-section h2 {
                 font-size: 1.8rem;
             }
-
-            .btn {
-                padding: 12px 25px;
-            }
-
-            .ad-container.fixed-bottom {
-                min-height: 50px; /* Smallest min-height for very small screens */
-                max-height: 70px; /* Smallest max-height for very small screens */
+            .story-content {
+                font-size: 1rem;
             }
         }
     </style>
@@ -567,8 +320,8 @@
             <nav>
                 <a href="index.html" class="logo">Ronald Chitsatso</a>
                 <div class="nav-links">
-                    <a href="index.html" class="active">Projects & Skills</a>
-                    <a href="generic.html">My Story</a>
+                    <a href="index.html">Projects & Skills</a>
+                    <a href="generic.html" class="active">My Story</a>
                 </div>
                 <div class="social-icons">
                     <a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -579,185 +332,23 @@
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container hero-content">
-            <img src="images/IMG-20241215-WA0026.jpg" alt="Ronald Chitsatso" class="hero-image fade-in">
-            <h1 class="fade-in delay-1">My Data Science Projects</h1>
-            <p class="fade-in delay-2">Financial Engineering graduate passionate about uncovering insights through data</p>
-            <a href="generic.html" class="btn fade-in delay-3">Learn My Story</a>
-        </div>
-    </section>
-
-    <div class="ad-container">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : '4d26941499f506497efcb4527b651831',
-                'format' : 'iframe',
-                'height' : 60,
-                'width' : 468,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/4d26941499f506497efcb4527b651831/invoke.js"></script>
-    </div>
-
-    <section class="intro">
+    <section class="my-story-section">
         <div class="container">
-            <p class="fade-in">A recent Financial Engineering student at Harare Institute of Technology. As a Financial Engineer I believe in data and numbers since there are reasons behind them. This belief has grown into a deep passion over the past few years to find hidden patterns in big data. Now, looking for an opportunity to work with my passion until I retire.</p>
-            <p class="fade-in"><strong>My Background:</strong><br>
-            - Bachelor of Technology Honors Degree in Financial Engineering at Harare Institute of Technology<br>
-            - Applied Data Science lab holder at WorldQuant University</p>
-        </div>
-    </section>
+            <h2 class="fade-in">My Story</h2>
+            <div class="story-content fade-in delay-1">
+                <p>Hello! I'm Ronald Chitsatso, a recent graduate with a Bachelor of Technology Honors Degree in Financial Engineering from Harare Institute of Technology. My academic journey has instilled in me a deep appreciation for the power of data and numbers. I believe that behind every financial decision and market trend, there are underlying reasons and patterns waiting to be discovered through rigorous analysis.</p>
 
-    <section class="projects">
-        <div class="container">
-            <h2 class="section-title fade-in">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card fade-in delay-1">
-                    <img src="images/mexico.png" alt="Housing in Mexico" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Housing in Mexico</h3>
-                        <p class="project-description">Used a dataset of 21,000 properties to determine if real estate prices are influenced more by property size or location.</p>
-                        <a href="#" class="btn">View Project</a>
-                    </div>
+                <p>Over the past few years, this belief has evolved into a strong passion for **data science**. I've dedicated myself to understanding how to extract meaningful insights from large datasets, clean messy information, and build predictive models that can drive informed decisions. My goal is to apply these skills in a challenging and rewarding career, where I can continue to learn and contribute to innovative solutions.</p>
+
+                <div class="story-highlight">
+                    "My journey has always been guided by curiosity and a relentless pursuit of understanding the 'why' behind the numbers."
                 </div>
 
-                <div class="project-card fade-in delay-2">
-                    <img src="images/loan.jpg" alt="Loan Classification" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Loan Classification</h3>
-                        <p class="project-description">Predict loan applicant defaulting using machine learning techniques to help financial institutions manage risk.</p>
-                        <a href="https://github.com/RonChits/Default-Probability/blob/main/Default_Probability.ipynb" class="btn">View Project</a>
-                    </div>
-                </div>
+                <p>Beyond my formal education, I'm a proud **Applied Data Science lab holder at WorldQuant University**, an experience that has significantly enhanced my practical skills in various data science methodologies. This program pushed me to apply theoretical knowledge to real-world financial datasets, honing my abilities in areas like quantitative analysis, machine learning for financial forecasting, and risk management.</p>
 
-                <div class="project-card fade-in delay-3">
-                    <img src="images/india.png" alt="Volatility Forecasting in India" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Volatility Forecasting in India</h3>
-                        <p class="project-description">Created a GARCH time series model to predict asset volatility using stock data from an API.</p>
-                        <a href="#" class="btn">View Project</a>
-                    </div>
-                </div>
+                <p>I'm constantly exploring new tools and techniques, staying updated with the latest advancements in data science and financial technology. My portfolio, as seen on the main page, showcases a range of projects from predicting loan defaults to analyzing market volatility, each reflecting my commitment to data-driven problem-solving.</p>
 
-                <div class="ad-container project-card" style="background-color: var(--primary-dark); color: white;">
-                    <p style="font-size: 1.1rem; margin-bottom: 10px;">Advertisement</p>
-                    <div style="max-width: 300px; margin: 0 auto;">
-                        <script type="text/javascript" src='//pl27172845.profitableratecpm.com/1e/9b/0b/1e9b0bcd368fdf0f475a77e224f32234.js'></script>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-4">
-                    <img src="images/WQU_logo_color.png" alt="A/B Testing at WorldQuant University" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">A/B Testing at WQU</h3>
-                        <p class="project-description">Conducted a chi-square test to determine if sending an email can increase program enrollment.</p>
-                        <a href="#" class="btn">View Project</a>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-1">
-                    <img src="images/us.png" alt="Customer Segmentation in the US" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Customer Segmentation in the US</h3>
-                        <p class="project-description">Built a k-means model to cluster US consumers into groups with PCA for visualization.</p>
-                        <a href="#" class="btn">View Project</a>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-2">
-                    <img src="images/poland.png" alt="Bankruptcy in Poland" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Bankruptcy in Poland</h3>
-                        <p class="project-description">Built random forest and gradient boosting models to predict whether a company will go bankrupt.</p>
-                        <a href="#" class="btn">View Project</a>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-3">
-                    <img src="images/nepal.png" alt="Earthquake Damage in Nepal" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Earthquake Damage in Nepal</h3>
-                        <p class="project-description">Built logistic regression and decision tree models to predict earthquake damage to buildings.</p>
-                        <a href="#" class="btn">View Project</a>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-4">
-                    <img src="images/nairobi.png" alt="Air Quality in Nairobi" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Air Quality in Nairobi</h3>
-                        <p class="project-description">Built an ARMA time-series model to predict particulate matter levels in Kenya.</p>
-                        <a href="#" class="btn">View Project</a>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-1">
-                    <img src="images/buenos.png" alt="Apartment Sales in Buenos Aires" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Apartment Sales in Buenos Aires</h3>
-                        <p class="project-description">Built a linear regression model to predict apartment prices in Argentina.</p>
-                        <a href="#" class="btn">View Project</a>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-2">
-                    <img src="images/hit4001.png" alt="Barrier Option Pricing" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Barrier Option Pricing (Thesis)</h3>
-                        <p class="project-description">Developed advanced numerical methods for accurate valuation of complex financial derivatives.</p>
-                        <a href="https://github.com/RonChits" class="btn">View Project</a>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-3">
-                    <img src="images/tita.png" alt="Titanic Survival Analysis" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Unsinkable Titanic</h3>
-                        <p class="project-description">Analyzed factors affecting survival rates in the Titanic disaster using demographic data.</p>
-                        <a href="https://github.com/RonChits/Titanic/blob/main/titanic_survivors.ipynb" class="btn">View Project</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="skills">
-        <div class="container">
-            <h2 class="section-title fade-in">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card fade-in delay-1">
-                    <div class="skill-icon">
-                        <i class="fab fa-python"></i>
-                    </div>
-                    <h3 class="skill-title">Python</h3>
-                    <p>Proficient in Python programming with experience in data analysis and machine learning. Skilled in utilizing Python libraries for data manipulation and model building.</p>
-                </div>
-
-                <div class="skill-card fade-in delay-2">
-                    <div class="skill-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="skill-title">Data Visualization</h3>
-                    <p>Experienced in creating compelling visual representations using Matplotlib, Seaborn, and other visualization libraries to uncover trends and insights.</p>
-                </div>
-
-                <div class="skill-card fade-in delay-3">
-                    <div class="skill-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3 class="skill-title">SQL</h3>
-                    <p>Proficient in SQL for data retrieval and management. Capable of writing efficient queries to extract, clean, and transform data from relational databases.</p>
-                </div>
-
-                <div class="skill-card fade-in delay-4">
-                    <div class="skill-icon">
-                        <i class="fas fa-file-excel"></i>
-                    </div>
-                    <h3 class="skill-title">Excel VBA</h3>
-                    <p>Excel VBA skills for automating tasks, creating custom functions, and enhancing data analysis capabilities within the Excel environment.</p>
-                </div>
+                <p>Thank you for visiting my portfolio. I'm excited about the possibilities that data science offers and look forward to connecting with opportunities where I can make a tangible impact.</p>
             </div>
         </div>
     </section>
@@ -792,10 +383,6 @@
         </div>
     </footer>
 
-    <div class="ad-container fixed-bottom" id="fixedBottomAd">
-        <script type='text/javascript' src='//pl27172845.profitableratecpm.com/1e/9b/0b/1e9b0bcd368fdf0f475a77e224f32234.js'></script>
-    </div>
-
     <script>
         // Header scroll effect
         window.addEventListener('scroll', function() {
@@ -816,44 +403,19 @@
                     const elementTop = element.getBoundingClientRect().top;
                     const windowHeight = window.innerHeight;
 
-                    if (elementTop < windowHeight - 100) {
+                    // Only animate if element is within view and hasn't been animated yet
+                    if (elementTop < windowHeight - 100 && element.style.opacity === '0') {
                         element.style.opacity = '1';
                         element.style.transform = 'translateY(0)';
                     }
                 });
             };
 
-            // Initial check
+            // Initial check on load
             fadeInOnScroll();
 
             // Check on scroll
             window.addEventListener('scroll', fadeInOnScroll);
-        });
-
-        // Dynamic padding for fixed bottom ad (Important for user-friendliness)
-        document.addEventListener('DOMContentLoaded', function() {
-            const fixedBottomAd = document.getElementById('fixedBottomAd');
-            const body = document.body;
-
-            function adjustBodyPadding() {
-                if (fixedBottomAd && fixedBottomAd.offsetHeight > 0) {
-                    // Give a slight delay to ensure ad content renders and height is accurate
-                    setTimeout(() => {
-                        const adHeight = fixedBottomAd.offsetHeight;
-                        body.style.paddingBottom = `${adHeight + 15}px`; // Add a small buffer
-                    }, 200); 
-                } else {
-                    body.style.paddingBottom = '0';
-                }
-            }
-
-            // Initial adjustment on load
-            adjustBodyPadding();
-            // Adjust on window resize (e.g., orientation change on mobile)
-            window.addEventListener('resize', adjustBodyPadding);
-
-            // You might want a close button for the fixed ad too, but it wasn't provided in the ad scripts.
-            // If you add one, remember to call adjustBodyPadding() when it's closed.
         });
     </script>
 </body>
