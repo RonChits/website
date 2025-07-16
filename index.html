@@ -1,467 +1,913 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>About Ronald</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ronald Chitsatso | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a1f44; /* Deep navy blue */
+            --primary-dark: #07152e; /* Darker navy */
+            --secondary: #1a3a8f; /* Rich royal blue */
+            --accent: #4cc9f0; /* Bright teal for accents */
+            --dark: #010814; /* Near-black */
+            --light: #f8f9fa;
+            --gray: #adb5bd;
+            --light-gray: #e5e5e5;
+        }
 
-        <style>
-            /* General container for banner ads */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+            padding-top: 90px; /* Space for fixed header */
+            padding-bottom: 0; /* Will be dynamically adjusted by JS for fixed bottom ad */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--light-gray);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a.active {
+            font-weight: 700;
+            color: white;
+        }
+
+        .nav-links a.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent);
+            transform: scaleX(1);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Hero Section (Main Intro) */
+        .hero {
+            padding: 120px 0 80px; /* Adjusted padding for content */
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(76, 201, 240, 0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px; /* Constrain width for readability */
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+            line-height: 1.2;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .hero-image {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255,255,255,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            margin: 0 auto 30px;
+            display: block;
+            transition: all 0.5s ease;
+        }
+
+        .hero-image:hover {
+            transform: rotate(5deg) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: var(--accent);
+        }
+
+        .hero .btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 15px 35px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .hero .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            background: var(--light-gray);
+        }
+
+        .hero .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            font-size: 2.8rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 3px;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .project-description {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, rgba(10, 31, 68, 0.05), rgba(76, 201, 240, 0.05));
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(10, 31, 68, 0.1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover .skill-icon {
+            color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .skill-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark), var(--dark));
+            color: white;
+            padding: 70px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-column p, .footer-column a {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 12px;
+            display: block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        /* --- Ad Styles --- */
+        .ad-banner-container {
+            position: relative; /* Needed for close button positioning */
+            display: flex;
+            justify-content: center; /* Center the ad horizontally */
+            align-items: center;    /* Center the ad vertically */
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.05); /* Subtle background */
+            border-radius: 8px;
+            overflow: hidden; /* Crucial: Hides any overflowing ad content */
+            margin: 3em auto; /* Spacing above and below ads */
+            padding: 10px; /* Internal padding */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            min-height: 90px; /* Default min-height for larger banners (e.g., 728x90) */
+            max-width: 900px; /* Max width to keep ads contained on wide screens */
+            text-align: center; /* Ensures text content (if any from ad) is centered */
+        }
+
+        .ad-banner-container .close-ad-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1; /* Ensures 'x' is vertically centered */
+            padding: 0;
+            transition: background 0.3s ease;
+            z-index: 10; /* Ensure it's above ad content */
+        }
+
+        .ad-banner-container .close-ad-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Style for the fixed bottom ad container */
+        .fixed-bottom-ad {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Above most content, but below your fixed header */
+            background-color: rgba(0, 0, 0, 0.9); /* Dark background for visibility */
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+            padding: 5px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60px; /* Standard mobile banner height */
+            max-height: 90px; /* Prevent it from being too tall */
+            overflow: hidden; /* Hide anything that overflows */
+        }
+
+        .fixed-bottom-ad .close-ad-btn {
+            top: 5px; /* Adjust as needed */
+            right: 10px; /* Adjust as needed */
+            width: 35px; /* Slightly larger for fixed bottom */
+            height: 35px;
+            font-size: 1.4rem;
+        }
+
+        /* Ensure ad content takes full space inside ad-container */
+        .ad-banner-container > div[id^="container-"],
+        .fixed-bottom-ad > div[id^="container-"] {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Ensure any overflowing ad content is clipped */
+            /* Important: Ad script might set fixed dimensions, these are suggestions */
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
             .ad-banner-container {
-                display: flex;
-                justify-content: center; /* Center the ad horizontally */
-                align-items: center;    /* Center the ad vertically */
-                width: 100%;
-                /* Optional: Add some background/border to make it visually distinct */
-                background-color: rgba(0, 0, 0, 0.05); /* Light transparent dark background */
-                border-radius: 8px;
-                overflow: hidden; /* Crucial: Hides any overflowing ad content */
-                margin: 3em auto; /* Spacing above and below ads */
-                padding: 10px; /* Internal padding */
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-                min-height: 90px; /* Default min-height for larger banners (e.g., 728x90) */
-                max-width: 900px; /* Max width to keep ads contained on wide screens */
-                text-align: center; /* Ensures text content (if any from ad) is centered */
+                margin: 2.5em auto;
+                min-height: 70px; /* For common 468x60 banners */
+                max-width: 700px;
             }
+        }
 
-            /* Specific adjustments for smaller screens */
-            @media screen and (max-width: 980px) { /* Tablet breakpoint for Massively theme */
-                .ad-banner-container {
-                    margin: 2.5em auto;
-                    min-height: 70px; /* For common 468x60 banners */
-                    max-width: 700px;
-                }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Hide nav links for mobile, assuming you have a mobile menu toggle */
             }
-
-            @media screen and (max-width: 736px) { /* Mobile breakpoint for Massively theme */
-                .ad-banner-container {
-                    margin: 2em auto;
-                    min-height: 60px; /* Standard mobile banner height (e.g., 320x50, 300x50) */
-                    padding: 5px;
-                    max-width: 100%; /* Take full width on mobile */
-                }
-                /* If the ad network renders a div inside with fixed width, force it to be fluid */
-                .ad-banner-container > div {
-                    max-width: 100%;
-                    overflow: hidden;
-                }
-            }
-
-            /* Style for the fixed bottom ad container */
-            .fixed-bottom-ad {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                z-index: 1000; /* Above most content, but below your fixed header */
-                background-color: rgba(0, 0, 0, 0.9); /* Dark background for visibility */
-                box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
-                padding: 5px 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 60px; /* Standard mobile banner height */
-                max-height: 90px; /* Prevent it from being too tall */
-                overflow: hidden; /* Hide anything that overflows */
-            }
-
-            /* Adjust body padding for the fixed bottom ad */
+            /* If you add a mobile menu, ensure padding-top accounts for it */
             body {
-                padding-bottom: 0; /* Reset default, controlled by JS */
+                padding-top: 80px; /* Adjust for potentially smaller mobile header */
             }
-        </style>
-	</head>
-	<body class="is-preload">
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-column h3:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .footer-social {
+                justify-content: center;
+            }
+            
+            /* Dynamic padding for fixed bottom ad on mobile */
+            body { padding-bottom: 0; } /* Reset default, controlled by JS */
 
-		<div id="wrapper" class="fade-in">
+            .ad-banner-container {
+                margin: 2em auto;
+                min-height: 60px; /* Standard mobile banner height (e.g., 320x50, 300x50) */
+                padding: 5px;
+                max-width: 100%; /* Take full width on mobile */
+            }
+            .fixed-bottom-ad {
+                min-height: 50px; /* Smallest min-height for mobile fixed ad */
+                max-height: 70px; /* Smallest max-height for mobile fixed ad */
+            }
+        }
 
-				<div id="intro">
-						<h1>Welcome!</h1>
-						<p>My Machine learning and Other projects</p>
-						<ul class="actions">
-							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
-						</ul>
-					</div>
-
-				<header id="header">
-						<a href="index.html" class="logo">My journey</a>
-					</header>
-
-				<nav id="nav">
-						<ul class="links">
-							<li class="active"><a href="index.html">My projects and skills.</a></li>
-							<li><a href="generic.html">My story.</a></li> </ul>
-						<ul class="icons">
-							<li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" class="icon brands fa-linkedin"><span class="label">Instagram</span></a></li>
-							<li><a href="https://github.com/RonChits" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-							<li><a href="mailto:r.i.chitsatso@gmail.com" class="icon fa-envelope"><span class="label">Gmail</span></a></li>
-							<li><a href="https://twitter.com/Ronald35032455" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="https://www.youtube.com/@RonaldChitsatso" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-						</ul>
-					</nav>
-
-				<div id="main">
-
-						<article class="post featured">
-								<header class="major">
-									<h3><a href="#">Hi! My name is Ronald<br />
-									and welcome to my page.</a></h3>
-									<p>Financial Engineering student at Harare Institute of Technology.<br />
-										As Financial Engineer I believe in data and numbers since there are reasons behind them.<br />
-                                   This belief has grown into a deep passion over the past few years to find hidden patterns in big data. <br />
-										Now, looking for an opportunity to work with my passion until I retire.</p>
-								</header>
-								<a href="#" class="image main"><img src="images/me.png" alt="" /></a>
-								<header class="major">
-								<p> My Background<br />
-										-Bachelor's of Financial Engineering at Harare Institute of Technology <br />
-										-Applied Data Science lab holder at WorldQuant University</p>
-								<ul class="actions special">
-									<li><a href="generic.html" class="button large">Full Story</a></li>
-								</ul>
-								</header>
-							</article>
-
-                        <div class="ad-banner-container">
-                            <div id="container-761e19dc071408ff07e61ae63b742321"></div>
-                            <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
-                        </div>
-
-							<section>
-								<header>
-										<h2><a href="#">Projects.<br/></a></h2>
-									</header>
-
-								</section>
-						<section class="posts">
-								<article>
-									<header>
-										<h3><a href="#">HOUSING IN MEXICO.<br/></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/mexico.png" alt="" /></a>
-									<p>I used a dataset of 21,000 properties to determine if real estate prices are
-										influenced more by property size or location. Importing and cleaning data from a
-										CSV file, build data visualizations, and examine the relationship between two
-										variables using correlation.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<h3><a href="https://github.com/RonChits/Default-Probabaility">Loan classification.<br/></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/loan.jpg" alt="" /></a>
-									<p>This project aims to predict loan applicant defaulting for a company using
-										machine learning techniques. Problem statement: Financial institutions face
-										significant risks due to loan defaults. Accurately predicting probability of
-										default on loans is critical for risk management and strategic planning..</p>
-									<ul class="actions special">
-										<li><a href="https://github.com/RonChits/Default-Probabaility" class="button">Check here.</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<h3><a href="#">VOLATILITY FORECASTING IN INDIA.<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/india.png" alt="" /></a>
-									<p>I created a GARCH time series model to predict asset volatility. I acquired
-										stock data through an API, clean and store it in a SQLite database, and build
-										API to serve model predictions.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<h3><a href="#">A/B TESTING AT WORLDQUANT UNIVERSITY.<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/WQU_logo_color.png" alt="" /></a>
-									<p>I conducted a chi-square test to determine if sending an email can increase
-										program enrollment at WQU. I build custom Python classes to implement an ETL
-										process, and creating an interactive data application following a three-tiered
-										design pattern..</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-								</article>
-
-                                <article class="ad-article">
-                                    <div class="ad-banner-container">
-                                        <script type="text/javascript">
-                                            atOptions = {
-                                                'key' : '4d26941499f506497efcb4527b651831',
-                                                'format' : 'iframe',
-                                                'height' : 60,
-                                                'width' : 468,
-                                                'params' : {}
-                                            };
-                                        </script>
-                                        <script type="text/javascript" src="//www.highperformanceformat.com/4d26941499f506497efcb4527b651831/invoke.js"></script>
-                                    </div>
-                                </article>
-
-								<article>
-									<header>
-										<h3><a href="#">CUSTOMER SEGMENTATION IN THE US.<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/us.png" alt="" /></a>
-									<p>I built a k-means model to cluster US consumers into groups. I used principal
-										component analysis (PCA) for data visualization, and I created an interactive
-										dashboard with Plotly Dash.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<h3><a href="#">BANKRUPTCY IN POLAND.<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/poland.png" alt="" /></a>
-									<p>I built random forest and gradient boosting models to predict whether a company
-										will go bankrupt. I navigated the Linux command line, address imbalanced data
-										through resampling, and consider the impact of performance metrics precision and
-										recall.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<h3><a href="#">EARTHQUAKE DAMAGE IN NEPAL.<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/nepal.png" alt="" /></a>
-									<p>I built logistic regression and decision tree models to predict earthquake damage
-										to buildings. I extracted data from a SQLite database, and reveal the biases in
-										data that can lead to discrimination.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<h3><a href="#">AIR QUALITY IN NAIROBI.<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/nairobi.png" alt="" /></a>
-									<p>I built an ARMA time-series model to predict particulate matter levels in Kenya.
-										I extracted data from a MongoDB database using pymongo, and improve model
-										performance through hyperparameter tuning.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<h3><a href="#">APARTMENT SALES IN BUENOS AIRES.<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/buenos.png" alt="" /></a>
-									<p>I built a linear regression model to predict apartment prices in Argentina. I created
-										a data pipeline to impute missing values and encode categorical features, and
-										they improve model performance by reducing over-fitting.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<h3><a href="https://github.com/RonChits">Barrier option pricing with Pade Scheme(Thesis.)<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/hit4001.png" alt="" /></a>
-									<p>Pricing of options is essential, path-depended options face challenge on solving
-										PDE's or SDE's, barrier options face same problem as the barrier is introduced.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-
-								</article>
-								<article>
-									<header>
-										<h3><a href="https://github.com/RonChits/Titanic-Survival">Unsinkable Titanic.<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/tita.png" alt="" /></a>
-									<p>The project is on famous 1912 titanic accident, deducing an explanation on what made
-										other people to survive and others failing. Problem statement : What sorts of
-										people were more likely to survive?</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-
-								</article>
-							</section>
-
-                            <div class="ad-banner-container">
-                                <script type="text/javascript">
-                                    atOptions = {
-                                        'key' : '4d26941499f506497efcb4527b651831',
-                                        'format' : 'iframe',
-                                        'height' : 60,
-                                        'width' : 468,
-                                        'params' : {}
-                                    };
-                                </script>
-                                <script type="text/javascript" src="//www.highperformanceformat.com/4d26941499f506497efcb4527b651831/invoke.js"></script>
-                            </div>
-
-
-							<section>
-								<header>
-										<h2><a href="#">Skills.<br/></a></h2>
-									</header>
-
-								</section>
-							<section class="posts">
-								<article>
-									<header>
-										<h3><a href="#"> Python.<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/1.png" alt="" /></a>
-									<p>Proficient in Python programming, with experience in [data analysis,machine learning].
-										Skilled in utilizing Python libraries and frameworks for [specific tasks, e.g.,
-										data manipulation, web application development, model building].</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-
-								</article>
-								<article>
-									<header>
-										<h3><a href="#">Data Visualization.<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/2.png" alt="" /></a>
-									<p>Proficient in Python programming with a strong emphasis on data analysis and visualization.
-										Experienced in utilizing Python libraries such as NumPy, Pandas, Matplotlib, and
-										Seaborn for data manipulation, exploration, and creating compelling visual
-										representations. Skilled in crafting informative and aesthetically pleasing
-										visualizations to uncover trends, patterns, and insights within complex datasets.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-
-								</article>
-								<article>
-									<header>
-										<h3><a href="#">SQL.<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/3.png" alt="" /></a>
-									<p>Proficient in SQL for data retrieval and management. Capable of writing efficient
-										SQL queries to extract, clean, and transform data from relational databases.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-
-								</article>
-								<article>
-									<header>
-										<h3><a href="#">Excel VBA.<br /></a></h3>
-									</header>
-									<a href="#" class="image fit"><img src="images/vba.png" alt="" /></a>
-									<p>Excel VBA skills for automating tasks, creating custom functions, and enhancing
-										data analysis capabilities within the Excel environment. Experienced in developing
-										VBA macros to streamline workflows and improve productivity.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Check here.</a></li>
-									</ul>
-
-								</article>
-
-								</section>
-
-                            <div class="ad-banner-container">
-                                <div id="container-761e19dc071408ff07e61ae63b742321_bottom"></div>
-                                <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
-                            </div>
-
-					</div>
-
-
-				<footer id="footer">
-						<section class="split contact">
-							<section class="alt">
-								<h3>Address</h3>
-								<p>Crowborough North<br />
-								834, Mufakose Harare </p>
-							</section>
-							<section>
-								<h3>Phone</h3>
-								<p><a href="#">+263 782522493</a></p>
-							</section>
-							<section>
-								<h3>Email</h3>
-								<p><a href="mailto:r.i.chitsatso@gmail.com">r.i.chitsatso@gmail.com</a></p>
-							</section>
-							<section>
-								<h3>Social</h3>
-								<ul class="icons alt">
-									<li><a href="https://github.com/RonChits" class="icon brands alt fa-github"><span class="label">Github</span></a></li>
-									<li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
-									<li><a href="mailto:r.i.chitsatso@gmail.com" class="icon fa-envelope"><span class="label">Gmail</span></a></li>
-									<li><a href="https://twitter.com/Ronald35032455" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="https://www.youtube.com/@RonaldChitsatso" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
-								</ul>
-							</section>
-						</section>
-					</footer>
-
-				<div id="copyright">
-						<ul><li>© Ronald</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
-					</div>
-
-			</div>
-
-        <div id="fixedBottomAd" class="fixed-bottom-ad">
-            <div id="container-fixed-bottom-banner-unit"></div>
-            <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
+        @media (max-width: 576px) {
+            .hero {
+                padding: 100px 0 50px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Ronald Chitsatso</a>
+                <div class="nav-links">
+                    <a href="index.html" class="active">Projects & Skills</a>
+                    <a href="generic.html">My Story</a>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/RonChits" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:r.i.chitsatso@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </nav>
         </div>
+    </header>
 
+    <!-- Hero Section (Main Intro) -->
+    <section class="hero">
+        <div class="container hero-content">
+            <img src="images/me.png" alt="Ronald Chitsatso" class="hero-image fade-in">
+            <h1 class="fade-in delay-1">Hi! My name is Ronald<br />and welcome to my page.</h1>
+            <p class="fade-in delay-2">Financial Engineering student at Harare Institute of Technology.<br />
+                As Financial Engineer I believe in data and numbers since there are reasons behind them.<br />
+                This belief has grown into a deep passion over the past few years to find hidden patterns in big data. <br />
+                Now, looking for an opportunity to work with my passion until I retire.
+            </p>
+            <p class="fade-in delay-3"> My Background<br />
+                -Bachelor's of Financial Engineering at Harare Institute of Technology <br />
+                -Applied Data Science lab holder at WorldQuant University
+            </p>
+            <a href="generic.html" class="btn fade-in delay-4">Full Story</a>
+        </div>
+    </section>
 
-		<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+    <!-- Ad Placement 1: After Hero Section -->
+    <div class="ad-banner-container" id="ad1_container">
+        <button class="close-ad-btn" data-ad-id="ad1_container">×</button>
+        <div id="container-761e19dc071408ff07e61ae63b742321_top"></div>
+        <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
+    </div>
 
-            <script>
-                // JavaScript for dynamic body padding to account for fixed bottom ad
-                document.addEventListener('DOMContentLoaded', function() {
-                    const fixedBottomAd = document.getElementById('fixedBottomAd');
-                    const body = document.body;
+    <!-- Projects Section -->
+    <section class="projects">
+        <div class="container">
+            <h2 class="section-title fade-in">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card fade-in delay-1">
+                    <img src="images/mexico.png" alt="Housing in Mexico" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Housing in Mexico</h3>
+                        <p class="project-description">I used a dataset of 21,000 properties to determine if real estate prices are influenced more by property size or location. Importing and cleaning data from a CSV file, build data visualizations, and examine the relationship between two variables using correlation.</p>
+                        <a href="#" class="btn">Check here.</a>
+                    </div>
+                </div>
 
-                    function adjustBodyPadding() {
-                        if (fixedBottomAd && fixedBottomAd.offsetHeight > 0 && fixedBottomAd.style.display !== 'none') {
-                            // Give a slight delay to ensure the ad content has rendered and taken its height
-                            setTimeout(() => {
-                                const adHeight = fixedBottomAd.offsetHeight;
-                                body.style.paddingBottom = `${adHeight + 10}px`; // Add a small buffer for spacing
-                            }, 500); // Increased delay slightly for ad loading
-                        } else {
-                            body.style.paddingBottom = '0';
-                        }
-                    }
+                <!-- Project 2 -->
+                <div class="project-card fade-in delay-2">
+                    <img src="images/loan.jpg" alt="Loan Classification" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Loan Classification</h3>
+                        <p class="project-description">This project aims to predict loan applicant defaulting for a company using machine learning techniques. Problem statement: Financial institutions face significant risks due to loan defaults. Accurately predicting probability of default on loans is critical for risk management and strategic planning..</p>
+                        <a href="https://github.com/RonChits/Default-Probabaility" class="btn">Check here.</a>
+                    </div>
+                </div>
 
-                    // Initial adjustment on load
-                    adjustBodyPadding();
-                    // Adjust on window resize (e.g., orientation change on mobile)
-                    window.addEventListener('resize', adjustBodyPadding);
+                <!-- Project 3 -->
+                <div class="project-card fade-in delay-3">
+                    <img src="images/india.png" alt="Volatility Forecasting in India" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Volatility Forecasting in India</h3>
+                        <p class="project-description">I created a GARCH time series model to predict asset volatility. I acquired stock data through an API, clean and store it in a SQLite database, and build API to serve model predictions.</p>
+                        <a href="#" class="btn">Check here.</a>
+                    </div>
+                </div>
 
-                    // Optional: If you want a close button for the fixed ad
-                    // You'd need to add a button element inside fixedBottomAd and its corresponding JS logic
-                    // Example (add this button HTML inside fixed-bottom-ad div if you want it):
-                    /* <button id="closeFixedAd" style="position: absolute; top: 5px; right: 10px; background: rgba(255,255,255,0.3); color: white; border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 1.2em; cursor: pointer;">&times;</button> */
-                    const closeFixedAdButton = document.getElementById('closeFixedAd'); // If you add one
-                    if (closeFixedAdButton) {
-                        closeFixedAdButton.addEventListener('click', () => {
-                            fixedBottomAd.style.display = 'none';
-                            adjustBodyPadding(); // Recalculate padding when ad is hidden
-                        });
+                <!-- Ad Placement 2: Mid-Projects -->
+                <div class="ad-banner-container" id="ad2_container">
+                    <button class="close-ad-btn" data-ad-id="ad2_container">×</button>
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key' : '4d26941499f506497efcb4527b651831',
+                            'format' : 'iframe',
+                            'height' : 60,
+                            'width' : 468,
+                            'params' : {}
+                        };
+                    </script>
+                    <script type="text/javascript" src="//www.highperformanceformat.com/4d26941499f506497efcb4527b651831/invoke.js"></script>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card fade-in delay-4">
+                    <img src="images/WQU_logo_color.png" alt="A/B Testing at WorldQuant University" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">A/B Testing at WQU</h3>
+                        <p class="project-description">I conducted a chi-square test to determine if sending an email can increase program enrollment at WQU. I build custom Python classes to implement an ETL process, and creating an interactive data application following a three-tiered design pattern..</p>
+                        <a href="#" class="btn">Check here.</a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card fade-in delay-1">
+                    <img src="images/us.png" alt="Customer Segmentation in the US" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Customer Segmentation in the US</h3>
+                        <p class="project-description">I built a k-means model to cluster US consumers into groups. I used principal component analysis (PCA) for data visualization, and I created an interactive dashboard with Plotly Dash.</p>
+                        <a href="#" class="btn">Check here.</a>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card fade-in delay-2">
+                    <img src="images/poland.png" alt="Bankruptcy in Poland" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Bankruptcy in Poland</h3>
+                        <p class="project-description">I built random forest and gradient boosting models to predict whether a company will go bankrupt. I navigated the Linux command line, address imbalanced data through resampling, and consider the impact of performance metrics precision and recall.</p>
+                        <a href="#" class="btn">Check here.</a>
+                    </div>
+                </div>
+
+                <!-- Project 7 -->
+                <div class="project-card fade-in delay-3">
+                    <img src="images/nepal.png" alt="Earthquake Damage in Nepal" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Earthquake Damage in Nepal</h3>
+                        <p class="project-description">I built logistic regression and decision tree models to predict earthquake damage to buildings. I extracted data from a SQLite database, and reveal the biases in data that can lead to discrimination.</p>
+                        <a href="#" class="btn">Check here.</a>
+                    </div>
+                </div>
+
+                <!-- Project 8 -->
+                <div class="project-card fade-in delay-4">
+                    <img src="images/nairobi.png" alt="Air Quality in Nairobi" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Air Quality in Nairobi</h3>
+                        <p class="project-description">I built an ARMA time-series model to predict particulate matter levels in Kenya. I extracted data from a MongoDB database using pymongo, and improve model performance through hyperparameter tuning.</p>
+                        <a href="#" class="btn">Check here.</a>
+                    </div>
+                </div>
+
+                <!-- Project 9 -->
+                <div class="project-card fade-in delay-1">
+                    <img src="images/buenos.png" alt="Apartment Sales in Buenos Aires" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Apartment Sales in Buenos Aires</h3>
+                        <p class="project-description">I built a linear regression model to predict apartment prices in Argentina. I created a data pipeline to impute missing values and encode categorical features, and they improve model performance by reducing over-fitting.</p>
+                        <a href="#" class="btn">Check here.</a>
+                    </div>
+                </div>
+
+                <!-- Project 10 -->
+                <div class="project-card fade-in delay-2">
+                    <img src="images/hit4001.png" alt="Barrier Option Pricing" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Barrier Option Pricing (Thesis)</h3>
+                        <p class="project-description">Pricing of options is essential, path-depended options face challenge on solving PDE's or SDE's, barrier options face same problem as the barrier is introduced.</p>
+                        <a href="https://github.com/RonChits" class="btn">Check here.</a>
+                    </div>
+                </div>
+
+                <!-- Project 11 -->
+                <div class="project-card fade-in delay-3">
+                    <img src="images/tita.png" alt="Titanic Survival Analysis" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Unsinkable Titanic</h3>
+                        <p class="project-description">The project is on famous 1912 titanic accident, deducing an explanation on what made other people to survive and others failing. Problem statement : What sorts of people were more likely to survive?</p>
+                        <a href="https://github.com/RonChits/Titanic-Survival" class="btn">Check here.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills">
+        <div class="container">
+            <h2 class="section-title fade-in">Technical Skills</h2>
+            <div class="skills-grid">
+                <!-- Skill 1 -->
+                <div class="skill-card fade-in delay-1">
+                    <div class="skill-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3 class="skill-title">Python</h3>
+                    <p>Proficient in Python programming, with experience in [data analysis,machine learning]. Skilled in utilizing Python libraries and frameworks for [specific tasks, e.g., data manipulation, web application development, model building].</p>
+                    <ul class="actions special">
+                        <li><a href="#" class="button">Check here.</a></li>
+                    </ul>
+                </div>
+
+                <!-- Skill 2 -->
+                <div class="skill-card fade-in delay-2">
+                    <div class="skill-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="skill-title">Data Visualization</h3>
+                    <p>Proficient in Python programming with a strong emphasis on data analysis and visualization. Experienced in utilizing Python libraries such as NumPy, Pandas, Matplotlib, and Seaborn for data manipulation, exploration, and creating compelling visual representations. Skilled in crafting informative and aesthetically pleasing visualizations to uncover trends, patterns, and insights within complex datasets.</p>
+                    <ul class="actions special">
+                        <li><a href="#" class="button">Check here.</a></li>
+                    </ul>
+                </div>
+
+                <!-- Skill 3 -->
+                <div class="skill-card fade-in delay-3">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="skill-title">SQL</h3>
+                    <p>Proficient in SQL for data retrieval and management. Capable of writing efficient SQL queries to extract, clean, and transform data from relational databases.</p>
+                    <ul class="actions special">
+                        <li><a href="#" class="button">Check here.</a></li>
+                    </ul>
+                </div>
+
+                <!-- Skill 4 -->
+                <div class="skill-card fade-in delay-4">
+                    <div class="skill-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <h3 class="skill-title">Excel VBA</h3>
+                    <p>Excel VBA skills for automating tasks, creating custom functions, and enhancing data analysis capabilities within the Excel environment. Experienced in developing VBA macros to streamline workflows and improve productivity.</p>
+                    <ul class="actions special">
+                        <li><a href="#" class="button">Check here.</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <a href="index.html" class="footer-logo">Ronald Chitsatso</a>
+            <div class="footer-social">
+                <a href="https://github.com/RonChits" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:r.i.chitsatso@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://twitter.com/Ronald35032455" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/ronald.chitsatso.1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.youtube.com/@RonaldChitsatso" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="copyright">&copy; 2023 Ronald Chitsatso. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Fixed Bottom Ad -->
+    <div id="fixedBottomAd" class="fixed-bottom-ad">
+        <button class="close-ad-btn" data-ad-id="fixedBottomAd">×</button>
+        <div id="container-761e19dc071408ff07e61ae63b742321_fixed_bottom"></div>
+        <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100 && element.style.opacity === '0') {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
                     }
                 });
-            </script>
+            };
+            
+            // Initial check
+            fadeInOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', fadeInOnScroll);
 
-	</body>
+            // Ad Close Button Logic
+            document.querySelectorAll('.close-ad-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const adContainerId = button.getAttribute('data-ad-id');
+                    const adContainer = document.getElementById(adContainerId);
+                    if (adContainer) {
+                        adContainer.style.display = 'none';
+                        // If the fixed bottom ad is closed, adjust body padding
+                        if (adContainerId === 'fixedBottomAd') {
+                            adjustBodyPadding();
+                        }
+                    }
+                });
+            });
+
+            // Dynamic body padding for fixed bottom ad
+            const fixedBottomAd = document.getElementById('fixedBottomAd');
+            const body = document.body;
+
+            function adjustBodyPadding() {
+                if (fixedBottomAd && fixedBottomAd.offsetHeight > 0 && fixedBottomAd.style.display !== 'none') {
+                    // Give a slight delay to ensure the ad content has rendered and taken its height
+                    setTimeout(() => {
+                        const adHeight = fixedBottomAd.offsetHeight;
+                        body.style.paddingBottom = `${adHeight + 10}px`; // Add a small buffer
+                    }, 500); 
+                } else {
+                    body.style.paddingBottom = '0';
+                }
+            }
+
+            // Initial adjustment on load
+            adjustBodyPadding();
+            // Adjust on window resize (e.g., orientation change on mobile)
+            window.addEventListener('resize', adjustBodyPadding);
+        });
+    </script>
+</body>
 </html>
