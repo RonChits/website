@@ -427,116 +427,176 @@
             color: white;
             padding: 70px 0 30px;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.3); /* Top shadow for footer */
+            position: relative; /* For the background elements */
+            overflow: hidden; /* Hide anything that spills */
         }
 
-        /* --- Restore Footer Layout from Original Massively Theme --- */
-        footer .split {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Two columns for desktop */
-            gap: 4em; /* Standard gap from Massively */
+        /* Decorative background elements for the footer */
+        footer::before, footer::after {
+            content: '';
+            position: absolute;
+            background: rgba(76, 201, 240, 0.05); /* Accent with transparency */
+            border-radius: 50%;
+            z-index: 0;
+            filter: blur(20px); /* Soft blur effect */
+        }
+
+        footer::before {
+            width: 150px;
+            height: 150px;
+            top: 20%;
+            left: -5%;
+            animation: footerFloat 8s ease-in-out infinite alternate;
+        }
+
+        footer::after {
+            width: 200px;
+            height: 200px;
+            bottom: 10%;
+            right: -10%;
+            animation: footerFloat 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes footerFloat {
+            0% { transform: translateY(0) translateX(0) scale(1); }
+            50% { transform: translateY(-15px) translateX(15px) scale(1.05); }
+            100% { transform: translateY(0) translateX(0) scale(1); }
+        }
+
+        /* --- New Footer Layout: Icon-focused with better flow --- */
+        footer .main-footer-content {
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            justify-content: center; /* Center items when they wrap */
+            gap: 40px 60px; /* Vertical and horizontal gap */
             margin-bottom: 40px;
-            max-width: 1200px; /* Match container width */
+            max-width: 900px; /* A bit narrower to focus content */
             margin-left: auto;
             margin-right: auto;
-            padding: 0 20px; /* Match container padding */
-        }
-
-        footer .split .alt {
-            grid-column: span 1; /* Ensure alt section takes one column */
-        }
-
-        footer .split .contact {
-            display: flex;
-            flex-direction: column; /* Stack contact items vertically */
-        }
-
-        footer .split .contact section {
-            margin-bottom: 1.5em; /* Space between contact items */
-        }
-
-        footer .split .contact section:last-child {
-            margin-bottom: 0; /* No margin on last item */
+            padding: 0 20px;
+            position: relative; /* To be above the decorative elements */
+            z-index: 1;
         }
         
-        /* Apply new styling to the restored footer content */
-        footer .split .contact h3 {
-            margin-bottom: 1em; /* Spacing for heading */
-            font-size: 1.4rem; /* Match footer-column h3 */
-            color: var(--accent); /* Accent color for titles */
+        /* Individual footer sections (Address, Phone, Email, Social) */
+        footer .footer-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content within each section */
+            text-align: center;
+            min-width: 180px; /* Ensure sections have a minimum width */
+        }
+
+        footer .footer-section h3 {
+            margin-bottom: 15px; /* Less margin as icons are compact */
+            font-size: 1.3rem; /* Slightly smaller title for more compact look */
+            color: var(--accent);
             position: relative;
             display: inline-block;
         }
 
-        footer .split .contact h3:after {
+        footer .footer-section h3:after {
             content: '';
             position: absolute;
-            bottom: -5px; /* Adjust as needed */
-            left: 0;
-            width: 60px; /* Longer underline */
-            height: 3px;
-            background: white; /* White underline */
+            bottom: -5px;
+            left: 50%; /* Center underline under titles */
+            transform: translateX(-50%);
+            width: 50px; /* Shorter underline */
+            height: 2px;
+            background: white;
         }
 
-        footer .split .contact p,
-        footer .split .contact a {
-            color: rgba(255,255,255,0.85); /* Slightly brighter text */
-            text-decoration: none; /* Remove underline from all footer links */
-            transition: color 0.3s ease, padding-left 0.3s ease;
+        /* Styling for contact items (Phone, Email, Address lines) */
+        footer .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center icon and text */
+            gap: 10px;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 10px; /* Spacing between contact lines */
+            text-decoration: none; /* No underline */
+            transition: color 0.3s ease;
         }
 
-        footer .split .contact a:hover {
+        footer .contact-item:hover {
             color: var(--accent); /* Accent color on hover */
-            padding-left: 8px; /* More pronounced slide */
         }
 
-        footer .split .contact ul.icons {
-            display: flex; /* Ensure icons display in a row */
-            list-style: none; /* Remove bullet points */
+        footer .contact-item i {
+            font-size: 1.1rem; /* Icon size for contact items */
+            color: var(--light-gray); /* Subtle icon color */
+        }
+
+        footer .contact-item.address-lines {
+            display: block; /* Address can be multiple lines */
+            margin-top: 10px; /* Space from heading */
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        footer .contact-item.address-lines p {
+            margin-bottom: 5px; /* Space between address lines */
+        }
+
+
+        /* Social Icons specific styling (more prominent) */
+        footer .social-icons-list {
+            display: flex;
+            list-style: none;
             padding: 0;
             margin: 0;
             gap: 15px; /* Space between icons */
+            margin-top: 15px; /* Space from 'Social' title */
         }
 
-        footer .split .contact ul.icons li {
+        footer .social-icons-list li {
             margin: 0;
         }
 
-        footer .split .contact ul.icons li a {
-            /* These styles are for the social icons specifically */
-            font-size: 1.8rem; /* Larger icons for more visual impact */
-            color: white; /* Make icons white by default */
-            text-decoration: none; /* Ensure no underline */
+        footer .social-icons-list li a {
+            font-size: 1.8rem; /* Larger icons for impact */
+            color: white; /* Default icon color */
+            text-decoration: none; /* No underline */
             transition: all 0.3s ease;
-            width: 40px; /* Define fixed width/height for square icon background */
-            height: 40px;
-            display: flex;
+            width: 45px; /* Fixed width for consistent circle size */
+            height: 45px; /* Fixed height */
+            display: flex; /* Flex for centering the icon */
             align-items: center;
             justify-content: center;
-            border-radius: 50%; /* Make them round */
-            background-color: rgba(255,255,255,0.1); /* Subtle white background for icons */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Small shadow for depth */
+            border-radius: 50%; /* Make them perfectly round */
+            background-color: rgba(255,255,255,0.1); /* Subtle transparent background */
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3); /* Soft shadow for depth */
         }
 
-        footer .split .contact ul.icons li a:hover {
+        footer .social-icons-list li a:hover {
             color: var(--accent); /* Accent color on hover */
-            transform: translateY(-5px) scale(1.2);
+            transform: translateY(-7px) scale(1.15); /* More pronounced lift and scale */
             background-color: rgba(255,255,255,0.2); /* Slightly more opaque background on hover */
-            box-shadow: 0 5px 10px rgba(0,0,0,0.3); /* More pronounced shadow on hover */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4); /* Stronger shadow on hover */
+        }
+        
+        /* Hide the text labels for screen readers */
+        footer .social-icons-list li a .label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
-        /* Hide the label span that might be causing issues with icon visibility */
-        footer .split .contact ul.icons li a .label {
-            display: none; /* Hide the text label next to the icon */
-        }
-
-
-        /* The copyright section is outside the .split contact div in Massively theme */
+        /* The copyright section */
         .copyright {
             text-align: center;
             padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.15); /* Slightly more visible border */
-            color: rgba(255,255,255,0.7); /* Slightly brighter */
+            border-top: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.7);
             font-size: 0.95rem;
+            position: relative; /* To be above decorative elements */
+            z-index: 1;
         }
 
         /* --- Animations --- */
@@ -685,16 +745,18 @@
             .fixed-bottom-ad .close-ad-btn { width: 35px; height: 35px; font-size: 1.4rem;}
             
             /* Footer adjustments for mobile */
-            footer .split {
-                grid-template-columns: 1fr; /* Stack columns on mobile */
-                text-align: center;
-                gap: 2em;
+            footer .main-footer-content {
+                flex-direction: column; /* Stack sections vertically */
+                gap: 2em; /* Adjusted gap */
             }
-            footer .split .contact h3:after {
+            footer .footer-section {
+                min-width: unset; /* Remove min-width to allow shrinking */
+            }
+            footer .footer-section h3:after {
                 left: 50%;
                 transform: translateX(-50%); /* Center underline */
             }
-            footer .split .contact ul.icons {
+            footer .social-icons-list {
                 justify-content: center; /* Center icons */
             }
         }
@@ -922,21 +984,26 @@
             </section>
             <section>
                 <h3>Phone</h3>
-                <p><a href="tel:+263782522493">+263 782522493</a></p>
+                <ul class="icons alt">
+                    <li><a href="tel:+263782522493" class="icon fa-phone"><span class="label">Phone</span></a></li>
+                    </ul>
+                <p class="contact-text">+263 782522493</p>
             </section>
             <section>
                 <h3>Email</h3>
-                <p><a href="mailto:r.i.chitsatso@gmail.com">r.i.chitsatso@gmail.com</a></p>
+                <ul class="icons alt">
+                    <li><a href="mailto:r.i.chitsatso@gmail.com" class="icon fa-envelope"><span class="label">Gmail</span></a></li>
+                </ul>
+                <p class="contact-text">r.i.chitsatso@gmail.com</p>
             </section>
             <section>
                 <h3>Social</h3>
                 <ul class="icons alt">
-                    <li><a href="https://github.com/RonChits" target="_blank"><i class="fab fa-github"></i><span class="label">Github</span></a></li>
-                    <li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" target="_blank"><i class="fab fa-linkedin"></i><span class="label">linkedin</span></a></li>
-                    <li><a href="mailto:r.i.chitsatso@gmail.com"><i class="icon fa-envelope"></i><span class="label">Gmail</span></a></li>
-                    <li><a href="https://twitter.com/Ronald35032455" target="_blank"><i class="fab fa-twitter"></i><span class="label">Twitter</span></a></li>
-                    <li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook-f"></i><span class="label">Facebook</span></a></li>
-                    <li><a href="https://www.youtube.com/@RonaldChitsatso" target="_blank"><i class="fab fa-youtube"></i><span class="label">Youtube</span></a></li>
+                    <li><a href="https://github.com/RonChits" target="_blank" class="icon brands alt fa-github"><span class="label">Github</span></a></li>
+                    <li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" target="_blank" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
+                    <li><a href="https://twitter.com/Ronald35032455" target="_blank" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" target="_blank" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="https://www.youtube.com/@RonaldChitsatso" target="_blank" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
                 </ul>
             </section>
         </section>
