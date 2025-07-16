@@ -1,600 +1,467 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ronald Chitsatso | Portfolio</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #7cf03d;
-            --dark: #1f242d;
-            --light: #ffffff;
-            --accent: #07ba10;
-            --shadow: 0 5px 15px rgba(124, 240, 61, 0.3);
-        }
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>About Ronald</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: var(--dark);
-            color: var(--light);
-            overflow-x: hidden;
-            /* Padding for the fixed bottom ad. Will be dynamically adjusted by JS. */
-            padding-bottom: 0;
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: rgba(31, 36, 45, 0.9);
-            backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
-        }
-
-        .navbar.scrolled {
-            padding: 1rem 5%;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--light);
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .logo:hover {
-            color: var(--primary);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--light);
-            font-weight: 500;
-            font-size: 1.1rem;
-            position: relative;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            bottom: -5px;
-            left: 0;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            z-index: 101;
-        }
-
-        .menu-toggle .bar {
-            width: 25px;
-            height: 3px;
-            background: var(--light);
-            transition: 0.3s;
-        }
-
-        .menu-toggle.active .bar:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-        .menu-toggle.active .bar:nth-child(2) {
-            opacity: 0;
-        }
-        .menu-toggle.active .bar:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-        }
-
-        .home {
-            min-height: 100vh;
-            padding: 0 5%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            padding-top: 80px;
-        }
-
-        .home-info {
-            max-width: 600px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .home-info h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, var(--light), var(--primary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .home-info h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            height: 2.5rem;
-            overflow: hidden;
-            position: relative; /* Added for correct positioning of spans */
-        }
-
-        .home-info h2 span {
-            position: absolute;
-            left: 0;
-            opacity: 0;
-            color: var(--primary);
-            animation: textSlide 12s infinite;
-        }
-
-        @keyframes textSlide {
-            0% { opacity: 0; transform: translateY(20px); }
-            5% { opacity: 1; transform: translateY(0); }
-            15% { opacity: 1; transform: translateY(0); }
-            20% { opacity: 0; transform: translateY(-20px); }
-            100% { opacity: 0; }
-        }
-
-        .home-info h2 span:nth-child(1) { animation-delay: 0s; }
-        .home-info h2 span:nth-child(2) { animation-delay: 2s; }
-        .home-info h2 span:nth-child(3) { animation-delay: 4s; }
-        .home-info h2 span:nth-child(4) { animation-delay: 6s; }
-        .home-info h2 span:nth-child(5) { animation-delay: 8s; }
-        .home-info h2 span:nth-child(6) { animation-delay: 10s; }
-
-        .home-info p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.3s forwards;
-        }
-
-        .btn-sci {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.6s forwards;
-        }
-
-        .btn {
-            padding: 0.8rem 2rem;
-            background: var(--primary);
-            border-radius: 40px;
-            font-weight: 600;
-            color: var(--dark);
-            text-decoration: none;
-            box-shadow: var(--shadow);
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(124, 240, 61, 0.4);
-        }
-
-        .sci {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .sci a {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            color: var(--primary);
-            font-size: 1.2rem;
-            transition: 0.3s;
-        }
-
-        .sci a:hover {
-            background: var(--primary);
-            color: var(--dark);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow);
-        }
-
-        .home-img {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            opacity: 0;
-            animation: fadeIn 1s ease 0.9s forwards, float 6s ease-in-out infinite;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .img-box {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .img-box::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 45%;
-            background: conic-gradient(
-                transparent,
-                transparent,
-                transparent,
-                var(--primary)
-            );
-            padding: 1px;
-            -webkit-mask:
-                linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            background: conic-gradient(transparent, transparent, transparent, var(--primary));
-            animation: rotate 0.6s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .img-item {
-            position: absolute;
-            width: 90%;
-            height: 90%;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 5px solid var(--dark);
-            z-index: 1;
-        }
-
-        .img-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* --- New Ad Container Styles --- */
-        .ad-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 40px auto; /* Margin above and below the ad */
-            background-color: rgba(255, 255, 255, 0.05); /* Slightly transparent background */
-            padding: 10px;
-            border-radius: 8px;
-            overflow: hidden; /* Important to contain ad content */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            /* Set a max-width for better display on larger screens, common banner sizes */
-            max-width: 728px;
-            min-height: 90px; /* Accommodate 728x90 or similar larger banners */
-        }
-
-        /* Fixed Bottom Ad Styles (if desired) */
-        .ad-container.fixed-bottom {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 101; 
-            background-color: var(--dark); /* Darker background for fixed bottom */
-            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.3); 
-            border-radius: 0; 
-            padding: 5px 0;
-            min-height: 50px; /* Mobile standard banner height */
-            max-height: 90px; /* Keep it contained on mobile */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Ensure ad content takes full space inside ad-container */
-        .ad-container > div {
-            width: 100%;
-            height: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden; /* Ensure any overflowing ad content is clipped */
-        }
-
-        .main-content {
-            padding: 20px 5%;
-        }
-
-        @media (max-width: 1200px) {
-            .home-info h1 { font-size: 2.5rem; }
-            .home-info h2 { font-size: 1.5rem; }
-            .home-img { width: 350px; height: 350px; }
-        }
-
-        @media (max-width: 992px) {
-            .home {
-                flex-direction: column-reverse;
-                text-align: center;
-                padding-top: 120px;
-                padding-bottom: 50px;
-            }
-            .home-img { margin-bottom: 50px; }
-            .btn-sci { justify-content: center; }
-
-            /* Ad container adjustments for smaller screens */
-            .ad-container {
-                margin: 30px auto; /* Slightly less margin */
-                max-width: 468px; /* Fit the 468x60 ad better */
-                min-height: 70px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .menu-toggle { display: flex; }
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: -100%;
+        <style>
+            /* General container for banner ads */
+            .ad-banner-container {
+                display: flex;
+                justify-content: center; /* Center the ad horizontally */
+                align-items: center;    /* Center the ad vertically */
                 width: 100%;
-                height: calc(100vh - 80px);
-                background: rgba(31, 36, 45, 0.95);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 2rem;
-                transition: 0.5s;
-            }
-            .nav-links.active { left: 0; }
-            .home-info h1 { font-size: 2rem; }
-            .home-info h2 { font-size: 1.3rem; height: 2.2rem; }
-            .home-img { width: 250px; height: 250px; }
-            
-            /* Dynamic padding for fixed bottom ad on mobile */
-            body { padding-bottom: 0; } 
-
-            .ad-container {
-                margin: 20px auto; /* Even less margin for smaller screens */
-                min-height: 50px; /* Standard mobile banner height */
+                /* Optional: Add some background/border to make it visually distinct */
+                background-color: rgba(0, 0, 0, 0.05); /* Light transparent dark background */
+                border-radius: 8px;
+                overflow: hidden; /* Crucial: Hides any overflowing ad content */
+                margin: 3em auto; /* Spacing above and below ads */
+                padding: 10px; /* Internal padding */
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                min-height: 90px; /* Default min-height for larger banners (e.g., 728x90) */
+                max-width: 900px; /* Max width to keep ads contained on wide screens */
+                text-align: center; /* Ensures text content (if any from ad) is centered */
             }
 
-            .ad-container.fixed-bottom {
-                min-height: 50px; /* Smallest min-height for mobile fixed ad */
-                max-height: 70px; /* Smallest max-height for mobile fixed ad */
-            }
-        }
-
-        @media (max-width: 576px) {
-            .btn-sci { flex-direction: column; gap: 1.5rem; }
-            .sci { justify-content: center; }
-            .ad-container {
-                min-height: 50px; /* Ensure it doesn't collapse */
-                padding: 5px; /* Less padding */
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar">
-        <a href="#" class="logo">Portfolio</a>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="https://ronchits.github.io/website/">About</a></li>
-            <li><a href="https://ronchits.github.io/website/">Portfolio</a></li>
-            <li><a href="https://ronchits.github.io/website/">Service</a></li>
-            <li><a href="mailto:r.i.chitsatso@gmail.com">Contact</a></li>
-        </ul>
-        <div class="menu-toggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </nav>
-
-    <div class="main-content">
-        <section class="home" id="home">
-            <div class="home-info">
-                <h1>Ronald Isheanesu Chitsatso.</h1>
-                <h2>I am</h2>
-                <h2>
-                    <span style="--i:6;" data-text="Chess Player.">Chess Player.</span>
-                    <span style="--i:5;" data-text="Financial Engineer.">Financial Engineer.</span>
-                    <span style="--i:4;" data-text="Data Analyst.">Data Analyst.</span>
-                    <span style="--i:3;" data-text="Python Expert.">Python Expert.</span>
-                    <span style="--i:2;" data-text="Youtuber.">Youtuber.</span>
-                    <span style="--i:1;" data-text="Financial Analyst.">Financial Analyst.</span>
-                </h2>
-                <p>Welcome! I'm a data-driven professional with a background in Financial Engineering.
-                    I'm passionate about finding patterns in data and eager to apply those skills in
-                    a challenging and rewarding career opportunity.</p>
-                <div class="btn-sci">
-                    <a href="Ronald I Chitsatso ResumeCV.pdf" class="btn">Download CV</a>
-                    <div class="sci">
-                        <a href="https://github.com/RonChits"><i class='bx bxl-github'></i></a>
-                        <a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/"><i class='bx bxl-linkedin'></i></a>
-                        <a href="https://www.youtube.com/@RonaldChitsatso"><i class='bx bxl-youtube'></i></a>
-                        <a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL"><i class='bx bxl-facebook-circle'></i></a>
-                        <a href="mailto:r.i.chitsatso@gmail.0"><i class='bx bx-envelope'></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="home-img">
-                <div class="img-box">
-                    <div class="img-item">
-                        <img src="mine.png" alt="Ronald Chitsatso">
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="ad-section">
-            <div class="ad-container">
-                <div id="container-761e19dc071408ff07e61ae63b742321"></div>
-                <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
-            </div>
-        </section>
-
-        <section class="about-me-section" style="padding: 100px 5%; background-color: var(--dark); text-align: center;">
-            <h2 style="color: var(--primary); font-size: 2.5rem; margin-bottom: 30px;">About My Work</h2>
-            <p style="max-width: 800px; margin: 0 auto; color: var(--light-gray);">
-                My work focuses on leveraging data science and financial engineering principles to solve complex problems. I combine robust analytical skills with a passion for uncovering actionable insights from diverse datasets.
-            </p>
-        </section>
-
-        <section class="ad-section">
-            <div class="ad-container">
-                <script type="text/javascript">
-                    atOptions = {
-                        'key' : '4d26941499f506497efcb4527b651831',
-                        'format' : 'iframe',
-                        'height' : 60,
-                        'width' : 468,
-                        'params' : {}
-                    };
-                </script>
-                <script type="text/javascript" src="//www.highperformanceformat.com/4d26941499f506497efcb4527b651831/invoke.js"></script>
-            </div>
-        </section>
-        
-        </div>
-
-    <div class="ad-container fixed-bottom" id="fixedBottomAd">
-        <button class="close-ad-btn" id="closeAdButton">×</button>
-        <div id="container-fixed-bottom-ad-unit"></div> 
-        <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
-        </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navLinks = document.querySelector('.nav-links');
-            const navbar = document.querySelector('.navbar');
-            const fixedBottomAd = document.getElementById('fixedBottomAd');
-            const closeAdButton = document.getElementById('closeAdButton');
-            const body = document.body;
-
-            // Function to adjust body padding based on ad visibility
-            function adjustBodyPadding() {
-                if (fixedBottomAd && fixedBottomAd.style.display !== 'none') {
-                    // Give a slight delay to ensure the ad content has rendered and taken its height
-                    // The delay helps get the accurate height after ad script execution
-                    setTimeout(() => {
-                        const adHeight = fixedBottomAd.offsetHeight;
-                        body.style.paddingBottom = `${adHeight}px`;
-                    }, 500); // Increased delay slightly for ad loading
-                } else {
-                    body.style.paddingBottom = '0';
+            /* Specific adjustments for smaller screens */
+            @media screen and (max-width: 980px) { /* Tablet breakpoint for Massively theme */
+                .ad-banner-container {
+                    margin: 2.5em auto;
+                    min-height: 70px; /* For common 468x60 banners */
+                    max-width: 700px;
                 }
             }
 
-            // Initial adjustment
-            adjustBodyPadding();
+            @media screen and (max-width: 736px) { /* Mobile breakpoint for Massively theme */
+                .ad-banner-container {
+                    margin: 2em auto;
+                    min-height: 60px; /* Standard mobile banner height (e.g., 320x50, 300x50) */
+                    padding: 5px;
+                    max-width: 100%; /* Take full width on mobile */
+                }
+                /* If the ad network renders a div inside with fixed width, force it to be fluid */
+                .ad-banner-container > div {
+                    max-width: 100%;
+                    overflow: hidden;
+                }
+            }
 
-            // Adjust padding when the window is resized (to handle orientation changes or dynamic ad sizes)
-            window.addEventListener('resize', adjustBodyPadding);
+            /* Style for the fixed bottom ad container */
+            .fixed-bottom-ad {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1000; /* Above most content, but below your fixed header */
+                background-color: rgba(0, 0, 0, 0.9); /* Dark background for visibility */
+                box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+                padding: 5px 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 60px; /* Standard mobile banner height */
+                max-height: 90px; /* Prevent it from being too tall */
+                overflow: hidden; /* Hide anything that overflows */
+            }
 
-            // Toggle navigation menu on mobile
-            menuToggle.addEventListener('click', () => {
-                menuToggle.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
+            /* Adjust body padding for the fixed bottom ad */
+            body {
+                padding-bottom: 0; /* Reset default, controlled by JS */
+            }
+        </style>
+	</head>
+	<body class="is-preload">
 
-            // Close navigation menu when a link is clicked on mobile
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        menuToggle.classList.remove('active');
-                        navLinks.classList.remove('active');
+		<div id="wrapper" class="fade-in">
+
+				<div id="intro">
+						<h1>Welcome!</h1>
+						<p>My Machine learning and Other projects</p>
+						<ul class="actions">
+							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
+
+				<header id="header">
+						<a href="index.html" class="logo">My journey</a>
+					</header>
+
+				<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="index.html">My projects and skills.</a></li>
+							<li><a href="generic.html">My story.</a></li> </ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" class="icon brands fa-linkedin"><span class="label">Instagram</span></a></li>
+							<li><a href="https://github.com/RonChits" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="mailto:r.i.chitsatso@gmail.com" class="icon fa-envelope"><span class="label">Gmail</span></a></li>
+							<li><a href="https://twitter.com/Ronald35032455" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="https://www.youtube.com/@RonaldChitsatso" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
+						</ul>
+					</nav>
+
+				<div id="main">
+
+						<article class="post featured">
+								<header class="major">
+									<h3><a href="#">Hi! My name is Ronald<br />
+									and welcome to my page.</a></h3>
+									<p>Financial Engineering student at Harare Institute of Technology.<br />
+										As Financial Engineer I believe in data and numbers since there are reasons behind them.<br />
+                                   This belief has grown into a deep passion over the past few years to find hidden patterns in big data. <br />
+										Now, looking for an opportunity to work with my passion until I retire.</p>
+								</header>
+								<a href="#" class="image main"><img src="images/me.png" alt="" /></a>
+								<header class="major">
+								<p> My Background<br />
+										-Bachelor's of Financial Engineering at Harare Institute of Technology <br />
+										-Applied Data Science lab holder at WorldQuant University</p>
+								<ul class="actions special">
+									<li><a href="generic.html" class="button large">Full Story</a></li>
+								</ul>
+								</header>
+							</article>
+
+                        <div class="ad-banner-container">
+                            <div id="container-761e19dc071408ff07e61ae63b742321"></div>
+                            <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
+                        </div>
+
+							<section>
+								<header>
+										<h2><a href="#">Projects.<br/></a></h2>
+									</header>
+
+								</section>
+						<section class="posts">
+								<article>
+									<header>
+										<h3><a href="#">HOUSING IN MEXICO.<br/></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/mexico.png" alt="" /></a>
+									<p>I used a dataset of 21,000 properties to determine if real estate prices are
+										influenced more by property size or location. Importing and cleaning data from a
+										CSV file, build data visualizations, and examine the relationship between two
+										variables using correlation.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="https://github.com/RonChits/Default-Probabaility">Loan classification.<br/></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/loan.jpg" alt="" /></a>
+									<p>This project aims to predict loan applicant defaulting for a company using
+										machine learning techniques. Problem statement: Financial institutions face
+										significant risks due to loan defaults. Accurately predicting probability of
+										default on loans is critical for risk management and strategic planning..</p>
+									<ul class="actions special">
+										<li><a href="https://github.com/RonChits/Default-Probabaility" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">VOLATILITY FORECASTING IN INDIA.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/india.png" alt="" /></a>
+									<p>I created a GARCH time series model to predict asset volatility. I acquired
+										stock data through an API, clean and store it in a SQLite database, and build
+										API to serve model predictions.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">A/B TESTING AT WORLDQUANT UNIVERSITY.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/WQU_logo_color.png" alt="" /></a>
+									<p>I conducted a chi-square test to determine if sending an email can increase
+										program enrollment at WQU. I build custom Python classes to implement an ETL
+										process, and creating an interactive data application following a three-tiered
+										design pattern..</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+
+                                <article class="ad-article">
+                                    <div class="ad-banner-container">
+                                        <script type="text/javascript">
+                                            atOptions = {
+                                                'key' : '4d26941499f506497efcb4527b651831',
+                                                'format' : 'iframe',
+                                                'height' : 60,
+                                                'width' : 468,
+                                                'params' : {}
+                                            };
+                                        </script>
+                                        <script type="text/javascript" src="//www.highperformanceformat.com/4d26941499f506497efcb4527b651831/invoke.js"></script>
+                                    </div>
+                                </article>
+
+								<article>
+									<header>
+										<h3><a href="#">CUSTOMER SEGMENTATION IN THE US.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/us.png" alt="" /></a>
+									<p>I built a k-means model to cluster US consumers into groups. I used principal
+										component analysis (PCA) for data visualization, and I created an interactive
+										dashboard with Plotly Dash.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">BANKRUPTCY IN POLAND.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/poland.png" alt="" /></a>
+									<p>I built random forest and gradient boosting models to predict whether a company
+										will go bankrupt. I navigated the Linux command line, address imbalanced data
+										through resampling, and consider the impact of performance metrics precision and
+										recall.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">EARTHQUAKE DAMAGE IN NEPAL.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/nepal.png" alt="" /></a>
+									<p>I built logistic regression and decision tree models to predict earthquake damage
+										to buildings. I extracted data from a SQLite database, and reveal the biases in
+										data that can lead to discrimination.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">AIR QUALITY IN NAIROBI.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/nairobi.png" alt="" /></a>
+									<p>I built an ARMA time-series model to predict particulate matter levels in Kenya.
+										I extracted data from a MongoDB database using pymongo, and improve model
+										performance through hyperparameter tuning.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">APARTMENT SALES IN BUENOS AIRES.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/buenos.png" alt="" /></a>
+									<p>I built a linear regression model to predict apartment prices in Argentina. I created
+										a data pipeline to impute missing values and encode categorical features, and
+										they improve model performance by reducing over-fitting.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<h3><a href="https://github.com/RonChits">Barrier option pricing with Pade Scheme(Thesis.)<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/hit4001.png" alt="" /></a>
+									<p>Pricing of options is essential, path-depended options face challenge on solving
+										PDE's or SDE's, barrier options face same problem as the barrier is introduced.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+
+								</article>
+								<article>
+									<header>
+										<h3><a href="https://github.com/RonChits/Titanic-Survival">Unsinkable Titanic.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/tita.png" alt="" /></a>
+									<p>The project is on famous 1912 titanic accident, deducing an explanation on what made
+										other people to survive and others failing. Problem statement : What sorts of
+										people were more likely to survive?</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+
+								</article>
+							</section>
+
+                            <div class="ad-banner-container">
+                                <script type="text/javascript">
+                                    atOptions = {
+                                        'key' : '4d26941499f506497efcb4527b651831',
+                                        'format' : 'iframe',
+                                        'height' : 60,
+                                        'width' : 468,
+                                        'params' : {}
+                                    };
+                                </script>
+                                <script type="text/javascript" src="//www.highperformanceformat.com/4d26941499f506497efcb4527b651831/invoke.js"></script>
+                            </div>
+
+
+							<section>
+								<header>
+										<h2><a href="#">Skills.<br/></a></h2>
+									</header>
+
+								</section>
+							<section class="posts">
+								<article>
+									<header>
+										<h3><a href="#"> Python.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/1.png" alt="" /></a>
+									<p>Proficient in Python programming, with experience in [data analysis,machine learning].
+										Skilled in utilizing Python libraries and frameworks for [specific tasks, e.g.,
+										data manipulation, web application development, model building].</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">Data Visualization.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/2.png" alt="" /></a>
+									<p>Proficient in Python programming with a strong emphasis on data analysis and visualization.
+										Experienced in utilizing Python libraries such as NumPy, Pandas, Matplotlib, and
+										Seaborn for data manipulation, exploration, and creating compelling visual
+										representations. Skilled in crafting informative and aesthetically pleasing
+										visualizations to uncover trends, patterns, and insights within complex datasets.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">SQL.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/3.png" alt="" /></a>
+									<p>Proficient in SQL for data retrieval and management. Capable of writing efficient
+										SQL queries to extract, clean, and transform data from relational databases.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+
+								</article>
+								<article>
+									<header>
+										<h3><a href="#">Excel VBA.<br /></a></h3>
+									</header>
+									<a href="#" class="image fit"><img src="images/vba.png" alt="" /></a>
+									<p>Excel VBA skills for automating tasks, creating custom functions, and enhancing
+										data analysis capabilities within the Excel environment. Experienced in developing
+										VBA macros to streamline workflows and improve productivity.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Check here.</a></li>
+									</ul>
+
+								</article>
+
+								</section>
+
+                            <div class="ad-banner-container">
+                                <div id="container-761e19dc071408ff07e61ae63b742321_bottom"></div>
+                                <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
+                            </div>
+
+					</div>
+
+
+				<footer id="footer">
+						<section class="split contact">
+							<section class="alt">
+								<h3>Address</h3>
+								<p>Crowborough North<br />
+								834, Mufakose Harare </p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="#">+263 782522493</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="mailto:r.i.chitsatso@gmail.com">r.i.chitsatso@gmail.com</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="https://github.com/RonChits" class="icon brands alt fa-github"><span class="label">Github</span></a></li>
+									<li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
+									<li><a href="mailto:r.i.chitsatso@gmail.com" class="icon fa-envelope"><span class="label">Gmail</span></a></li>
+									<li><a href="https://twitter.com/Ronald35032455" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="https://www.youtube.com/@RonaldChitsatso" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<div id="copyright">
+						<ul><li>© Ronald</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+        <div id="fixedBottomAd" class="fixed-bottom-ad">
+            <div id="container-fixed-bottom-banner-unit"></div>
+            <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
+        </div>
+
+
+		<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+            <script>
+                // JavaScript for dynamic body padding to account for fixed bottom ad
+                document.addEventListener('DOMContentLoaded', function() {
+                    const fixedBottomAd = document.getElementById('fixedBottomAd');
+                    const body = document.body;
+
+                    function adjustBodyPadding() {
+                        if (fixedBottomAd && fixedBottomAd.offsetHeight > 0 && fixedBottomAd.style.display !== 'none') {
+                            // Give a slight delay to ensure the ad content has rendered and taken its height
+                            setTimeout(() => {
+                                const adHeight = fixedBottomAd.offsetHeight;
+                                body.style.paddingBottom = `${adHeight + 10}px`; // Add a small buffer for spacing
+                            }, 500); // Increased delay slightly for ad loading
+                        } else {
+                            body.style.paddingBottom = '0';
+                        }
+                    }
+
+                    // Initial adjustment on load
+                    adjustBodyPadding();
+                    // Adjust on window resize (e.g., orientation change on mobile)
+                    window.addEventListener('resize', adjustBodyPadding);
+
+                    // Optional: If you want a close button for the fixed ad
+                    // You'd need to add a button element inside fixedBottomAd and its corresponding JS logic
+                    // Example (add this button HTML inside fixed-bottom-ad div if you want it):
+                    /* <button id="closeFixedAd" style="position: absolute; top: 5px; right: 10px; background: rgba(255,255,255,0.3); color: white; border: none; border-radius: 50%; width: 30px; height: 30px; font-size: 1.2em; cursor: pointer;">&times;</button> */
+                    const closeFixedAdButton = document.getElementById('closeFixedAd'); // If you add one
+                    if (closeFixedAdButton) {
+                        closeFixedAdButton.addEventListener('click', () => {
+                            fixedBottomAd.style.display = 'none';
+                            adjustBodyPadding(); // Recalculate padding when ad is hidden
+                        });
                     }
                 });
-            });
+            </script>
 
-            // Add scrolled class to navbar on scroll
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
-
-            // Close mobile menu if window is resized above mobile breakpoint
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
-                    menuToggle.classList.remove('active');
-                    navLinks.classList.remove('active');
-                }
-                // Re-adjust padding on resize for responsiveness
-                adjustBodyPadding();
-            });
-
-            // Fixed Bottom Ad close logic
-            if (closeAdButton && fixedBottomAd) {
-                closeAdButton.addEventListener('click', () => {
-                    fixedBottomAd.style.display = 'none';
-                    adjustBodyPadding(); // Adjust padding immediately after closing
-                });
-            }
-        });
-    </script>
-</body>
+	</body>
 </html>
