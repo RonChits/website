@@ -464,112 +464,133 @@
             100% { transform: translateY(0) translateX(0) scale(1); }
         }
 
-        /* --- Refined Footer Layout: Icon-focused --- */
-        footer .footer-content-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center; /* Center the entire set of sections */
-            gap: 40px 60px; /* Vertical and horizontal gap between sections */
-            margin-bottom: 40px;
-            max-width: 900px; /* Constrain width for a compact look */
-            margin-left: auto;
-            margin-right: auto;
+        /* --- MODERN FOOTER DESIGN --- */
+
+        /* Main wrapper for footer content */
+        footer .footer-main-wrapper {
+            max-width: 1000px; /* Wider for better icon distribution */
+            margin: 0 auto 40px; /* Centered with bottom margin */
             padding: 0 20px;
-            position: relative; /* To be above the decorative elements */
+            position: relative;
             z-index: 1;
-        }
-        
-        /* Individual footer sections */
-        footer .footer-section {
             display: flex;
-            flex-direction: column;
-            align-items: center; /* Center content within each section */
-            text-align: center;
-            min-width: 180px; /* Ensure sections have a minimum width */
+            flex-direction: column; /* Stack sections vertically */
+            gap: 40px; /* Space between the main content blocks */
         }
 
-        footer .footer-section h3 {
-            margin-bottom: 1em; /* Spacing for heading */
-            font-size: 1.4rem; 
-            color: var(--accent); 
+        /* Section for Contact Info (Address, Phone, Email) */
+        footer .contact-info-section {
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap */
+            justify-content: center; /* Center items horizontally */
+            gap: 20px 40px; /* Space between each contact item */
+            align-items: flex-start; /* Align icons at the top */
+        }
+
+        /* Individual contact item (Address, Phone, Email) */
+        footer .contact-item {
+            display: flex;
+            flex-direction: column; /* Stack icon and text */
+            align-items: center; /* Center content within item */
+            text-align: center;
+            text-decoration: none; /* No underline */
+            color: rgba(255,255,255,0.8); /* Default text color */
+            transition: all 0.3s ease;
+            min-width: 120px; /* Ensure some minimum width for stacking */
+        }
+
+        footer .contact-item:hover {
+            color: var(--accent); /* Accent color on hover */
+            transform: translateY(-3px); /* Subtle lift */
+        }
+
+        footer .contact-item i {
+            font-size: 2.5rem; /* Larger icon size for main contact */
+            color: white; /* White icon color */
+            margin-bottom: 10px; /* Space between icon and text */
+            transition: color 0.3s ease;
+            /* Optional: Add background to icons for a more button-like feel */
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        footer .contact-item:hover i {
+            background-color: rgba(255,255,255,0.2);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        footer .contact-item .text-content {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* Social Icons Section */
+        footer .social-icons-section {
+            padding-top: 20px; /* Space from contact info */
+            border-top: 1px solid rgba(255,255,255,0.1); /* Separator line */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center social block */
+            text-align: center;
+        }
+
+        footer .social-icons-section h3 {
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin-bottom: 20px;
             position: relative;
             display: inline-block;
         }
-
-        footer .footer-section h3:after {
+        
+        footer .social-icons-section h3:after {
             content: '';
             position: absolute;
             bottom: -5px;
-            left: 50%; /* Center underline under titles */
+            left: 50%;
             transform: translateX(-50%);
-            width: 50px; /* Shorter underline */
+            width: 50px;
             height: 2px;
             background: white;
         }
 
-        /* Styling for icon links (address, phone, email, social) */
-        footer .footer-icon-link {
-            display: flex;
-            flex-direction: column; /* Stack icon above text */
-            align-items: center;
-            justify-content: center;
-            text-decoration: none; /* No underline */
-            color: white; /* Default icon/text color */
-            transition: all 0.3s ease;
-            margin-top: 15px; /* Spacing from heading */
-        }
 
-        footer .footer-icon-link:hover {
-            color: var(--accent); /* Accent color on hover */
-            transform: translateY(-5px); /* Lift on hover */
-        }
-
-        footer .footer-icon-link i {
-            font-size: 2.2rem; /* Larger icons for impact */
-            width: 55px; /* Fixed width for consistent circle size */
-            height: 55px; /* Fixed height */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%; /* Make them perfectly round */
-            background-color: rgba(255,255,255,0.1); /* Subtle transparent background */
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3); /* Soft shadow for depth */
-            margin-bottom: 10px; /* Space between icon and text */
-            transition: all 0.3s ease;
-        }
-
-        footer .footer-icon-link:hover i {
-            background-color: rgba(255,255,255,0.2); /* Slightly more opaque background on hover */
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4); /* Stronger shadow on hover */
-        }
-
-        footer .footer-icon-link .text-content {
-            font-size: 0.95rem; /* Text size for details */
-            line-height: 1.4;
-            max-width: 150px; /* Constrain text width for multi-line address */
-        }
-
-        /* Specific styles for the social icons list */
         footer .social-icons-list {
             display: flex;
             list-style: none;
             padding: 0;
             margin: 0;
             gap: 15px; /* Space between icons */
-            margin-top: 15px; /* Spacing from heading */
         }
 
-        footer .social-icons-list li {
-            margin: 0;
-        }
-
-        footer .social-icons-list li a { /* Inherit .footer-icon-link styles */
-            font-size: 1.8rem; /* Slightly smaller for general social list */
+        footer .social-icons-list li a {
+            font-size: 1.8rem; /* Size of social icons */
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
             width: 45px;
             height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        }
+
+        footer .social-icons-list li a:hover {
+            color: var(--accent);
+            transform: translateY(-7px) scale(1.15); /* More pronounced lift */
+            background-color: rgba(255,255,255,0.2);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
         }
         
-        /* Hide the text labels for screen readers (accessibility) */
+        /* Hide accessibility labels */
         .label {
             position: absolute;
             width: 1px;
@@ -589,7 +610,7 @@
             border-top: 1px solid rgba(255,255,255,0.15);
             color: rgba(255,255,255,0.7);
             font-size: 0.95rem;
-            position: relative; /* To be above decorative elements */
+            position: relative;
             z-index: 1;
         }
 
@@ -957,33 +978,27 @@
     </section>
 
     <footer id="footer">
-        <div class="footer-content-wrapper">
-            <section class="footer-section">
-                <h3>Address</h3>
-                <a href="#" class="footer-icon-link" aria-label="Our Address">
+        <div class="footer-main-wrapper">
+            <div class="contact-info-section">
+                <a href="#" class="contact-item" aria-label="Our Address">
                     <i class="fas fa-map-marker-alt"></i>
                     <div class="text-content">
                         <p>Crowborough North</p>
                         <p>834, Mufakose Harare</p>
                     </div>
                 </a>
-            </section>
-            <section class="footer-section">
-                <h3>Phone</h3>
-                <a href="tel:+263782522493" class="footer-icon-link" aria-label="Call me at +263 782522493">
+                <a href="tel:+263782522493" class="contact-item" aria-label="Call me at +263 782522493">
                     <i class="fas fa-phone"></i>
                     <span class="text-content">+263 782522493</span>
                 </a>
-            </section>
-            <section class="footer-section">
-                <h3>Email</h3>
-                <a href="mailto:r.i.chitsatso@gmail.com" class="footer-icon-link" aria-label="Email me at r.i.chitsatso@gmail.com">
+                <a href="mailto:r.i.chitsatso@gmail.com" class="contact-item" aria-label="Email me at r.i.chitsatso@gmail.com">
                     <i class="fas fa-envelope"></i>
                     <span class="text-content">r.i.chitsatso@gmail.com</span>
                 </a>
-            </section>
-            <section class="footer-section">
-                <h3>Social</h3>
+            </div>
+
+            <div class="social-icons-section">
+                <h3>Connect With Me</h3>
                 <ul class="social-icons-list">
                     <li><a href="https://github.com/RonChits" target="_blank" class="icon brands alt fa-github" aria-label="Github"></a></li>
                     <li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" target="_blank" class="icon brands alt fa-linkedin" aria-label="LinkedIn"></a></li>
@@ -991,7 +1006,7 @@
                     <li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" target="_blank" class="icon brands alt fa-facebook-f" aria-label="Facebook"></a></li>
                     <li><a href="https://www.youtube.com/@RonaldChitsatso" target="_blank" class="icon brands alt fa-youtube" aria-label="YouTube"></a></li>
                 </ul>
-            </section>
+            </div>
         </div>
         <div class="copyright">
             <p>© 2023 Ronald Chitsatso. All rights reserved.</p>
