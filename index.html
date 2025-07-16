@@ -503,15 +503,25 @@
 
         footer .split .contact ul.icons li a {
             /* These styles are for the social icons specifically */
-            font-size: 1.5rem; /* Larger icons */
+            font-size: 1.8rem; /* Larger icons for more visual impact */
             color: white; /* Make icons white by default */
             text-decoration: none; /* Ensure no underline */
             transition: all 0.3s ease;
+            width: 40px; /* Define fixed width/height for square icon background */
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%; /* Make them round */
+            background-color: rgba(255,255,255,0.1); /* Subtle white background for icons */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Small shadow for depth */
         }
 
         footer .split .contact ul.icons li a:hover {
             color: var(--accent); /* Accent color on hover */
             transform: translateY(-5px) scale(1.2);
+            background-color: rgba(255,255,255,0.2); /* Slightly more opaque background on hover */
+            box-shadow: 0 5px 10px rgba(0,0,0,0.3); /* More pronounced shadow on hover */
         }
 
         /* Hide the label span that might be causing issues with icon visibility */
@@ -921,12 +931,12 @@
             <section>
                 <h3>Social</h3>
                 <ul class="icons alt">
-                    <li><a href="https://github.com/RonChits" class="icon brands alt fa-github"><span class="label">Github</span></a></li>
-                    <li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
-                    <li><a href="mailto:r.i.chitsatso@gmail.com" class="icon fa-envelope"><span class="label">Gmail</span></a></li>
-                    <li><a href="https://twitter.com/Ronald35032455" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-                    <li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-                    <li><a href="https://www.youtube.com/@RonaldChitsatso" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
+                    <li><a href="https://github.com/RonChits" target="_blank"><i class="fab fa-github"></i><span class="label">Github</span></a></li>
+                    <li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" target="_blank"><i class="fab fa-linkedin"></i><span class="label">linkedin</span></a></li>
+                    <li><a href="mailto:r.i.chitsatso@gmail.com"><i class="icon fa-envelope"></i><span class="label">Gmail</span></a></li>
+                    <li><a href="https://twitter.com/Ronald35032455" target="_blank"><i class="fab fa-twitter"></i><span class="label">Twitter</span></a></li>
+                    <li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook-f"></i><span class="label">Facebook</span></a></li>
+                    <li><a href="https://www.youtube.com/@RonaldChitsatso" target="_blank"><i class="fab fa-youtube"></i><span class="label">Youtube</span></a></li>
                 </ul>
             </section>
         </section>
