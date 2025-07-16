@@ -231,7 +231,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px; /* Space for icons if used */
-            background: var(--accent); /* Solid accent color */
+            background: var(--primary); /* Dark Blue Button */
             color: var(--button-text); /* White text for contrast */
             padding: 16px 40px; /* More padding for a bolder look */
             border: none;
@@ -249,7 +249,7 @@
         .btn:hover {
             transform: translateY(-5px); /* More lift on hover */
             box-shadow: 0 12px 25px rgba(0,0,0,0.25); /* Darker shadow on hover */
-            background: var(--secondary); /* Change background on hover */
+            background: var(--secondary); /* Change to royal blue on hover */
             color: var(--light); /* Ensure text stays light */
         }
 
@@ -258,19 +258,25 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Additional button styles for secondary actions if needed */
-        .btn.secondary {
-            background: transparent;
-            border: 2px solid var(--accent);
-            color: var(--accent);
-            box-shadow: none;
+        /* Specific button style for project/skill cards (smaller variant) */
+        .project-card .btn,
+        .skill-card .btn {
+            background: var(--secondary); /* Royal blue for card buttons */
+            color: var(--button-text);
+            padding: 12px 20px; /* Slightly smaller button for card context */
+            font-size: 1rem;
+            border-radius: 8px; /* Square off corners for card button */
+            margin-top: 15px; /* Spacing above button */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Lighter shadow for card buttons */
         }
 
-        .btn.secondary:hover {
-            background: var(--accent);
-            color: var(--button-text);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        .project-card .btn:hover,
+        .skill-card .btn:hover {
+            background: var(--accent); /* Change to bright teal on hover */
+            transform: translateY(-3px); /* Less lift for card buttons */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         }
+
 
         /* --- Projects Section --- */
         .projects {
@@ -330,15 +336,7 @@
             line-height: 1.7;
             flex-grow: 1; /* Allow description to take space */
         }
-
-        .project-card .btn {
-            width: 100%; /* Make buttons full width in cards */
-            padding: 12px 20px; /* Slightly smaller button for card context */
-            font-size: 1rem;
-            border-radius: 8px; /* Square off corners for card button */
-            margin-top: 15px; /* Spacing above button */
-        }
-
+        
         /* --- Skills Section --- */
         .skills {
             padding: 100px 0;
@@ -361,6 +359,10 @@
             border: 1px solid rgba(10, 31, 68, 0.15); /* More visible border */
             position: relative; /* For potential overflow effect */
             overflow: hidden; /* Hide any content spilling */
+            display: flex; /* Use flex for vertical alignment of content */
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .skill-card:hover {
@@ -415,25 +417,10 @@
             font-size: 1rem;
             position: relative;
             z-index: 2;
+            flex-grow: 1; /* Allow description to take space */
+            margin-bottom: 20px; /* Space above the button */
         }
-
-        .skill-card .button { /* Specific button for skill cards */
-            margin-top: 20px; /* Spacing */
-            background: var(--secondary); /* Secondary button color */
-            color: var(--button-text);
-            padding: 10px 25px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .skill-card .button:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-        }
-
-
+        
         /* --- Footer --- */
         footer {
             background: linear-gradient(135deg, var(--primary-dark), var(--dark));
@@ -442,61 +429,90 @@
             box-shadow: 0 -5px 20px rgba(0,0,0,0.3); /* Top shadow for footer */
         }
 
-        .footer-content {
+        /* --- Restore Footer Layout from Original Massively Theme --- */
+        footer .split {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(2, 1fr); /* Two columns for desktop */
+            gap: 4em; /* Standard gap from Massively */
             margin-bottom: 40px;
+            max-width: 1200px; /* Match container width */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px; /* Match container padding */
         }
 
-        .footer-column h3 {
-            margin-bottom: 25px;
-            font-size: 1.4rem; /* Slightly larger footer titles */
+        footer .split .alt {
+            grid-column: span 1; /* Ensure alt section takes one column */
+        }
+
+        footer .split .contact {
+            display: flex;
+            flex-direction: column; /* Stack contact items vertically */
+        }
+
+        footer .split .contact section {
+            margin-bottom: 1.5em; /* Space between contact items */
+        }
+
+        footer .split .contact section:last-child {
+            margin-bottom: 0; /* No margin on last item */
+        }
+        
+        /* Apply new styling to the restored footer content */
+        footer .split .contact h3 {
+            margin-bottom: 1em; /* Spacing for heading */
+            font-size: 1.4rem; /* Match footer-column h3 */
+            color: var(--accent); /* Accent color for titles */
             position: relative;
             display: inline-block;
-            color: var(--accent); /* Accent color for titles */
         }
 
-        .footer-column h3:after {
+        footer .split .contact h3:after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -5px; /* Adjust as needed */
             left: 0;
             width: 60px; /* Longer underline */
             height: 3px;
             background: white; /* White underline */
         }
 
-        .footer-column p, .footer-column a {
+        footer .split .contact p,
+        footer .split .contact a {
             color: rgba(255,255,255,0.85); /* Slightly brighter text */
-            margin-bottom: 12px;
-            display: block;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease, padding-left 0.3s ease;
         }
 
-        .footer-column a:hover {
+        footer .split .contact a:hover {
             color: var(--accent); /* Accent color on hover */
             padding-left: 8px; /* More pronounced slide */
         }
 
-        .footer-social {
-            display: flex;
-            gap: 20px;
-            margin-top: 20px;
+        footer .split .contact ul.icons {
+            display: flex; /* Ensure icons display in a row */
+            list-style: none; /* Remove bullet points */
+            padding: 0;
+            margin: 0;
+            gap: 15px; /* Space between icons */
         }
 
-        .footer-social a {
+        footer .split .contact ul.icons li {
+            margin: 0;
+        }
+
+        footer .split .contact ul.icons li a {
+            font-size: 1.5rem; /* Larger icons */
             color: white;
-            font-size: 1.5rem; /* Larger social icons */
             transition: all 0.3s ease;
         }
 
-        .footer-social a:hover {
+        footer .split .contact ul.icons li a:hover {
             color: var(--accent);
-            transform: translateY(-5px) scale(1.2); /* More pronounced lift and scale */
+            transform: translateY(-5px) scale(1.2);
         }
 
+        /* The copyright section is outside the .split contact div in Massively theme */
         .copyright {
             text-align: center;
             padding-top: 40px;
@@ -650,9 +666,19 @@
             .fixed-bottom-ad { min-height: 55px; max-height: 80px; padding: 5px 0; }
             .fixed-bottom-ad .close-ad-btn { width: 35px; height: 35px; font-size: 1.4rem;}
             
-            .footer-content { grid-template-columns: 1fr; text-align: center; gap: 30px;}
-            .footer-column h3:after { left: 50%; transform: translateX(-50%); }
-            .footer-social { justify-content: center; }
+            /* Footer adjustments for mobile */
+            footer .split {
+                grid-template-columns: 1fr; /* Stack columns on mobile */
+                text-align: center;
+                gap: 2em;
+            }
+            footer .split .contact h3:after {
+                left: 50%;
+                transform: translateX(-50%); /* Center underline */
+            }
+            footer .split .contact ul.icons {
+                justify-content: center; /* Center icons */
+            }
         }
 
         @media (max-width: 480px) {
@@ -729,7 +755,7 @@
                 </div>
 
                 <div class="project-card fade-in delay-3">
-                    <img src="images/india.png" alt="Volatility Forecasting in India" class.project-image">
+                    <img src="images/india.png" alt="Volatility Forecasting in India" class="project-image">
                     <div class="project-content">
                         <h3 class="project-title">Volatility Forecasting in India</h3>
                         <p class="project-description">I created a GARCH time series model to predict asset volatility. I acquired stock data through an API, clean and store it in a SQLite database, and build API to serve model predictions.</p>
@@ -836,9 +862,7 @@
                     </div>
                     <h3 class="skill-title">Python</h3>
                     <p>Proficient in Python programming, with experience in data analysis and machine learning. Skilled in utilizing Python libraries and frameworks for data manipulation and model building.</p>
-                    <ul class="actions special">
-                        <li><a href="#" class="btn">Check here.</a></li>
-                    </ul>
+                    <a href="#" class="btn">Check here.</a>
                 </div>
 
                 <div class="skill-card fade-in delay-2">
@@ -847,9 +871,7 @@
                     </div>
                     <h3 class="skill-title">Data Visualization</h3>
                     <p>Proficient in Python programming with a strong emphasis on data analysis and visualization. Experienced in utilizing Python libraries such as NumPy, Pandas, Matplotlib, and Seaborn for data manipulation, exploration, and creating compelling visual representations. Skilled in crafting informative and aesthetically pleasing visualizations to uncover trends, patterns, and insights within complex datasets.</p>
-                    <ul class="actions special">
-                        <li><a href="#" class="btn">Check here.</a></li>
-                    </ul>
+                    <a href="#" class="btn">Check here.</a>
                 </div>
 
                 <div class="skill-card fade-in delay-3">
@@ -858,9 +880,7 @@
                     </div>
                     <h3 class="skill-title">SQL</h3>
                     <p>Proficient in SQL for data retrieval and management. Capable of writing efficient SQL queries to extract, clean, and transform data from relational databases.</p>
-                    <ul class="actions special">
-                        <li><a href="#" class="btn">Check here.</a></li>
-                    </ul>
+                    <a href="#" class="btn">Check here.</a>
                 </div>
 
                 <div class="skill-card fade-in delay-4">
@@ -869,26 +889,41 @@
                     </div>
                     <h3 class="skill-title">Excel VBA</h3>
                     <p>Excel VBA skills for automating tasks, creating custom functions, and enhancing data analysis capabilities within the Excel environment. Experienced in developing VBA macros to streamline workflows and improve productivity.</p>
-                    <ul class="actions special">
-                        <li><a href="#" class="btn">Check here.</a></li>
-                    </ul>
+                    <a href="#" class="btn">Check here.</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container footer-content">
-            <a href="index.html" class="footer-logo">Ronald Chitsatso</a>
-            <div class="footer-social">
-                <a href="https://github.com/RonChits" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:r.i.chitsatso@gmail.com"><i class="fas fa-envelope"></i></a>
-                <a href="https://twitter.com/Ronald35032455" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.facebook.com/ronald.chitsatso.1" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.youtube.com/@RonaldChitsatso" target="_blank"><i class="fab fa-youtube"></i></a>
-            </div>
-            <p class="copyright">© 2023 Ronald Chitsatso. All rights reserved.</p>
+    <footer id="footer">
+        <section class="split contact">
+            <section class="alt">
+                <h3>Address</h3>
+                <p>Crowborough North<br />
+                834, Mufakose Harare </p>
+            </section>
+            <section>
+                <h3>Phone</h3>
+                <p><a href="tel:+263782522493">+263 782522493</a></p>
+            </section>
+            <section>
+                <h3>Email</h3>
+                <p><a href="mailto:r.i.chitsatso@gmail.com">r.i.chitsatso@gmail.com</a></p>
+            </section>
+            <section>
+                <h3>Social</h3>
+                <ul class="icons alt">
+                    <li><a href="https://github.com/RonChits" class="icon brands alt fa-github"><span class="label">Github</span></a></li>
+                    <li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" class="icon brands alt fa-linkedin"><span class="label">linkedin</span></a></li>
+                    <li><a href="mailto:r.i.chitsatso@gmail.com" class="icon fa-envelope"><span class="label">Gmail</span></a></li>
+                    <li><a href="https://twitter.com/Ronald35032455" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+                    <li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="https://www.youtube.com/@RonaldChitsatso" class="icon brands alt fa-youtube"><span class="label">Youtube</span></a></li>
+                </ul>
+            </section>
+        </section>
+        <div class="copyright">
+            <p>© 2023 Ronald Chitsatso. All rights reserved.</p>
         </div>
     </footer>
 
