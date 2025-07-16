@@ -13,11 +13,13 @@
             --secondary: #1a3a8f; /* Rich royal blue */
             --accent: #4cc9f0; /* Bright teal for accents */
             --dark: #010814; /* Near-black */
-            --light: #f8f9fa;
-            --gray: #adb5bd;
-            --light-gray: #e5e5e5;
+            --light: #f8f9fa; /* Off-white for backgrounds */
+            --gray: #adb5bd; /* Medium gray */
+            --light-gray: #e5e5e5; /* Very light gray */
+            --button-text: #ffffff; /* White text for buttons */
         }
 
+        /* --- Base Styles --- */
         * {
             margin: 0;
             padding: 0;
@@ -32,6 +34,7 @@
             overflow-x: hidden;
             padding-top: 90px; /* Space for fixed header */
             padding-bottom: 0; /* Will be dynamically adjusted by JS for fixed bottom ad */
+            transition: padding-bottom 0.3s ease; /* Smooth transition for padding changes */
         }
 
         h1, h2, h3, h4 {
@@ -45,7 +48,7 @@
             padding: 0 20px;
         }
 
-        /* Header */
+        /* --- Header / Navbar --- */
         header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             box-shadow: 0 2px 20px rgba(0,0,0,0.3);
@@ -58,6 +61,7 @@
 
         header.scrolled {
             box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary)); /* Slightly change on scroll */
         }
 
         nav {
@@ -77,7 +81,7 @@
         }
 
         .logo:hover {
-            color: var(--light-gray);
+            color: var(--accent); /* Logo highlights on hover */
         }
 
         .nav-links {
@@ -130,17 +134,22 @@
 
         .social-icons a:hover {
             color: var(--accent);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.1); /* Subtle lift and scale */
         }
 
-        /* Hero Section (Main Intro) */
+        /* --- Hero Section (Main Intro) --- */
         .hero {
-            padding: 120px 0 80px; /* Adjusted padding for content */
+            padding: 120px 0 80px;
             text-align: center;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             position: relative;
             overflow: hidden;
             color: white;
+            min-height: 100vh; /* Ensure hero takes full viewport height initially */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
 
         .hero::before {
@@ -157,76 +166,52 @@
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 800px; /* Constrain width for readability */
+            max-width: 800px;
             margin: 0 auto;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem; /* Slightly larger heading */
             margin-bottom: 20px;
             color: white;
             line-height: 1.2;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3); /* More pronounced shadow */
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.2rem; /* Slightly smaller for better flow */
             max-width: 700px;
             margin: 0 auto 30px;
             opacity: 0.9;
+            color: var(--light-gray); /* Match text to theme */
         }
 
         .hero-image {
-            width: 220px;
-            height: 220px;
+            width: 200px; /* Slightly smaller for better composition */
+            height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid rgba(255,255,255,0.2);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border: 6px solid var(--accent); /* Accent border color */
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4); /* Darker shadow */
             margin: 0 auto 30px;
             display: block;
             transition: all 0.5s ease;
         }
 
         .hero-image:hover {
-            transform: rotate(5deg) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border-color: var(--accent);
+            transform: rotate(5deg) scale(1.08); /* More pronounced hover effect */
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5); /* Even darker shadow */
         }
 
-        .hero .btn {
-            display: inline-block;
-            background: white;
-            color: var(--primary);
-            padding: 15px 35px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .hero .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            background: var(--light-gray);
-        }
-
-        .hero .btn:active {
-            transform: translateY(1px);
-        }
-
-        /* Section Titles */
+        /* --- Section Titles --- */
         .section-title {
             text-align: center;
             margin-bottom: 70px;
-            font-size: 2.8rem;
+            font-size: 3rem; /* Slightly larger */
             color: var(--primary);
             position: relative;
             display: inline-block;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.05); /* Subtle shadow */
         }
 
         .section-title:after {
@@ -235,12 +220,59 @@
             bottom: -15px;
             left: 0;
             width: 100%;
-            height: 3px;
+            height: 4px; /* Thicker underline */
             background: linear-gradient(90deg, var(--secondary), var(--accent));
             border-radius: 3px;
         }
 
-        /* Projects Section */
+        /* --- Buttons (General) --- */
+        .btn {
+            display: inline-flex; /* Use flex for centering content easily */
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Space for icons if used */
+            background: var(--accent); /* Solid accent color */
+            color: var(--button-text); /* White text for contrast */
+            padding: 16px 40px; /* More padding for a bolder look */
+            border: none;
+            border-radius: 50px; /* Pill shape */
+            font-size: 1.1rem; /* Slightly larger font */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* More pronounced shadow */
+            text-transform: uppercase; /* Uppercase text */
+            letter-spacing: 1px; /* Subtle letter spacing */
+        }
+
+        .btn:hover {
+            transform: translateY(-5px); /* More lift on hover */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25); /* Darker shadow on hover */
+            background: var(--secondary); /* Change background on hover */
+            color: var(--light); /* Ensure text stays light */
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Additional button styles for secondary actions if needed */
+        .btn.secondary {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            box-shadow: none;
+        }
+
+        .btn.secondary:hover {
+            background: var(--accent);
+            color: var(--button-text);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* --- Projects Section --- */
         .projects {
             padding: 100px 0;
             background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%);
@@ -254,34 +286,40 @@
 
         .project-card {
             background-color: white;
-            border-radius: 10px;
+            border-radius: 12px; /* Slightly more rounded */
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12); /* More pronounced shadow */
+            transition: all 0.4s ease; /* Slower transition */
+            display: flex; /* Use flex to control content within card */
+            flex-direction: column;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            transform: translateY(-12px); /* More lift */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2); /* Even more pronounced shadow */
         }
 
         .project-image {
             width: 100%;
-            height: 200px;
+            height: 220px; /* Slightly taller images */
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease; /* Slower image zoom */
         }
 
         .project-card:hover .project-image {
-            transform: scale(1.05);
+            transform: scale(1.1); /* More zoom on image */
         }
 
         .project-content {
             padding: 25px;
+            flex-grow: 1; /* Allows content to push button to bottom */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Space out title, desc, button */
         }
 
         .project-title {
-            font-size: 1.4rem;
+            font-size: 1.5rem; /* Slightly larger title */
             margin-bottom: 15px;
             color: var(--primary);
         }
@@ -290,9 +328,18 @@
             margin-bottom: 20px;
             color: #555;
             line-height: 1.7;
+            flex-grow: 1; /* Allow description to take space */
         }
 
-        /* Skills Section */
+        .project-card .btn {
+            width: 100%; /* Make buttons full width in cards */
+            padding: 12px 20px; /* Slightly smaller button for card context */
+            font-size: 1rem;
+            border-radius: 8px; /* Square off corners for card button */
+            margin-top: 15px; /* Spacing above button */
+        }
+
+        /* --- Skills Section --- */
         .skills {
             padding: 100px 0;
             background-color: white;
@@ -300,49 +347,99 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly wider minmax */
             gap: 30px;
         }
 
         .skill-card {
-            background: linear-gradient(135deg, rgba(10, 31, 68, 0.05), rgba(76, 201, 240, 0.05));
-            padding: 30px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(10, 31, 68, 0.08), rgba(76, 201, 240, 0.08)); /* Stronger gradient */
+            padding: 35px; /* More padding */
+            border-radius: 15px; /* More rounded */
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(10, 31, 68, 0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08); /* Stronger shadow */
+            transition: all 0.4s ease;
+            border: 1px solid rgba(10, 31, 68, 0.15); /* More visible border */
+            position: relative; /* For potential overflow effect */
+            overflow: hidden; /* Hide any content spilling */
         }
 
         .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-color: var(--accent);
+            transform: translateY(-8px) scale(1.02); /* More lift and subtle scale */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-color: var(--secondary); /* Change border color on hover */
         }
 
         .skill-icon {
-            font-size: 3rem;
+            font-size: 3.5rem; /* Larger icon */
             color: var(--primary);
             margin-bottom: 20px;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2; /* Ensure icon is above potential overlay */
         }
 
         .skill-card:hover .skill-icon {
-            color: var(--secondary);
-            transform: scale(1.1);
+            color: var(--accent); /* Change icon color on hover */
+            transform: scale(1.2) rotate(5deg); /* More pronounced animation */
+        }
+
+        .skill-card:before { /* Subtle background shape on hover */
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 60%);
+            opacity: 0;
+            transition: all 0.5s ease;
+            transform: scale(0.5);
+            z-index: 1;
+        }
+
+        .skill-card:hover:before {
+            opacity: 0.1;
+            transform: scale(1);
         }
 
         .skill-title {
-            font-size: 1.4rem;
+            font-size: 1.6rem; /* Larger title */
             margin-bottom: 15px;
             color: var(--primary);
+            position: relative;
+            z-index: 2;
         }
 
-        /* Footer */
+        .skill-card p {
+            color: #444; /* Darker text for readability */
+            font-size: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .skill-card .button { /* Specific button for skill cards */
+            margin-top: 20px; /* Spacing */
+            background: var(--secondary); /* Secondary button color */
+            color: var(--button-text);
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .skill-card .button:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+
+        /* --- Footer --- */
         footer {
             background: linear-gradient(135deg, var(--primary-dark), var(--dark));
             color: white;
             padding: 70px 0 30px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.3); /* Top shadow for footer */
         }
 
         .footer-content {
@@ -354,9 +451,10 @@
 
         .footer-column h3 {
             margin-bottom: 25px;
-            font-size: 1.3rem;
+            font-size: 1.4rem; /* Slightly larger footer titles */
             position: relative;
             display: inline-block;
+            color: var(--accent); /* Accent color for titles */
         }
 
         .footer-column h3:after {
@@ -364,13 +462,13 @@
             position: absolute;
             bottom: -10px;
             left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--accent);
+            width: 60px; /* Longer underline */
+            height: 3px;
+            background: white; /* White underline */
         }
 
         .footer-column p, .footer-column a {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.85); /* Slightly brighter text */
             margin-bottom: 12px;
             display: block;
             text-decoration: none;
@@ -378,8 +476,8 @@
         }
 
         .footer-column a:hover {
-            color: white;
-            padding-left: 5px;
+            color: var(--accent); /* Accent color on hover */
+            padding-left: 8px; /* More pronounced slide */
         }
 
         .footer-social {
@@ -390,32 +488,32 @@
 
         .footer-social a {
             color: white;
-            font-size: 1.3rem;
+            font-size: 1.5rem; /* Larger social icons */
             transition: all 0.3s ease;
         }
 
         .footer-social a:hover {
             color: var(--accent);
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.2); /* More pronounced lift and scale */
         }
 
         .copyright {
             text-align: center;
             padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.6);
-            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.15); /* Slightly more visible border */
+            color: rgba(255,255,255,0.7); /* Slightly brighter */
+            font-size: 0.95rem;
         }
 
-        /* Animations */
+        /* --- Animations --- */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); } /* More movement */
             to { opacity: 1; transform: translateY(0); }
         }
 
         .fade-in {
             opacity: 0;
-            animation: fadeIn 1s ease forwards;
+            animation: fadeIn 1.2s ease-out forwards; /* Slower and smoother */
         }
 
         .delay-1 { animation-delay: 0.2s; }
@@ -423,7 +521,7 @@
         .delay-3 { animation-delay: 0.6s; }
         .delay-4 { animation-delay: 0.8s; }
 
-        /* --- Ad Styles --- */
+        /* --- Ad Specific Styles --- */
         .ad-banner-container {
             position: relative; /* Needed for close button positioning */
             display: flex;
@@ -434,36 +532,38 @@
             border-radius: 8px;
             overflow: hidden; /* Crucial: Hides any overflowing ad content */
             margin: 3em auto; /* Spacing above and below ads */
-            padding: 10px; /* Internal padding */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            min-height: 90px; /* Default min-height for larger banners (e.g., 728x90) */
+            padding: 15px; /* More padding for a premium feel */
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+            min-height: 100px; /* Default min-height for larger banners (e.g., 728x90 + padding) */
             max-width: 900px; /* Max width to keep ads contained on wide screens */
             text-align: center; /* Ensures text content (if any from ad) is centered */
+            transition: all 0.3s ease; /* Smooth transition for display changes */
         }
 
         .ad-banner-container .close-ad-btn {
             position: absolute;
-            top: 5px;
-            right: 5px;
-            background: rgba(255, 255, 255, 0.2);
+            top: 10px; /* More padding from top */
+            right: 10px; /* More padding from right */
+            background: rgba(255, 255, 255, 0.3);
             color: white;
             border: none;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 1.2rem;
+            width: 35px; /* Slightly larger tap target */
+            height: 35px;
+            font-size: 1.3rem; /* Larger 'x' */
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            line-height: 1; /* Ensures 'x' is vertically centered */
+            line-height: 1;
             padding: 0;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.2s ease;
             z-index: 10; /* Ensure it's above ad content */
         }
 
         .ad-banner-container .close-ad-btn:hover {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.1);
         }
 
         /* Style for the fixed bottom ad container */
@@ -473,23 +573,24 @@
             left: 0;
             width: 100%;
             z-index: 1000; /* Above most content, but below your fixed header */
-            background-color: rgba(0, 0, 0, 0.9); /* Dark background for visibility */
+            background-color: var(--dark); /* Use dark theme color */
             box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
-            padding: 5px 0;
+            padding: 8px 0; /* Slightly more padding */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 60px; /* Standard mobile banner height */
-            max-height: 90px; /* Prevent it from being too tall */
-            overflow: hidden; /* Hide anything that overflows */
+            min-height: 65px; /* Standard mobile banner height + padding */
+            max-height: 95px; /* Prevent it from being too tall */
+            overflow: hidden;
+            transition: all 0.3s ease; /* Smooth transition for display changes */
         }
 
         .fixed-bottom-ad .close-ad-btn {
-            top: 5px; /* Adjust as needed */
-            right: 10px; /* Adjust as needed */
-            width: 35px; /* Slightly larger for fixed bottom */
-            height: 35px;
-            font-size: 1.4rem;
+            top: 8px; /* Slightly more central for fixed ad */
+            right: 15px; /* More padding */
+            width: 40px; /* Even larger tap target */
+            height: 40px;
+            font-size: 1.6rem;
         }
 
         /* Ensure ad content takes full space inside ad-container */
@@ -501,89 +602,70 @@
             justify-content: center;
             align-items: center;
             overflow: hidden; /* Ensure any overflowing ad content is clipped */
-            /* Important: Ad script might set fixed dimensions, these are suggestions */
             max-width: 100%;
             max-height: 100%;
         }
 
 
-        /* Responsive Design */
+        /* --- Responsive Design --- */
+        @media (max-width: 1200px) {
+            .hero h1 { font-size: 3.2rem; }
+            .hero p { font-size: 1.1rem; }
+            .section-title { font-size: 2.5rem; }
+            .btn { padding: 14px 35px; font-size: 1rem; }
+            .projects-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+            .ad-banner-container { max-width: 800px; }
+        }
+
         @media (max-width: 992px) {
-            .projects-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
-            .ad-banner-container {
-                margin: 2.5em auto;
-                min-height: 70px; /* For common 468x60 banners */
-                max-width: 700px;
-            }
+            .nav-links { gap: 30px; }
+            .hero { padding: 100px 0 60px; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero p { font-size: 1rem; }
+            .section-title { font-size: 2.2rem; margin-bottom: 50px; }
+            .projects-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;}
+            .project-card .btn { padding: 10px 15px; font-size: 0.9rem; }
+            .skills-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+            .ad-banner-container { margin: 2em auto; padding: 10px; min-height: 80px; max-width: 700px; }
+            .ad-banner-container .close-ad-btn { width: 30px; height: 30px; font-size: 1.1rem; top: 8px; right: 8px;}
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none; /* Hide nav links for mobile, assuming you have a mobile menu toggle */
-            }
-            /* If you add a mobile menu, ensure padding-top accounts for it */
-            body {
-                padding-top: 80px; /* Adjust for potentially smaller mobile header */
-            }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .hero p {
-                font-size: 1.1rem;
-            }
-            .section-title {
-                font-size: 2.2rem;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .footer-column h3:after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .footer-social {
-                justify-content: center;
-            }
+            .nav-links { display: none; } /* Consider adding a mobile menu toggle if removed */
+            body { padding-top: 70px; } /* Adjust for fixed mobile header if different height */
+            header { padding: 15px 5%; }
+            .logo { font-size: 1.6rem; }
+            .social-icons { gap: 15px; }
+            .hero { padding: 80px 0 50px; min-height: auto; } /* Less padding, auto height for mobile */
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 0.9rem; margin-bottom: 20px;}
+            .hero-image { width: 150px; height: 150px; border-width: 4px; margin-bottom: 20px;}
+            .btn { padding: 12px 30px; font-size: 0.9rem; }
+            .section-title { font-size: 1.8rem; margin-bottom: 40px; }
+            .projects-grid, .skills-grid { grid-template-columns: 1fr; gap: 25px; } /* Single column for mobile */
+            .project-card, .skill-card { box-shadow: 0 8px 15px rgba(0,0,0,0.1); } /* Lighter shadows on mobile */
+            .project-card:hover, .skill-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+            .ad-banner-container { margin: 1.5em auto; padding: 8px; min-height: 60px; max-width: 100%; }
+            .ad-banner-container .close-ad-btn { width: 28px; height: 28px; font-size: 1rem; top: 5px; right: 5px;}
+            .fixed-bottom-ad { min-height: 55px; max-height: 80px; padding: 5px 0; }
+            .fixed-bottom-ad .close-ad-btn { width: 35px; height: 35px; font-size: 1.4rem;}
             
-            /* Dynamic padding for fixed bottom ad on mobile */
-            body { padding-bottom: 0; } /* Reset default, controlled by JS */
-
-            .ad-banner-container {
-                margin: 2em auto;
-                min-height: 60px; /* Standard mobile banner height (e.g., 320x50, 300x50) */
-                padding: 5px;
-                max-width: 100%; /* Take full width on mobile */
-            }
-            .fixed-bottom-ad {
-                min-height: 50px; /* Smallest min-height for mobile fixed ad */
-                max-height: 70px; /* Smallest max-height for mobile fixed ad */
-            }
+            .footer-content { grid-template-columns: 1fr; text-align: center; gap: 30px;}
+            .footer-column h3:after { left: 50%; transform: translateX(-50%); }
+            .footer-social { justify-content: center; }
         }
 
-        @media (max-width: 576px) {
-            .hero {
-                padding: 100px 0 50px;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
-            .section-title {
-                font-size: 1.8rem;
-            }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 0.85rem; }
+            .btn { padding: 10px 25px; font-size: 0.8rem; }
+            .section-title { font-size: 1.6rem; }
+            .project-title { font-size: 1.3rem; }
+            .skill-title { font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header id="header">
         <div class="container">
             <nav>
@@ -601,7 +683,6 @@
         </div>
     </header>
 
-    <!-- Hero Section (Main Intro) -->
     <section class="hero">
         <div class="container hero-content">
             <img src="images/IMG-20241215-WA0026.jpg" alt="Ronald Chitsatso" class="hero-image fade-in">
@@ -619,19 +700,16 @@
         </div>
     </section>
 
-    <!-- Ad Placement 1: After Hero Section -->
     <div class="ad-banner-container" id="ad1_container">
         <button class="close-ad-btn" data-ad-id="ad1_container">×</button>
         <div id="container-761e19dc071408ff07e61ae63b742321_top"></div>
         <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
     </div>
 
-    <!-- Projects Section -->
     <section class="projects">
         <div class="container">
             <h2 class="section-title fade-in">Featured Projects</h2>
             <div class="projects-grid">
-                <!-- Project 1 -->
                 <div class="project-card fade-in delay-1">
                     <img src="images/mexico.png" alt="Housing in Mexico" class="project-image">
                     <div class="project-content">
@@ -641,7 +719,6 @@
                     </div>
                 </div>
 
-                <!-- Project 2 -->
                 <div class="project-card fade-in delay-2">
                     <img src="images/loan.jpg" alt="Loan Classification" class="project-image">
                     <div class="project-content">
@@ -651,9 +728,8 @@
                     </div>
                 </div>
 
-                <!-- Project 3 -->
                 <div class="project-card fade-in delay-3">
-                    <img src="images/india.png" alt="Volatility Forecasting in India" class="project-image">
+                    <img src="images/india.png" alt="Volatility Forecasting in India" class.project-image">
                     <div class="project-content">
                         <h3 class="project-title">Volatility Forecasting in India</h3>
                         <p class="project-description">I created a GARCH time series model to predict asset volatility. I acquired stock data through an API, clean and store it in a SQLite database, and build API to serve model predictions.</p>
@@ -661,22 +737,6 @@
                     </div>
                 </div>
 
-                <!-- Ad Placement 2: Mid-Projects -->
-                <div class="ad-banner-container" id="ad2_container">
-                    <button class="close-ad-btn" data-ad-id="ad2_container">×</button>
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key' : '4d26941499f506497efcb4527b651831',
-                            'format' : 'iframe',
-                            'height' : 60,
-                            'width' : 468,
-                            'params' : {}
-                        };
-                    </script>
-                    <script type="text/javascript" src="//www.highperformanceformat.com/4d26941499f506497efcb4527b651831/invoke.js"></script>
-                </div>
-
-                <!-- Project 4 -->
                 <div class="project-card fade-in delay-4">
                     <img src="images/WQU_logo_color.png" alt="A/B Testing at WorldQuant University" class="project-image">
                     <div class="project-content">
@@ -686,7 +746,6 @@
                     </div>
                 </div>
 
-                <!-- Project 5 -->
                 <div class="project-card fade-in delay-1">
                     <img src="images/us.png" alt="Customer Segmentation in the US" class="project-image">
                     <div class="project-content">
@@ -696,7 +755,6 @@
                     </div>
                 </div>
 
-                <!-- Project 6 -->
                 <div class="project-card fade-in delay-2">
                     <img src="images/poland.png" alt="Bankruptcy in Poland" class="project-image">
                     <div class="project-content">
@@ -706,7 +764,6 @@
                     </div>
                 </div>
 
-                <!-- Project 7 -->
                 <div class="project-card fade-in delay-3">
                     <img src="images/nepal.png" alt="Earthquake Damage in Nepal" class="project-image">
                     <div class="project-content">
@@ -716,7 +773,6 @@
                     </div>
                 </div>
 
-                <!-- Project 8 -->
                 <div class="project-card fade-in delay-4">
                     <img src="images/nairobi.png" alt="Air Quality in Nairobi" class="project-image">
                     <div class="project-content">
@@ -726,7 +782,6 @@
                     </div>
                 </div>
 
-                <!-- Project 9 -->
                 <div class="project-card fade-in delay-1">
                     <img src="images/buenos.png" alt="Apartment Sales in Buenos Aires" class="project-image">
                     <div class="project-content">
@@ -736,7 +791,6 @@
                     </div>
                 </div>
 
-                <!-- Project 10 -->
                 <div class="project-card fade-in delay-2">
                     <img src="images/hit4001.png" alt="Barrier Option Pricing" class="project-image">
                     <div class="project-content">
@@ -746,7 +800,6 @@
                     </div>
                 </div>
 
-                <!-- Project 11 -->
                 <div class="project-card fade-in delay-3">
                     <img src="images/tita.png" alt="Titanic Survival Analysis" class="project-image">
                     <div class="project-content">
@@ -759,24 +812,35 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <div class="ad-banner-container" id="ad2_container">
+        <button class="close-ad-btn" data-ad-id="ad2_container">×</button>
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '4d26941499f506497efcb4527b651831',
+                'format' : 'iframe',
+                'height' : 60,
+                'width' : 468,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/4d26941499f506497efcb4527b651831/invoke.js"></script>
+    </div>
+
     <section class="skills">
         <div class="container">
             <h2 class="section-title fade-in">Technical Skills</h2>
             <div class="skills-grid">
-                <!-- Skill 1 -->
                 <div class="skill-card fade-in delay-1">
                     <div class="skill-icon">
                         <i class="fab fa-python"></i>
                     </div>
                     <h3 class="skill-title">Python</h3>
-                    <p>Proficient in Python programming, with experience in [data analysis,machine learning]. Skilled in utilizing Python libraries and frameworks for [specific tasks, e.g., data manipulation, web application development, model building].</p>
+                    <p>Proficient in Python programming, with experience in data analysis and machine learning. Skilled in utilizing Python libraries and frameworks for data manipulation and model building.</p>
                     <ul class="actions special">
-                        <li><a href="#" class="button">Check here.</a></li>
+                        <li><a href="#" class="btn">Check here.</a></li>
                     </ul>
                 </div>
 
-                <!-- Skill 2 -->
                 <div class="skill-card fade-in delay-2">
                     <div class="skill-icon">
                         <i class="fas fa-chart-line"></i>
@@ -784,11 +848,10 @@
                     <h3 class="skill-title">Data Visualization</h3>
                     <p>Proficient in Python programming with a strong emphasis on data analysis and visualization. Experienced in utilizing Python libraries such as NumPy, Pandas, Matplotlib, and Seaborn for data manipulation, exploration, and creating compelling visual representations. Skilled in crafting informative and aesthetically pleasing visualizations to uncover trends, patterns, and insights within complex datasets.</p>
                     <ul class="actions special">
-                        <li><a href="#" class="button">Check here.</a></li>
+                        <li><a href="#" class="btn">Check here.</a></li>
                     </ul>
                 </div>
 
-                <!-- Skill 3 -->
                 <div class="skill-card fade-in delay-3">
                     <div class="skill-icon">
                         <i class="fas fa-database"></i>
@@ -796,11 +859,10 @@
                     <h3 class="skill-title">SQL</h3>
                     <p>Proficient in SQL for data retrieval and management. Capable of writing efficient SQL queries to extract, clean, and transform data from relational databases.</p>
                     <ul class="actions special">
-                        <li><a href="#" class="button">Check here.</a></li>
+                        <li><a href="#" class="btn">Check here.</a></li>
                     </ul>
                 </div>
 
-                <!-- Skill 4 -->
                 <div class="skill-card fade-in delay-4">
                     <div class="skill-icon">
                         <i class="fas fa-file-excel"></i>
@@ -808,14 +870,13 @@
                     <h3 class="skill-title">Excel VBA</h3>
                     <p>Excel VBA skills for automating tasks, creating custom functions, and enhancing data analysis capabilities within the Excel environment. Experienced in developing VBA macros to streamline workflows and improve productivity.</p>
                     <ul class="actions special">
-                        <li><a href="#" class="button">Check here.</a></li>
+                        <li><a href="#" class="btn">Check here.</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container footer-content">
             <a href="index.html" class="footer-logo">Ronald Chitsatso</a>
@@ -827,18 +888,16 @@
                 <a href="https://www.facebook.com/ronald.chitsatso.1" target="_blank"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.youtube.com/@RonaldChitsatso" target="_blank"><i class="fab fa-youtube"></i></a>
             </div>
-            <p class="copyright">&copy; 2023 Ronald Chitsatso. All rights reserved.</p>
+            <p class="copyright">© 2023 Ronald Chitsatso. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Fixed Bottom Ad -->
     <div id="fixedBottomAd" class="fixed-bottom-ad">
         <button class="close-ad-btn" data-ad-id="fixedBottomAd">×</button>
         <div id="container-761e19dc071408ff07e61ae63b742321_fixed_bottom"></div>
         <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
     </div>
 
-    <!-- Scripts -->
     <script>
         // Header scroll effect
         window.addEventListener('scroll', function() {
