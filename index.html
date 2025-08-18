@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ronald Chitsatso | Portfolio</title>
+    <title>Ronald Chitsatso | Financial Engineer & Data Scientist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0a1f44; /* Deep navy blue */
-            --primary-dark: #07152e; /* Darker navy */
-            --secondary: #1a3a8f; /* Rich royal blue */
-            --accent: #4cc9f0; /* Bright teal for accents */
-            --dark: #010814; /* Near-black */
-            --light: #f8f9fa; /* Off-white for backgrounds */
-            --gray: #adb5bd; /* Medium gray */
-            --light-gray: #e5e5e5; /* Very light gray */
-            --button-text: #ffffff; /* White text for buttons */
+            --primary: #0a1f44;
+            --primary-dark: #07152e;
+            --secondary: #1a3a8f;
+            --accent: #4cc9f0;
+            --dark: #010814;
+            --light: #f8f9fa;
+            --gray: #adb5bd;
+            --light-gray: #e5e5e5;
         }
 
-        /* --- Base Styles --- */
         * {
             margin: 0;
             padding: 0;
@@ -30,81 +28,67 @@
             font-family: 'Montserrat', sans-serif;
             background-color: var(--light);
             color: var(--dark);
-            line-height: 1.8;
-            overflow-x: hidden;
-            padding-top: 90px; /* Space for fixed header */
-            padding-bottom: 0; /* Will be dynamically adjusted by JS for fixed bottom ad */
-            transition: padding-bottom 0.3s ease; /* Smooth transition for padding changes */
+            line-height: 1.6;
+            padding-top: 80px;
         }
 
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
+            line-height: 1.3;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* --- Header / Navbar --- */
+        /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            background: var(--primary);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        header.scrolled {
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary)); /* Slightly change on scroll */
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 15px 0;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: white;
             text-decoration: none;
             font-family: 'Playfair Display', serif;
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            color: var(--accent); /* Logo highlights on hover */
         }
 
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 30px;
         }
 
         .nav-links a {
             text-decoration: none;
             color: rgba(255,255,255,0.9);
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            transition: color 0.2s ease;
             position: relative;
             padding: 5px 0;
         }
 
         .nav-links a:hover {
-            color: white;
+            color: var(--accent);
         }
 
         .nav-links a.active {
-            font-weight: 700;
             color: white;
         }
 
@@ -116,664 +100,295 @@
             width: 100%;
             height: 2px;
             background-color: var(--accent);
-            transform: scaleX(1);
-            transform-origin: left;
-            transition: transform 0.3s ease;
         }
 
         .social-icons {
             display: flex;
-            gap: 20px;
+            gap: 15px;
         }
 
         .social-icons a {
             color: rgba(255,255,255,0.9);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
         }
 
         .social-icons a:hover {
             color: var(--accent);
-            transform: translateY(-3px) scale(1.1); /* Subtle lift and scale */
         }
 
-        /* --- Hero Section (Main Intro) --- */
+        /* Hero Section */
         .hero {
-            padding: 120px 0 80px;
+            padding: 100px 0 60px;
             text-align: center;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            position: relative;
-            overflow: hidden;
+            background: var(--primary);
             color: white;
-            min-height: 100vh; /* Ensure hero takes full viewport height initially */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(76, 201, 240, 0.1) 0%, rgba(255,255,255,0) 70%);
-            z-index: 0;
         }
 
         .hero-content {
-            position: relative;
-            z-index: 1;
             max-width: 800px;
             margin: 0 auto;
         }
 
+        .hero-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255,255,255,0.2);
+            margin: 0 auto 25px;
+            display: block;
+        }
+
         .hero h1 {
-            font-size: 3.8rem; /* Slightly larger heading */
-            margin-bottom: 20px;
-            color: white;
-            line-height: 1.2;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3); /* More pronounced shadow */
+            font-size: 2.5rem;
+            margin-bottom: 15px;
         }
 
         .hero p {
-            font-size: 1.2rem; /* Slightly smaller for better flow */
-            max-width: 700px;
-            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
             opacity: 0.9;
-            color: var(--light-gray); /* Match text to theme */
         }
 
-        .hero-image {
-            width: 200px; /* Slightly smaller for better composition */
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 6px solid var(--accent); /* Accent border color */
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4); /* Darker shadow */
-            margin: 0 auto 30px;
-            display: block;
-            transition: all 0.5s ease;
-        }
-
-        .hero-image:hover {
-            transform: rotate(5deg) scale(1.08); /* More pronounced hover effect */
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5); /* Even darker shadow */
-        }
-
-        /* --- Section Titles --- */
+        /* Section Titles */
         .section-title {
             text-align: center;
-            margin-bottom: 70px;
-            font-size: 3rem; /* Slightly larger */
+            margin-bottom: 50px;
+            font-size: 2.2rem;
             color: var(--primary);
             position: relative;
-            display: inline-block;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.05); /* Subtle shadow */
         }
 
         .section-title:after {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 0;
-            width: 100%;
-            height: 4px; /* Thicker underline */
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
-            border-radius: 3px;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
         }
 
-        /* --- Buttons (General) --- */
+        /* Buttons */
         .btn {
-            display: inline-flex; /* Use flex for centering content easily */
-            align-items: center;
-            justify-content: center;
-            gap: 10px; /* Space for icons if used */
-            background: var(--primary); /* Dark Blue Button */
-            color: var(--button-text); /* White text for contrast */
-            padding: 16px 40px; /* More padding for a bolder look */
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
             border: none;
-            border-radius: 50px; /* Pill shape */
-            font-size: 1.1rem; /* Slightly larger font */
+            border-radius: 30px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* More pronounced shadow */
-            text-transform: uppercase; /* Uppercase text */
-            letter-spacing: 1px; /* Subtle letter spacing */
+            margin-top: 15px;
         }
 
         .btn:hover {
-            transform: translateY(-5px); /* More lift on hover */
-            box-shadow: 0 12px 25px rgba(0,0,0,0.25); /* Darker shadow on hover */
-            background: var(--secondary); /* Change to royal blue on hover */
-            color: var(--light); /* Ensure text stays light */
+            background: var(--secondary);
+            transform: translateY(-3px);
         }
 
-        .btn:active {
-            transform: translateY(1px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        /* Specific button style for project/skill cards (smaller variant) */
-        .project-card .btn,
-        .skill-card .btn {
-            background: var(--secondary); /* Royal blue for card buttons */
-            color: var(--button-text);
-            padding: 12px 20px; /* Slightly smaller button for card context */
-            font-size: 1rem;
-            border-radius: 8px; /* Square off corners for card button */
-            margin-top: 15px; /* Spacing above button */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Lighter shadow for card buttons */
-        }
-
-        .project-card .btn:hover,
-        .skill-card .btn:hover {
-            background: var(--accent); /* Change to bright teal on hover */
-            transform: translateY(-3px); /* Less lift for card buttons */
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-        }
-
-
-        /* --- Projects Section --- */
+        /* Projects Section */
         .projects {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%);
+            padding: 80px 0;
+            background: #f5f7fa;
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
         }
 
         .project-card {
             background-color: white;
-            border-radius: 12px; /* Slightly more rounded */
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.12); /* More pronounced shadow */
-            transition: all 0.4s ease; /* Slower transition */
-            display: flex; /* Use flex to control content within card */
-            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         .project-card:hover {
-            transform: translateY(-12px); /* More lift */
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2); /* Even more pronounced shadow */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
         .project-image {
             width: 100%;
-            height: 220px; /* Slightly taller images */
+            height: 200px;
             object-fit: cover;
-            transition: transform 0.6s ease; /* Slower image zoom */
-        }
-
-        .project-card:hover .project-image {
-            transform: scale(1.1); /* More zoom on image */
         }
 
         .project-content {
-            padding: 25px;
-            flex-grow: 1; /* Allows content to push button to bottom */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Space out title, desc, button */
+            padding: 20px;
         }
 
         .project-title {
-            font-size: 1.5rem; /* Slightly larger title */
-            margin-bottom: 15px;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
             color: var(--primary);
         }
 
         .project-description {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #555;
-            line-height: 1.7;
-            flex-grow: 1; /* Allow description to take space */
+            font-size: 0.95rem;
         }
-        
-        /* --- Skills Section --- */
+
+        /* Skills Section */
         .skills {
-            padding: 100px 0;
+            padding: 80px 0;
             background-color: white;
         }
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly wider minmax */
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
         }
 
         .skill-card {
-            background: linear-gradient(135deg, rgba(10, 31, 68, 0.08), rgba(76, 201, 240, 0.08)); /* Stronger gradient */
-            padding: 35px; /* More padding */
-            border-radius: 15px; /* More rounded */
+            background: rgba(10, 31, 68, 0.05);
+            padding: 30px;
+            border-radius: 10px;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08); /* Stronger shadow */
-            transition: all 0.4s ease;
-            border: 1px solid rgba(10, 31, 68, 0.15); /* More visible border */
-            position: relative; /* For potential overflow effect */
-            overflow: hidden; /* Hide any content spilling */
-            display: flex; /* Use flex for vertical alignment of content */
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
+            transition: all 0.3s ease;
         }
 
         .skill-card:hover {
-            transform: translateY(-8px) scale(1.02); /* More lift and subtle scale */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            border-color: var(--secondary); /* Change border color on hover */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .skill-icon {
-            font-size: 3.5rem; /* Larger icon */
+            font-size: 2.5rem;
             color: var(--primary);
-            margin-bottom: 20px;
-            transition: all 0.4s ease;
-            position: relative;
-            z-index: 2; /* Ensure icon is above potential overlay */
-        }
-
-        .skill-card:hover .skill-icon {
-            color: var(--accent); /* Change icon color on hover */
-            transform: scale(1.2) rotate(5deg); /* More pronounced animation */
-        }
-
-        .skill-card:before { /* Subtle background shape on hover */
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, var(--accent) 0%, transparent 60%);
-            opacity: 0;
-            transition: all 0.5s ease;
-            transform: scale(0.5);
-            z-index: 1;
-        }
-
-        .skill-card:hover:before {
-            opacity: 0.1;
-            transform: scale(1);
+            margin-bottom: 15px;
         }
 
         .skill-title {
-            font-size: 1.6rem; /* Larger title */
-            margin-bottom: 15px;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
             color: var(--primary);
-            position: relative;
-            z-index: 2;
         }
 
         .skill-card p {
-            color: #444; /* Darker text for readability */
-            font-size: 1rem;
-            position: relative;
-            z-index: 2;
-            flex-grow: 1; /* Allow description to take space */
-            margin-bottom: 20px; /* Space above the button */
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
         }
-        
-        /* --- Footer --- */
+
+        /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--primary-dark), var(--dark));
+            background: var(--primary-dark);
             color: white;
-            padding: 70px 0 30px; /* Adjust padding as needed */
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.3); /* Top shadow for footer */
-            position: relative; /* For the background elements */
-            overflow: hidden; /* Hide anything that spills */
-            text-align: center; /* Center footer content by default */
-        }
-
-        /* Decorative background elements for the footer */
-        footer::before, footer::after {
-            content: '';
-            position: absolute;
-            background: rgba(76, 201, 240, 0.05); /* Accent with transparency */
-            border-radius: 50%;
-            z-index: 0;
-            filter: blur(20px); /* Soft blur effect */
-        }
-
-        footer::before {
-            width: 150px;
-            height: 150px;
-            top: 20%;
-            left: -5%;
-            animation: footerFloat 8s ease-in-out infinite alternate;
-        }
-
-        footer::after {
-            width: 200px;
-            height: 200px;
-            bottom: 10%;
-            right: -10%;
-            animation: footerFloat 10s ease-in-out infinite reverse;
-        }
-
-        @keyframes footerFloat {
-            0% { transform: translateY(0) translateX(0) scale(1); }
-            50% { transform: translateY(-15px) translateX(15px) scale(1.05); }
-            100% { transform: translateY(0) translateX(0) scale(1); }
-        }
-
-        /* --- MODERN FOOTER DESIGN --- */
-
-        /* Main wrapper for footer content */
-        footer .footer-main-wrapper {
-            max-width: 1000px; /* Wider for better icon distribution */
-            margin: 0 auto 40px; /* Centered with bottom margin */
-            padding: 0 20px;
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column; /* Stack sections vertically */
-            gap: 40px; /* Space between the main content blocks */
-        }
-
-        /* Section for Contact Info (Address, Phone, Email) */
-        footer .contact-info-section {
-            display: flex;
-            flex-wrap: wrap; /* Allow items to wrap */
-            justify-content: center; /* Center items horizontally */
-            gap: 20px 40px; /* Space between each contact item */
-            align-items: flex-start; /* Align icons at the top */
-        }
-
-        /* Individual contact item (Address, Phone, Email) */
-        footer .contact-item {
-            display: flex;
-            flex-direction: column; /* Stack icon and text */
-            align-items: center; /* Center content within item */
-            text-align: center;
-            text-decoration: none; /* No underline */
-            color: rgba(255,255,255,0.8); /* Default text color */
-            transition: all 0.3s ease;
-            min-width: 120px; /* Ensure some minimum width for stacking */
-        }
-
-        footer .contact-item:hover {
-            color: var(--accent); /* Accent color on hover */
-            transform: translateY(-3px); /* Subtle lift */
-        }
-
-        footer .contact-item i {
-            font-size: 2.5rem; /* Larger icon size for main contact */
-            color: white; /* White icon color */
-            margin-bottom: 10px; /* Space between icon and text */
-            transition: color 0.3s ease;
-            /* Optional: Add background to icons for a more button-like feel */
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background-color: rgba(255,255,255,0.1);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        footer .contact-item:hover i {
-            background-color: rgba(255,255,255,0.2);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-        }
-
-        footer .contact-item .text-content {
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-
-        /* Social Icons Section */
-        footer .social-icons-section {
-            padding-top: 20px; /* Space from contact info */
-            border-top: 1px solid rgba(255,255,255,0.1); /* Separator line */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Center social block */
+            padding: 50px 0 20px;
             text-align: center;
         }
 
-        footer .social-icons-section h3 {
-            font-size: 1.4rem;
-            color: var(--accent);
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
             margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        footer .social-icons-section h3:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 2px;
-            background: white;
+            font-family: 'Playfair Display', serif;
         }
 
-
-        footer .social-icons-list {
+        .footer-social {
             display: flex;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            gap: 15px; /* Space between icons */
-        }
-
-        footer .social-icons-list li a {
-            font-size: 1.8rem; /* Size of social icons */
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            background-color: rgba(255,255,255,0.1);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            gap: 20px;
+            margin-bottom: 25px;
         }
 
-        footer .social-icons-list li a:hover {
+        .footer-social a {
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.2s ease;
+        }
+
+        .footer-social a:hover {
             color: var(--accent);
-            transform: translateY(-7px) scale(1.15); /* More pronounced lift */
-            background-color: rgba(255,255,255,0.2);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-        }
-        
-        /* Hide accessibility labels */
-        .label {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
         }
 
-        /* The copyright section */
         .copyright {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-            color: rgba(255,255,255,0.7);
-            font-size: 0.95rem;
-            position: relative;
-            z-index: 1;
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* --- Animations --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); } /* More movement */
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        /* Animations */
         .fade-in {
             opacity: 0;
-            animation: fadeIn 1.2s ease-out forwards; /* Slower and smoother */
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(20px);
         }
 
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
-
-        /* --- Ad Specific Styles --- */
-        .ad-banner-container {
-            position: relative; /* Needed for close button positioning */
-            display: flex;
-            justify-content: center; /* Center the ad horizontally */
-            align-items: center;    /* Center the ad vertically */
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.05); /* Subtle background */
-            border-radius: 8px;
-            overflow: hidden; /* Crucial: Hides any overflowing ad content */
-            margin: 3em auto; /* Spacing above and below ads */
-            padding: 15px; /* More padding for a premium feel */
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); /* Stronger shadow */
-            min-height: 100px; /* Default min-height for larger banners (e.g., 728x90 + padding) */
-            max-width: 900px; /* Max width to keep ads contained on wide screens */
-            text-align: center; /* Ensures text content (if any from ad) is centered */
-            transition: all 0.3s ease; /* Smooth transition for display changes */
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .ad-banner-container .close-ad-btn {
-            position: absolute;
-            top: 10px; /* More padding from top */
-            right: 10px; /* More padding from right */
-            background: rgba(255, 255, 255, 0.3);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 35px; /* Slightly larger tap target */
-            height: 35px;
-            font-size: 1.3rem; /* Larger 'x' */
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            line-height: 1;
-            padding: 0;
-            transition: background 0.3s ease, transform 0.2s ease;
-            z-index: 10; /* Ensure it's above ad content */
-        }
-
-        .ad-banner-container .close-ad-btn:hover {
-            background: rgba(255, 255, 255, 0.5);
-            transform: scale(1.1);
-        }
-
-        /* Style for the fixed bottom ad container */
-        .fixed-bottom-ad {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000; /* Above most content, but below your fixed header */
-            background-color: var(--dark); /* Use dark theme color */
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
-            padding: 8px 0; /* Slightly more padding */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 65px; /* Standard mobile banner height + padding */
-            max-height: 95px; /* Prevent it from being too tall */
-            overflow: hidden;
-            transition: all 0.3s ease; /* Smooth transition for display changes */
-        }
-
-        .fixed-bottom-ad .close-ad-btn {
-            top: 8px; /* Slightly more central for fixed ad */
-            right: 15px; /* More padding */
-            width: 40px; /* Even larger tap target */
-            height: 40px;
-            font-size: 1.6rem;
-        }
-
-        /* Ensure ad content takes full space inside ad-container */
-        .ad-banner-container > div[id^="container-"],
-        .fixed-bottom-ad > div[id^="container-"] {
-            width: 100%;
-            height: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden; /* Ensure any overflowing ad content is clipped */
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-
-        /* --- Responsive Design --- */
-        @media (max-width: 1200px) {
-            .hero h1 { font-size: 3.2rem; }
-            .hero p { font-size: 1.1rem; }
-            .section-title { font-size: 2.5rem; }
-            .btn { padding: 14px 35px; font-size: 1rem; }
-            .projects-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
-            .ad-banner-container { max-width: 800px; }
-        }
-
-        @media (max-width: 992px) {
-            .nav-links { display: none; } /* Assuming mobile menu toggle is handled elsewhere */
-            body { padding-top: 70px; } /* Adjust for fixed mobile header if different height */
-            header { padding: 15px 5%; }
-            .logo { font-size: 1.6rem; }
-            .social-icons { gap: 15px; }
-            .hero { padding: 80px 0 50px; min-height: auto; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 0.9rem; margin-bottom: 20px;}
-            .hero-image { width: 150px; height: 150px; border-width: 4px; margin-bottom: 20px;}
-            .btn { padding: 12px 30px; font-size: 0.9rem; }
-            .section-title { font-size: 1.8rem; margin-bottom: 40px; }
-            .projects-grid, .skills-grid { grid-template-columns: 1fr; gap: 25px; }
-            .project-card, .skill-card { box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
-            .project-card:hover, .skill-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
-            .ad-banner-container { margin: 1.5em auto; padding: 8px; min-height: 60px; max-width: 100%; }
-            .ad-banner-container .close-ad-btn { width: 28px; height: 28px; font-size: 1rem; top: 5px; right: 5px;}
-            .fixed-bottom-ad { min-height: 55px; max-height: 80px; padding: 5px 0; }
-            .fixed-bottom-ad .close-ad-btn { width: 35px; height: 35px; font-size: 1.4rem;}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+            }
             
-            /* Footer adjustments for mobile */
-            footer .footer-content-wrapper {
-                flex-direction: column; /* Stack sections vertically */
-                gap: 2em; /* Adjusted gap */
+            .hero {
+                padding: 80px 0 40px;
             }
-            footer .footer-section {
-                min-width: unset; /* Remove min-width to allow shrinking */
+            
+            .hero h1 {
+                font-size: 2rem;
             }
-            footer .footer-section h3:after {
-                left: 50%;
-                transform: translateX(-50%); /* Center underline */
+            
+            .hero p {
+                font-size: 1rem;
             }
-            footer .social-icons-list {
-                justify-content: center; /* Center icons */
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .projects-grid, .skills-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 1.8rem; }
-            .hero p { font-size: 0.85rem; }
-            .btn { padding: 10px 25px; font-size: 0.8rem; }
-            .section-title { font-size: 1.6rem; }
-            .project-title { font-size: 1.3rem; }
-            .skill-title { font-size: 1.4rem; }
+        @media (max-width: 576px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-image {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .btn {
+                padding: 10px 25px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header id="header">
         <div class="container">
             <nav>
@@ -791,302 +406,166 @@
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
             <img src="images/IMG-20241215-WA0026.jpg" alt="Ronald Chitsatso" class="hero-image fade-in">
-            <h1 class="fade-in delay-1">Hi<br />Welcome!!!.</h1>
-            <p class="fade-in delay-2">Financial Engineering student at Harare Institute of Technology.<br />
-                As Financial Engineer I believe in data and numbers since there are reasons behind them.<br />
-                This belief has grown into a deep passion over the past few years to find hidden patterns in big data. <br />
-                Now, looking for an opportunity to work with my passion until I retire.
+            <h1 class="fade-in">Financial Engineer & Data Scientist</h1>
+            <p class="fade-in">I believe in the power of data and numbers to reveal hidden patterns and drive decision-making. My passion for quantitative analysis has grown through my academic journey and practical projects in financial engineering and data science.</p>
+            <p class="fade-in">
+                <strong>Education:</strong><br>
+                - Bachelor's in Financial Engineering, Harare Institute of Technology<br>
+                - Applied Data Science Lab, WorldQuant University
             </p>
-            <p class="fade-in delay-3"> My Background<br />
-                -Bachelor's of Financial Engineering at Harare Institute of Technology <br />
-                -Applied Data Science lab holder at WorldQuant University
-            </p>
-            <a href="generic.html" class="btn fade-in delay-4">Full Story</a>
+            <a href="generic.html" class="btn fade-in">Learn More About Me</a>
         </div>
     </section>
 
-    <div class="ad-banner-container" id="ad1_container">
-        <button class="close-ad-btn" data-ad-id="ad1_container">×</button>
-        <div id="container-761e19dc071408ff07e61ae63b742321_top"></div>
-        <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
-    </div>
-
+    <!-- Projects Section -->
     <section class="projects">
         <div class="container">
             <h2 class="section-title fade-in">Featured Projects</h2>
             <div class="projects-grid">
-                <div class="project-card fade-in delay-1">
+                <div class="project-card fade-in">
                     <img src="images/mexico.png" alt="Housing in Mexico" class="project-image">
                     <div class="project-content">
                         <h3 class="project-title">Housing in Mexico</h3>
-                        <p class="project-description">I used a dataset of 21,000 properties to determine if real estate prices are influenced more by property size or location. Importing and cleaning data from a CSV file, build data visualizations, and examine the relationship between two variables using correlation.</p>
-                        <a href="#" class="btn">Check here.</a>
+                        <p class="project-description">Analyzed 21,000 properties to determine price drivers (size vs. location) using Python for data cleaning, visualization, and correlation analysis.</p>
+                        <a href="#" class="btn">View Project</a>
                     </div>
                 </div>
 
-                <div class="project-card fade-in delay-2">
+                <div class="project-card fade-in">
                     <img src="images/loan.jpg" alt="Loan Classification" class="project-image">
                     <div class="project-content">
                         <h3 class="project-title">Loan Classification</h3>
-                        <p class="project-description">This project aims to predict loan applicant defaulting for a company using machine learning techniques. Problem statement: Financial institutions face significant risks due to loan defaults. Accurately predicting probability of default on loans is critical for risk management and strategic planning..</p>
-                        <a href="https://github.com/RonChits/Default-Probabaility" class="btn">Check here.</a>
+                        <p class="project-description">Developed machine learning models to predict loan defaults, helping financial institutions with risk management and strategic planning.</p>
+                        <a href="https://github.com/RonChits/Default-Probabaility" class="btn">View Project</a>
                     </div>
                 </div>
 
-                <div class="project-card fade-in delay-3">
+                <div class="project-card fade-in">
                     <img src="images/india.png" alt="Volatility Forecasting in India" class="project-image">
                     <div class="project-content">
-                        <h3 class="project-title">Volatility Forecasting in India</h3>
-                        <p class="project-description">I created a GARCH time series model to predict asset volatility. I acquired stock data through an API, clean and store it in a SQLite database, and build API to serve model predictions.</p>
-                        <a href="#" class="btn">Check here.</a>
+                        <h3 class="project-title">Volatility Forecasting</h3>
+                        <p class="project-description">Created a GARCH time series model to predict asset volatility, with data acquisition through API and storage in SQLite.</p>
+                        <a href="#" class="btn">View Project</a>
                     </div>
                 </div>
 
-                <div class="project-card fade-in delay-4">
+                <div class="project-card fade-in">
                     <img src="images/WQU_logo_color.png" alt="A/B Testing at WorldQuant University" class="project-image">
                     <div class="project-content">
                         <h3 class="project-title">A/B Testing at WQU</h3>
-                        <p class="project-description">I conducted a chi-square test to determine if sending an email can increase program enrollment at WQU. I build custom Python classes to implement an ETL process, and creating an interactive data application following a three-tiered design pattern..</p>
-                        <a href="#" class="btn">Check here.</a>
+                        <p class="project-description">Conducted chi-square tests to measure email campaign effectiveness on program enrollment, with custom Python ETL implementation.</p>
+                        <a href="#" class="btn">View Project</a>
                     </div>
                 </div>
 
-                <div class="project-card fade-in delay-1">
+                <div class="project-card fade-in">
                     <img src="images/us.png" alt="Customer Segmentation in the US" class="project-image">
                     <div class="project-content">
-                        <h3 class="project-title">Customer Segmentation in the US</h3>
-                        <p class="project-description">I built a k-means model to cluster US consumers into groups. I used principal component analysis (PCA) for data visualization, and I created an interactive dashboard with Plotly Dash.</p>
-                        <a href="#" class="btn">Check here.</a>
+                        <h3 class="project-title">Customer Segmentation</h3>
+                        <p class="project-description">Built k-means clustering model with PCA for visualization and created an interactive dashboard with Plotly Dash.</p>
+                        <a href="#" class="btn">View Project</a>
                     </div>
                 </div>
 
-                <div class="project-card fade-in delay-2">
+                <div class="project-card fade-in">
                     <img src="images/poland.png" alt="Bankruptcy in Poland" class="project-image">
                     <div class="project-content">
-                        <h3 class="project-title">Bankruptcy in Poland</h3>
-                        <p class="project-description">I built random forest and gradient boosting models to predict whether a company will go bankrupt. I navigated the Linux command line, address imbalanced data through resampling, and consider the impact of performance metrics precision and recall.</p>
-                        <a href="#" class="btn">Check here.</a>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-3">
-                    <img src="images/nepal.png" alt="Earthquake Damage in Nepal" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Earthquake Damage in Nepal</h3>
-                        <p class="project-description">I built logistic regression and decision tree models to predict earthquake damage to buildings. I extracted data from a SQLite database, and reveal the biases in data that can lead to discrimination.</p>
-                        <a href="#" class="btn">Check here.</a>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-4">
-                    <img src="images/nairobi.png" alt="Air Quality in Nairobi" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Air Quality in Nairobi</h3>
-                        <p class="project-description">I built an ARMA time-series model to predict particulate matter levels in Kenya. I extracted data from a MongoDB database using pymongo, and improve model performance through hyperparameter tuning.</p>
-                        <a href="#" class="btn">Check here.</a>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-1">
-                    <img src="images/buenos.png" alt="Apartment Sales in Buenos Aires" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Apartment Sales in Buenos Aires</h3>
-                        <p class="project-description">I built a linear regression model to predict apartment prices in Argentina. I created a data pipeline to impute missing values and encode categorical features, and they improve model performance by reducing over-fitting.</p>
-                        <a href="#" class="btn">Check here.</a>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-2">
-                    <img src="images/hit4001.png" alt="Barrier Option Pricing" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Barrier Option Pricing (Thesis)</h3>
-                        <p class="project-description">Pricing of options is essential, path-depended options face challenge on solving PDE's or SDE's, barrier options face same problem as the barrier is introduced.</p>
-                        <a href="https://github.com/RonChits" class="btn">Check here.</a>
-                    </div>
-                </div>
-
-                <div class="project-card fade-in delay-3">
-                    <img src="images/tita.png" alt="Titanic Survival Analysis" class="project-image">
-                    <div class="project-content">
-                        <h3 class="project-title">Unsinkable Titanic</h3>
-                        <p class="project-description">The project is on famous 1912 titanic accident, deducing an explanation on what made other people to survive and others failing. Problem statement : What sorts of people were more likely to survive?</p>
-                        <a href="https://github.com/RonChits/Titanic-Survival" class="btn">Check here.</a>
+                        <h3 class="project-title">Bankruptcy Prediction</h3>
+                        <p class="project-description">Developed random forest and gradient boosting models to predict company bankruptcy, addressing data imbalance and metric selection.</p>
+                        <a href="#" class="btn">View Project</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="ad-banner-container" id="ad2_container">
-        <button class="close-ad-btn" data-ad-id="ad2_container">×</button>
-        <script type="text/javascript">
-            atOptions = {
-                'key' : '4d26941499f506497efcb4527b651831',
-                'format' : 'iframe',
-                'height' : 60,
-                'width' : 468,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/4d26941499f506497efcb4527b651831/invoke.js"></script>
-    </div>
-
+    <!-- Skills Section -->
     <section class="skills">
         <div class="container">
             <h2 class="section-title fade-in">Technical Skills</h2>
             <div class="skills-grid">
-                <div class="skill-card fade-in delay-1">
+                <div class="skill-card fade-in">
                     <div class="skill-icon">
                         <i class="fab fa-python"></i>
                     </div>
                     <h3 class="skill-title">Python</h3>
-                    <p>Proficient in Python programming, with experience in data analysis and machine learning. Skilled in utilizing Python libraries and frameworks for data manipulation and model building.</p>
-                    <a href="#" class="btn">Check here.</a>
+                    <p>Proficient in Python for data analysis, machine learning, and automation. Experienced with NumPy, Pandas, Scikit-learn, and visualization libraries.</p>
+                    <a href="#" class="btn">See Examples</a>
                 </div>
 
-                <div class="skill-card fade-in delay-2">
+                <div class="skill-card fade-in">
                     <div class="skill-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3 class="skill-title">Data Visualization</h3>
-                    <p>Proficient in Python programming with a strong emphasis on data analysis and visualization. Experienced in utilizing Python libraries such as NumPy, Pandas, Matplotlib, and Seaborn for data manipulation, exploration, and creating compelling visual representations. Skilled in crafting informative and aesthetically pleasing visualizations to uncover trends, patterns, and insights within complex datasets.</p>
-                    <a href="#" class="btn">Check here.</a>
+                    <p>Skilled in creating informative visualizations using Matplotlib, Seaborn, and Plotly to uncover trends and communicate insights effectively.</p>
+                    <a href="#" class="btn">See Examples</a>
                 </div>
 
-                <div class="skill-card fade-in delay-3">
+                <div class="skill-card fade-in">
                     <div class="skill-icon">
                         <i class="fas fa-database"></i>
                     </div>
                     <h3 class="skill-title">SQL</h3>
-                    <p>Proficient in SQL for data retrieval and management. Capable of writing efficient SQL queries to extract, clean, and transform data from relational databases.</p>
-                    <a href="#" class="btn">Check here.</a>
+                    <p>Experienced in writing efficient SQL queries for data retrieval, transformation, and analysis from relational databases.</p>
+                    <a href="#" class="btn">See Examples</a>
                 </div>
 
-                <div class="skill-card fade-in delay-4">
+                <div class="skill-card fade-in">
                     <div class="skill-icon">
                         <i class="fas fa-file-excel"></i>
                     </div>
                     <h3 class="skill-title">Excel VBA</h3>
-                    <p>Excel VBA skills for automating tasks, creating custom functions, and enhancing data analysis capabilities within the Excel environment. Experienced in developing VBA macros to streamline workflows and improve productivity.</p>
-                    <a href="#" class="btn">Check here.</a>
+                    <p>Developed automation solutions with VBA macros to streamline financial workflows and enhance data processing capabilities.</p>
+                    <a href="#" class="btn">See Examples</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="footer">
-        <div class="footer-main-wrapper">
-            <div class="contact-info-section">
-                <a href="#" class="contact-item" aria-label="Our Address">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div class="text-content">
-                        <p>Crowborough North</p>
-                        <p>834, Mufakose Harare</p>
-                    </div>
-                </a>
-                <a href="tel:+263782522493" class="contact-item" aria-label="Call me at +263 782522493">
-                    <i class="fas fa-phone"></i>
-                    <span class="text-content">+263 782522493</span>
-                </a>
-                <a href="mailto:r.i.chitsatso@gmail.com" class="contact-item" aria-label="Email me at r.i.chitsatso@gmail.com">
-                    <i class="fas fa-envelope"></i>
-                    <span class="text-content">r.i.chitsatso@gmail.com</span>
-                </a>
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <a href="index.html" class="footer-logo">Ronald Chitsatso</a>
+            <div class="footer-social">
+                <a href="https://github.com/RonChits" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:r.i.chitsatso@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
-
-            <div class="social-icons-section">
-                <h3>Connect With Me</h3>
-                <ul class="social-icons-list">
-                    <li><a href="https://github.com/RonChits" target="_blank" class="icon brands alt fa-github" aria-label="Github"></a></li>
-                    <li><a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" target="_blank" class="icon brands alt fa-linkedin" aria-label="LinkedIn"></a></li>
-                    <li><a href="https://twitter.com/Ronald35032455" target="_blank" class="icon brands alt fa-twitter" aria-label="Twitter"></a></li>
-                    <li><a href="https://www.facebook.com/ronald.chitsatso.1?mibextid=ZbWKwL" target="_blank" class="icon brands alt fa-facebook-f" aria-label="Facebook"></a></li>
-                    <li><a href="https://www.youtube.com/@RonaldChitsatso" target="_blank" class="icon brands alt fa-youtube" aria-label="YouTube"></a></li>
-                </ul>
+            <div class="contact-info">
+                <p>Crowborough North, 834, Mufakose Harare</p>
+                <p><a href="tel:+263782522493">+263 782522493</a></p>
             </div>
-        </div>
-        <div class="copyright">
-            <p>© 2023 Ronald Chitsatso. All rights reserved.</p>
+            <p class="copyright">&copy; 2023 Ronald Chitsatso. All rights reserved.</p>
         </div>
     </footer>
-
-    <div id="fixedBottomAd" class="fixed-bottom-ad">
-        <button class="close-ad-btn" data-ad-id="fixedBottomAd">×</button>
-        <div id="container-761e19dc071408ff07e61ae63b742321_fixed_bottom"></div>
-        <script async="async" data-cfasync="false" src="//pl27180508.profitableratecpm.com/761e19dc071408ff07e61ae63b742321/invoke.js"></script>
-    </div>
 
     <script>
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            header.style.boxShadow = window.scrollY > 50 ? '0 2px 10px rgba(0,0,0,0.2)' : 'none';
         });
 
-        // Animation on scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            
-            const fadeInOnScroll = function() {
-                fadeElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (elementTop < windowHeight - 100 && element.style.opacity === '0') {
-                        element.style.opacity = '1';
-                        element.style.transform = 'translateY(0)';
-                    }
-                });
-            };
-            
-            // Initial check
-            fadeInOnScroll();
-            
-            // Check on scroll
-            window.addEventListener('scroll', fadeInOnScroll);
-
-            // Ad Close Button Logic
-            document.querySelectorAll('.close-ad-btn').forEach(button => {
-                button.addEventListener('click', () => {
-                    const adContainerId = button.getAttribute('data-ad-id');
-                    const adContainer = document.getElementById(adContainerId);
-                    if (adContainer) {
-                        adContainer.style.display = 'none';
-                        // If the fixed bottom ad is closed, adjust body padding
-                        if (adContainerId === 'fixedBottomAd') {
-                            adjustBodyPadding();
-                        }
-                    }
-                });
-            });
-
-            // Dynamic body padding for fixed bottom ad
-            const fixedBottomAd = document.getElementById('fixedBottomAd');
-            const body = document.body;
-
-            function adjustBodyPadding() {
-                if (fixedBottomAd && fixedBottomAd.offsetHeight > 0 && fixedBottomAd.style.display !== 'none') {
-                    // Give a slight delay to ensure the ad content has rendered and taken its height
-                    setTimeout(() => {
-                        const adHeight = fixedBottomAd.offsetHeight;
-                        body.style.paddingBottom = `${adHeight + 10}px`; // Add a small buffer
-                    }, 500); 
-                } else {
-                    body.style.paddingBottom = '0';
+        // Intersection Observer for scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
-            }
+            });
+        }, {
+            threshold: 0.1
+        });
 
-            // Initial adjustment on load
-            adjustBodyPadding();
-            // Adjust on window resize (e.g., orientation change on mobile)
-            window.addEventListener('resize', adjustBodyPadding);
+        fadeElements.forEach(element => {
+            observer.observe(element);
         });
     </script>
 </body>
