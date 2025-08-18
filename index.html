@@ -29,7 +29,7 @@
             background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
-            padding-top: 80px;
+            padding-top: 80px; /* Added padding for fixed header */
         }
 
         h1, h2, h3, h4 {
@@ -52,13 +52,15 @@
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            height: 80px; /* Fixed height for header */
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            height: 80px; /* Match header height */
+            padding: 0 20px;
         }
 
         .logo {
@@ -117,12 +119,14 @@
             color: var(--accent);
         }
 
-        /* Hero Section */
+        /* Hero Section - Fixed to account for header */
         .hero {
-            padding: 100px 0 60px;
+            padding: 60px 0; /* Reduced top padding since we have body padding-top */
             text-align: center;
             background: var(--primary);
             color: white;
+            margin-top: -80px; /* Negative margin to pull content up */
+            padding-top: 140px; /* Extra padding to compensate */
         }
 
         .hero-content {
@@ -346,7 +350,7 @@
             }
             
             .hero {
-                padding: 80px 0 40px;
+                padding: 120px 0 60px;
             }
             
             .hero h1 {
@@ -369,20 +373,39 @@
         @media (max-width: 576px) {
             nav {
                 flex-direction: column;
+                height: auto;
+                padding: 15px 0;
+            }
+            
+            .nav-links {
                 gap: 15px;
+                margin: 15px 0;
+            }
+            
+            .hero {
+                margin-top: 0;
+                padding-top: 100px;
             }
             
             .hero h1 {
                 font-size: 1.8rem;
             }
             
-            .hero-image {
-                width: 150px;
-                height: 150px;
+            .section-title {
+                font-size: 1.6rem;
             }
             
             .btn {
                 padding: 10px 25px;
+            }
+            
+            body {
+                padding-top: 0;
+            }
+            
+            header {
+                position: relative;
+                height: auto;
             }
         }
     </style>
@@ -421,7 +444,7 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects Section - Now with all your original projects -->
     <section class="projects">
         <div class="container">
             <h2 class="section-title fade-in">Featured Projects</h2>
@@ -430,8 +453,8 @@
                     <img src="images/mexico.png" alt="Housing in Mexico" class="project-image">
                     <div class="project-content">
                         <h3 class="project-title">Housing in Mexico</h3>
-                        <p class="project-description">Analyzed 21,000 properties to determine price drivers (size vs. location) using Python for data cleaning, visualization, and correlation analysis.</p>
-                        <a href="#" class="btn">View Project</a>
+                        <p class="project-description">I used a dataset of 21,000 properties to determine if real estate prices are influenced more by property size or location. Importing and cleaning data from a CSV file, build data visualizations, and examine the relationship between two variables using correlation.</p>
+                        <a href="#" class="btn">Check here.</a>
                     </div>
                 </div>
 
@@ -439,17 +462,17 @@
                     <img src="images/loan.jpg" alt="Loan Classification" class="project-image">
                     <div class="project-content">
                         <h3 class="project-title">Loan Classification</h3>
-                        <p class="project-description">Developed machine learning models to predict loan defaults, helping financial institutions with risk management and strategic planning.</p>
-                        <a href="https://github.com/RonChits/Default-Probabaility" class="btn">View Project</a>
+                        <p class="project-description">This project aims to predict loan applicant defaulting for a company using machine learning techniques. Problem statement: Financial institutions face significant risks due to loan defaults. Accurately predicting probability of default on loans is critical for risk management and strategic planning.</p>
+                        <a href="https://github.com/RonChits/Default-Probabaility" class="btn">Check here.</a>
                     </div>
                 </div>
 
                 <div class="project-card fade-in">
                     <img src="images/india.png" alt="Volatility Forecasting in India" class="project-image">
                     <div class="project-content">
-                        <h3 class="project-title">Volatility Forecasting</h3>
-                        <p class="project-description">Created a GARCH time series model to predict asset volatility, with data acquisition through API and storage in SQLite.</p>
-                        <a href="#" class="btn">View Project</a>
+                        <h3 class="project-title">Volatility Forecasting in India</h3>
+                        <p class="project-description">I created a GARCH time series model to predict asset volatility. I acquired stock data through an API, clean and store it in a SQLite database, and build API to serve model predictions.</p>
+                        <a href="#" class="btn">Check here.</a>
                     </div>
                 </div>
 
@@ -457,26 +480,71 @@
                     <img src="images/WQU_logo_color.png" alt="A/B Testing at WorldQuant University" class="project-image">
                     <div class="project-content">
                         <h3 class="project-title">A/B Testing at WQU</h3>
-                        <p class="project-description">Conducted chi-square tests to measure email campaign effectiveness on program enrollment, with custom Python ETL implementation.</p>
-                        <a href="#" class="btn">View Project</a>
+                        <p class="project-description">I conducted a chi-square test to determine if sending an email can increase program enrollment at WQU. I build custom Python classes to implement an ETL process, and creating an interactive data application following a three-tiered design pattern.</p>
+                        <a href="#" class="btn">Check here.</a>
                     </div>
                 </div>
 
                 <div class="project-card fade-in">
                     <img src="images/us.png" alt="Customer Segmentation in the US" class="project-image">
                     <div class="project-content">
-                        <h3 class="project-title">Customer Segmentation</h3>
-                        <p class="project-description">Built k-means clustering model with PCA for visualization and created an interactive dashboard with Plotly Dash.</p>
-                        <a href="#" class="btn">View Project</a>
+                        <h3 class="project-title">Customer Segmentation in the US</h3>
+                        <p class="project-description">I built a k-means model to cluster US consumers into groups. I used principal component analysis (PCA) for data visualization, and I created an interactive dashboard with Plotly Dash.</p>
+                        <a href="#" class="btn">Check here.</a>
                     </div>
                 </div>
 
                 <div class="project-card fade-in">
                     <img src="images/poland.png" alt="Bankruptcy in Poland" class="project-image">
                     <div class="project-content">
-                        <h3 class="project-title">Bankruptcy Prediction</h3>
-                        <p class="project-description">Developed random forest and gradient boosting models to predict company bankruptcy, addressing data imbalance and metric selection.</p>
-                        <a href="#" class="btn">View Project</a>
+                        <h3 class="project-title">Bankruptcy in Poland</h3>
+                        <p class="project-description">I built random forest and gradient boosting models to predict whether a company will go bankrupt. I navigated the Linux command line, address imbalanced data through resampling, and consider the impact of performance metrics precision and recall.</p>
+                        <a href="#" class="btn">Check here.</a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <img src="images/nepal.png" alt="Earthquake Damage in Nepal" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Earthquake Damage in Nepal</h3>
+                        <p class="project-description">I built logistic regression and decision tree models to predict earthquake damage to buildings. I extracted data from a SQLite database, and reveal the biases in data that can lead to discrimination.</p>
+                        <a href="#" class="btn">Check here.</a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <img src="images/nairobi.png" alt="Air Quality in Nairobi" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Air Quality in Nairobi</h3>
+                        <p class="project-description">I built an ARMA time-series model to predict particulate matter levels in Kenya. I extracted data from a MongoDB database using pymongo, and improve model performance through hyperparameter tuning.</p>
+                        <a href="#" class="btn">Check here.</a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <img src="images/buenos.png" alt="Apartment Sales in Buenos Aires" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Apartment Sales in Buenos Aires</h3>
+                        <p class="project-description">I built a linear regression model to predict apartment prices in Argentina. I created a data pipeline to impute missing values and encode categorical features, and they improve model performance by reducing over-fitting.</p>
+                        <a href="#" class="btn">Check here.</a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <img src="images/hit4001.png" alt="Barrier Option Pricing" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Barrier Option Pricing (Thesis)</h3>
+                        <p class="project-description">Pricing of options is essential, path-depended options face challenge on solving PDE's or SDE's, barrier options face same problem as the barrier is introduced.</p>
+                        <a href="https://github.com/RonChits" class="btn">Check here.</a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <img src="images/tita.png" alt="Titanic Survival Analysis" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Unsinkable Titanic</h3>
+                        <p class="project-description">The project is on famous 1912 titanic accident, deducing an explanation on what made other people to survive and others failing. Problem statement : What sorts of people were more likely to survive?</p>
+                        <a href="https://github.com/RonChits/Titanic-Survival" class="btn">Check here.</a>
                     </div>
                 </div>
             </div>
@@ -493,8 +561,8 @@
                         <i class="fab fa-python"></i>
                     </div>
                     <h3 class="skill-title">Python</h3>
-                    <p>Proficient in Python for data analysis, machine learning, and automation. Experienced with NumPy, Pandas, Scikit-learn, and visualization libraries.</p>
-                    <a href="#" class="btn">See Examples</a>
+                    <p>Proficient in Python programming, with experience in data analysis and machine learning. Skilled in utilizing Python libraries and frameworks for data manipulation and model building.</p>
+                    <a href="#" class="btn">Check here.</a>
                 </div>
 
                 <div class="skill-card fade-in">
@@ -502,8 +570,8 @@
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3 class="skill-title">Data Visualization</h3>
-                    <p>Skilled in creating informative visualizations using Matplotlib, Seaborn, and Plotly to uncover trends and communicate insights effectively.</p>
-                    <a href="#" class="btn">See Examples</a>
+                    <p>Proficient in Python programming with a strong emphasis on data analysis and visualization. Experienced in utilizing Python libraries such as NumPy, Pandas, Matplotlib, and Seaborn for data manipulation, exploration, and creating compelling visual representations. Skilled in crafting informative and aesthetically pleasing visualizations to uncover trends, patterns, and insights within complex datasets.</p>
+                    <a href="#" class="btn">Check here.</a>
                 </div>
 
                 <div class="skill-card fade-in">
@@ -511,8 +579,8 @@
                         <i class="fas fa-database"></i>
                     </div>
                     <h3 class="skill-title">SQL</h3>
-                    <p>Experienced in writing efficient SQL queries for data retrieval, transformation, and analysis from relational databases.</p>
-                    <a href="#" class="btn">See Examples</a>
+                    <p>Proficient in SQL for data retrieval and management. Capable of writing efficient SQL queries to extract, clean, and transform data from relational databases.</p>
+                    <a href="#" class="btn">Check here.</a>
                 </div>
 
                 <div class="skill-card fade-in">
@@ -520,8 +588,8 @@
                         <i class="fas fa-file-excel"></i>
                     </div>
                     <h3 class="skill-title">Excel VBA</h3>
-                    <p>Developed automation solutions with VBA macros to streamline financial workflows and enhance data processing capabilities.</p>
-                    <a href="#" class="btn">See Examples</a>
+                    <p>Excel VBA skills for automating tasks, creating custom functions, and enhancing data analysis capabilities within the Excel environment. Experienced in developing VBA macros to streamline workflows and improve productivity.</p>
+                    <a href="#" class="btn">Check here.</a>
                 </div>
             </div>
         </div>
@@ -535,10 +603,9 @@
                 <a href="https://github.com/RonChits" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="mailto:r.i.chitsatso@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
-            <div class="contact-info">
-                <p>Crowborough North, 834, Mufakose Harare</p>
-                <p><a href="tel:+263782522493">+263 782522493</a></p>
+                <a href="https://twitter.com/Ronald35032455" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/ronald.chitsatso.1" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.youtube.com/@RonaldChitsatso" target="_blank"><i class="fab fa-youtube"></i></a>
             </div>
             <p class="copyright">&copy; 2023 Ronald Chitsatso. All rights reserved.</p>
         </div>
