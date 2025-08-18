@@ -119,10 +119,30 @@
         .social-icons a:hover {
             color: var(--accent);
         }
+        
+        /* Sections */
+        section {
+            padding: 60px 0;
+        }
+        
+        .about, .contact {
+            background-color: var(--light);
+        }
+        
+        .timeline-section {
+            background-color: var(--light-gray);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary-dark);
+        }
 
-        /* Hero Section - Fixed to account for header */
+        /* Hero Section */
         .hero {
-            padding: 60px 0; /* Reduced top padding since we have body padding-top */
+            padding: 60px 0;
             text-align: center;
             background: var(--primary);
             color: white;
@@ -130,7 +150,6 @@
             padding-top: 140px; /* Extra padding to compensate */
         }
 
-        /* Rest of your CSS remains the same */
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
@@ -156,13 +175,143 @@
             margin: 0 auto 25px;
             display: block;
         }
+        
+        /* About Section Styles */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            font-size: 1.1rem;
+        }
+        
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--accent);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        
+        .timeline-item.left {
+            left: 0;
+        }
+        
+        .timeline-item.right {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -14px;
+            background-color: var(--primary);
+            border: 4px solid var(--accent);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item.right::after {
+            left: -11px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-content h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        .timeline-content p {
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Form Styles */
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-form label {
+            font-weight: 600;
+        }
+        
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .contact-form button {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .contact-form button:hover {
+            background-color: var(--secondary);
+        }
 
-        /* ... rest of your existing CSS ... */
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header id="header">
         <div class="container">
             <nav>
@@ -180,7 +329,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
             <img src="images/IMG-20240906-WA0004.jpg" alt="Ronald Chitsatso" class="hero-image fade-in">
@@ -189,25 +337,78 @@
         </div>
     </section>
 
-    <!-- Rest of your HTML remains the same -->
-    <!-- About Section -->
     <section class="about">
-        <!-- ... existing about section content ... -->
+        <div class="container">
+            <h2 class="section-title fade-in">About Me</h2>
+            <div class="about-content fade-in">
+                <p>Hello! My name is Ronald Chitsatso, and I am a passionate and dedicated full-stack developer with a strong focus on creating clean, efficient, and user-friendly web applications. My journey in tech began with a deep curiosity about how things work, and it quickly grew into a passion for building and creating.</p>
+                <p>I have experience with a range of technologies, including HTML, CSS, JavaScript, and frameworks like React. My back-end skills include Node.js, Express, and databases such as MongoDB and SQL. I believe in continuous learning and am always looking for new challenges to expand my knowledge and skill set.</p>
+                <p>When I'm not coding, you can find me exploring new hiking trails, reading a good book on software architecture, or contributing to open-source projects. I'm always eager to collaborate with others and bring innovative ideas to life.</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Timeline Section -->
     <section class="timeline-section">
-        <!-- ... existing timeline content ... -->
+        <div class="container">
+            <h2 class="section-title fade-in">My Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item left fade-in">
+                    <div class="timeline-content">
+                        <h3>2020: First steps into coding</h3>
+                        <p>Began my self-taught journey with HTML and CSS, building simple static websites and falling in love with front-end development.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right fade-in">
+                    <div class="timeline-content">
+                        <h3>2021: Diving into JavaScript</h3>
+                        <p>Mastered core JavaScript concepts, enabling me to add interactivity and dynamic functionality to my projects.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left fade-in">
+                    <div class="timeline-content">
+                        <h3>2022: Full-Stack Development</h3>
+                        <p>Learned Node.js and Express to build my first full-stack applications, connecting front-end interfaces to a back-end server and database.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right fade-in">
+                    <div class="timeline-content">
+                        <h3>2023: Professional Experience</h3>
+                        <p>Joined a startup as a junior developer, gaining valuable experience in a professional environment and contributing to real-world projects.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left fade-in">
+                    <div class="timeline-content">
+                        <h3>2024: The Journey Continues</h3>
+                        <p>Currently working on advanced projects, focusing on scalable architecture, cloud computing, and expanding my knowledge of modern frameworks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="contact">
-        <!-- ... existing contact content ... -->
+        <div class="container">
+            <h2 class="section-title fade-in">Get in Touch</h2>
+            <p class="fade-in" style="text-align: center; max-width: 600px; margin: 0 auto 30px;">I am always open to new opportunities, collaborations, or just a friendly chat. Feel free to reach out to me via the form below or through my social media links.</p>
+            <form class="contact-form fade-in">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <!-- ... existing footer content ... -->
+        <div class="container">
+            <p>&copy; 2024 Ronald Chitsatso. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
