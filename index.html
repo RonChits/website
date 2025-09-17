@@ -195,6 +195,17 @@
             background: var(--secondary);
             transform: translateY(-3px);
         }
+        
+        /* New styling for download button */
+        .download-btn {
+            background: #4CC9F0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .download-btn:hover {
+            background: #3ac6ee;
+        }
 
         /* Projects Section */
         .projects {
@@ -290,27 +301,14 @@
         footer {
             background: var(--primary-dark);
             color: white;
-            padding: 50px 0 20px;
+            padding: 20px 0; /* Reduced padding to make it smaller */
             text-align: center;
-        }
-
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            font-family: 'Playfair Display', serif;
         }
 
         .footer-social {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-bottom: 25px;
         }
 
         .footer-social a {
@@ -324,13 +322,22 @@
         }
 
         .copyright {
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-top: 25px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            display: none; /* Hide the copyright text */
         }
 
+        .footer-content {
+            /* Remove all children except .footer-social to keep only icons */
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-content > *:not(.footer-social) {
+            display: none;
+        }
+        
         /* Animations */
         .fade-in {
             opacity: 0;
@@ -411,7 +418,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header id="header">
         <div class="container">
             <nav>
@@ -429,7 +435,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
             <img src="images/IMG-20241215-WA0026.jpg" alt="Ronald Chitsatso" class="hero-image fade-in">
@@ -444,11 +449,19 @@
         </div>
     </section>
 
-    <!-- Projects Section - Now with all your original projects -->
     <section class="projects">
         <div class="container">
             <h2 class="section-title fade-in">Featured Projects</h2>
             <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <img src="images/ping_pong.png" alt="Ping Pong Multiplayer Game" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Online Ping Pong Game</h3>
+                        <p class="project-description">A multi-platform ping pong game built with Flutter and Dart, allowing players to compete against an AI or challenge other players online. The game features real-time multiplayer functionality and user authentication.</p>
+                        <a href="assets/apk/app-release.zip" download class="btn download-btn">Download APK File</a>
+                    </div>
+                </div>
+
                 <div class="project-card fade-in">
                     <img src="images/mexico.png" alt="Housing in Mexico" class="project-image">
                     <div class="project-content">
@@ -551,7 +564,6 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section class="skills">
         <div class="container">
             <h2 class="section-title fade-in">Technical Skills</h2>
@@ -562,6 +574,14 @@
                     </div>
                     <h3 class="skill-title">Python</h3>
                     <p>Proficient in Python programming, with experience in data analysis and machine learning. Skilled in utilizing Python libraries and frameworks for data manipulation and model building.</p>
+                    <a href="#" class="btn">Check here.</a>
+                </div>
+
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fab fa-dev"></i> </div>
+                    <h3 class="skill-title">Web & App Development</h3>
+                    <p>Skilled in building web applications using the **Flask** framework with Python. Also proficient in developing cross-platform mobile applications for Android and iOS using **Flutter** and **Dart**.</p>
                     <a href="#" class="btn">Check here.</a>
                 </div>
 
@@ -595,10 +615,8 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container footer-content">
-            <a href="index.html" class="footer-logo">Ronald Chitsatso</a>
             <div class="footer-social">
                 <a href="https://github.com/RonChits" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/ronald-chitsatso-6b491a237/" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -607,7 +625,6 @@
                 <a href="https://www.facebook.com/ronald.chitsatso.1" target="_blank"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.youtube.com/@RonaldChitsatso" target="_blank"><i class="fab fa-youtube"></i></a>
             </div>
-            <p class="copyright">&copy; 2023 Ronald Chitsatso. All rights reserved.</p>
         </div>
     </footer>
 
