@@ -400,6 +400,7 @@
         let isOnline = false;
         let userId = null;
         let dbAuthReady = false;
+        let authStateReady = false;
 
         let onlineUsers = [];
         let gameHistory = [];
@@ -480,7 +481,7 @@
         }
 
         // --- Firebase Auth & Firestore Setup ---
-        async function signIn() {
+        async function firebaseInitAndSignIn() {
             try {
                 if (initialAuthToken) {
                     await signInWithCustomToken(auth, initialAuthToken);
@@ -488,13 +489,16 @@
                     await signInAnonymously(auth);
                 }
             } catch (error) {
-                console.error("Firebase auth error:", error);
-                showError('Authentication failed. Please check the console for details.');
+                console.error("Firebase auth error during initial sign-in:", error);
             }
         }
         
         function getHistoryCollection() {
-            const historyPath = isOnline ? `/artifacts/${appId}/users/${userId}/history` : `temp-history`;
+            if (!userId) {
+                console.error("User ID is not set. Cannot get Firestore collection.");
+                return null;
+            }
+            const historyPath = `/artifacts/${appId}/users/${userId}/history`;
             return collection(db, historyPath);
         }
 
@@ -502,12 +506,14 @@
             if (user) {
                 userId = user.uid;
                 dbAuthReady = true;
-                // Since this is for a new app, we don't have existing history.
-                // We'll just listen to new history added.
+                if (authStateReady) {
+                    loadGameHistory();
+                }
             } else {
-                userId = crypto.randomUUID();
+                userId = null;
                 dbAuthReady = true;
             }
+            authStateReady = true;
         });
 
         // --- Login Screen Logic ---
@@ -531,6 +537,7 @@
             if (isOfflineMode) {
                 username = "Guest";
                 isOnline = false;
+                await firebaseInitAndSignIn();
                 showLobbyScreen();
                 return;
             }
@@ -564,6 +571,12 @@
             errorMessage.textContent = message;
             errorMessage.classList.remove('hidden');
         }
+        
+        document.getElementById('logout-button')?.addEventListener('click', () => {
+            auth.signOut();
+            isOnline = false;
+            showScreen('login');
+        });
 
         // --- Lobby Screen Logic ---
         function showLobbyScreen() {
@@ -572,6 +585,10 @@
             setupLobbyListeners();
             if (isOnline) {
               connectWebSocket();
+              loadGameHistory();
+            } else {
+              gameHistory = [];
+              renderGameHistory();
             }
         }
         
@@ -669,7 +686,11 @@
         }
 
         async function loadGameHistory() {
-            if (!isOnline || !dbAuthReady) return;
+            if (!isOnline || !dbAuthReady) {
+                gameHistory = [];
+                renderGameHistory();
+                return;
+            }
             try {
                 const historyRef = getHistoryCollection();
                 const q = query(historyRef);
@@ -699,21 +720,26 @@
                     timestamp: serverTimestamp()
                 });
                 console.log("History saved to Firestore.");
+                loadGameHistory();
             } catch (e) {
                 console.error("Error saving history:", e);
             }
         }
         
         function renderGameHistory() {
-             const historyDiv = document.createElement('div');
-             historyDiv.className = 'mt-4';
-             historyDiv.innerHTML = `
+            let historyContainer = document.getElementById('history-container');
+            if (!historyContainer) {
+                historyContainer = document.createElement('div');
+                historyContainer.id = 'history-container';
+                historyContainer.className = 'mt-4';
+                document.querySelector('#lobby-screen .card').appendChild(historyContainer);
+            }
+            historyContainer.innerHTML = `
                 <h3 class="text-lg font-bold">Recent Games</h3>
                 <div class="lobby-list-container h-32 mt-2">
                     ${gameHistory.slice(0, 5).map(h => `<p class="text-sm">${h}</p>`).join('')}
                 </div>
-             `;
-             document.querySelector('#lobby-screen .card').appendChild(historyDiv);
+            `;
         }
 
         // --- WebSocket Logic ---
@@ -783,14 +809,20 @@
                     break;
                 case 'game_end':
                     if (data.to === username) {
-                        endGameLocally();
-                        gameStatus.textContent = `Winner: ${data.winner} | Loser: ${data.loser}`;
-                        saveGameHistory(data.winner, data.loser);
+                        endGameLocally(data.winner, data.loser);
                     }
                     break;
             }
         }
         
+        function endGameLocally(winner, loser) {
+            isGameActive = false;
+            cancelAnimationFrame(gameTimer);
+            gameStatus.textContent = `Winner: ${winner} | Loser: ${loser}`;
+            showScreen('lobby');
+            saveGameHistory(winner, loser);
+        }
+
         declineInviteButton.addEventListener('click', () => {
             if (ws && ws.readyState === WebSocket.OPEN) {
                 ws.send(JSON.stringify({
@@ -1037,8 +1069,7 @@
 
         // --- Initial Load ---
         window.onload = async () => {
-            // First, sign in with the provided token or anonymously
-            await signIn();
+            await firebaseInitAndSignIn();
             showScreen('login');
         };
     </script>
