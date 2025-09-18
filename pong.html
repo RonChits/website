@@ -919,8 +919,8 @@
         }
 
         function updateGame() {
-            const gameWidth = gameCanvas.width;
-            const gameHeight = gameCanvas.height;
+            const gameWidth = canvas.width;
+            const gameHeight = canvas.height;
             
             ballX += ballVX;
             ballY += ballVY;
@@ -984,8 +984,8 @@
         }
 
         function drawGame() {
-            const gameWidth = gameCanvas.width;
-            const gameHeight = gameCanvas.height;
+            const gameWidth = canvas.width;
+            const gameHeight = canvas.height;
             
             // Background
             ctx.fillStyle = 'black';
@@ -1010,8 +1010,8 @@
         }
 
         function resetBall() {
-            const gameWidth = gameCanvas.width;
-            const gameHeight = gameCanvas.height;
+            const gameWidth = canvas.width;
+            const gameHeight = canvas.height;
             ballX = gameWidth / 2 - BALL_SIZE / 2;
             ballY = gameHeight / 2 - BALL_SIZE / 2;
             ballVX = Math.random() < 0.5 ? 5 : -5;
