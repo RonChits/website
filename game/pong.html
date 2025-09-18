@@ -1,1 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RonPingPong</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .app-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .app-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            border-radius: 22px;
+            padding: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+        }
+
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .ping-icon {
+            font-size: 90px;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #BB86FC;
+        }
+
+        .form-group {
+            width: 100%;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #2c2c2c;
+            color: white;
+            font-size: 16px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #3e8e41;
+        }
+
+        .btn-secondary {
+            background-color: #BB86FC;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #9b6cef;
+        }
+
+        .switch-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #4CAF50;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .game-canvas-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #gameCanvas {
+            background-color: #000;
+            border-radius: 12px;
+            border: 2px solid #4CAF50;
+        }
+
+        .score-display {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #2c2c2c;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-messages {
+            height: 200px;
+            overflow-y: auto;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+        }
+
+        .user-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .user-chip {
+            background-color: #2c2c2c;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-chip:hover {
+            background-color: #4CAF50;
+        }
+
+        .user-chip.selected {
+            background-color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .history-list {
+            max-height: 200px;
+            overflow-y: auto;
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .history-item {
+            padding: 10px;
+            border-bottom: 1px solid #333;
+            font-size: 14px;
+        }
+
+        .error-message {
+            color: #ff5252;
+            margin: 10px 0;
+        }
+
+        .success-message {
+            color: #4CAF50;
+            margin: 10px 0;
+        }
+
+        .help-button {
+            background: none;
+            border: none;
+            color: #BB86FC;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-title {
+            margin-bottom: 15px;
+            color: #4CAF50;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .app-container {
+                padding: 10px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .ping-icon {
+                font-size: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Username Screen -->
+        <div id="usernameScreen" class="screen active">
+            <div class="app-bar">
+                <div class="app-title">
+                    <span class="ping-icon">🏓</span>
+                    <span>RonPingPong</span>
+                </div>
+                <button class="help-button" onclick="showHelp()">❓</button>
+            </div>
+            
+            <div class="card centered-content">
+                <div class="ping-icon">🏓</div>
+                <h1>RonPingPong</h1>
+                
+                <div class="switch-container">
+                    <label for="offlineMode">Play Offline:</label>
+                    <label class="switch">
+                        <input type="checkbox" id="offlineMode">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div id="loginForm">
+                    <div class="form-group">
+                        <input type="text" id="usernameInput" placeholder="Username" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="passwordInput" placeholder="Password" autocomplete="off">
+                    </div>
+                </div>
+                
+                <div id="errorMessage" class="error-message"></div>
+                
+                <button id="submitButton" class="btn btn-primary" onclick="handleSubmit()">Login</button>
+                
+                <div>
+                    <button class="btn btn-secondary" onclick="toggleLoginMode()" id="toggleLoginButton">Don't have an account? Sign Up</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Screen -->
+        <div id="mainScreen" class="screen">
+            <div class="app-bar">
+                <h2 id="welcomeText">Welcome, User</h2>
+                <div>
+                    <button class="btn btn-secondary" onclick="logout()">Logout</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="game-container">
+                    <div class="ping-icon">🏓</div>
+                    <h1>Ping Pong</h1>
+                    
+                    <div class="form-group">
+                        <label for="opponentType">Opponent:</label>
+                        <select id="opponentType" onchange="onOpponentTypeChange()">
+                            <option value="ai">AI</option>
+                            <option value="human">Human</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="aiDifficultyGroup">
+                        <label for="aiDifficulty">AI Difficulty:</label>
+                        <select id="aiDifficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="winPoints">Win Points:</label>
+                        <input type="number" id="winPoints" value="5" min="1" max="20">
+                    </div>
+                    
+                    <div id="humanOpponentSection" style="display: none;">
+                        <button class="btn btn-secondary" onclick="showAvailablePlayers()">Show Available Players</button>
+                        
+                        <div id="availablePlayers" class="user-list"></div>
+                        
+                        <div id="chatSection" style="margin-top: 20px;">
+                            <h3>Chat</h3>
+                            <div class="chat-container">
+                                <div id="chatMessages" class="chat-messages"></div>
+                                <div class="chat-input">
+                                    <input type="text" id="chatInput" placeholder="Type a message...">
+                                    <button class="btn btn-primary" onclick="sendChat()">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="startGame()">Start Game</button>
+                    
+                    <div id="winnerMessage" class="success-message"></div>
+                    
+                    <div id="gameHistory" style="margin-top: 20px;">
+                        <h3>Recent Games</h3>
+                        <div id="historyList" class="history-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <div class="app-bar">
+                <h2 id="gameTitle">Pong vs Opponent</h2>
+                <div>
+                    <button class="btn btn-secondary" onclick="exitGame()">Exit Game</button>
+                </div>
+            </div>
+            
+            <div class="game-canvas-container">
+                <canvas id="gameCanvas" width="700" height="400"></canvas>
+                <div id="scoreDisplay" class="score-display">0 : 0</div>
+            </div>
+            
+            <div class="chat-container" style="margin-top: 20px;">
+                <h3>Chat with <span id="opponentName">Opponent</span></h3>
+                <div id="gameChatMessages" class="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="gameChatInput" placeholder="Type a message...">
+                    <button class="btn btn-primary" onclick="sendGameChat()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">Help</h2>
+            <p>Sign up or log in to start. Your games will be saved online.</p>
+            <p>Or select 'Play Offline' to play against AI without an account.</p>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="closeHelp()">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Game state
+        let gameState = {
+            username: '',
+            offlineMode: false,
+            isLoginMode: true,
+            opponentType: 'ai',
+            aiDifficulty: 'medium',
+            winPoints: 5,
+            selectedOpponent: null,
+            onlineUsers: [],
+            chatLog: [],
+            gameHistory: [],
+            isGameActive: false,
+            winnerMsg: '',
+            lobbyState: 'idle'
+        };
+
+        // DOM Elements
+        const usernameScreen = document.getElementById('usernameScreen');
+        const mainScreen = document.getElementById('mainScreen');
+        const gameScreen = document.getElementById('gameScreen');
+        const usernameInput = document.getElementById('usernameInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const offlineModeToggle = document.getElementById('offlineMode');
+        const errorMessage = document.getElementById('errorMessage');
+        const submitButton = document.getElementById('submitButton');
+        const toggleLoginButton = document.getElementById('toggleLoginButton');
+        const welcomeText = document.getElementById('welcomeText');
+        const opponentTypeSelect = document.getElementById('opponentType');
+        const aiDifficultyGroup = document.getElementById('aiDifficultyGroup');
+        const humanOpponentSection = document.getElementById('humanOpponentSection');
+        const winPointsInput = document.getElementById('winPoints');
+        const availablePlayers = document.getElementById('availablePlayers');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const winnerMessage = document.getElementById('winnerMessage');
+        const historyList = document.getElementById('historyList');
+        const gameCanvas = document.getElementById('gameCanvas');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const gameTitle = document.getElementById('gameTitle');
+        const opponentName = document.getElementById('opponentName');
+        const gameChatMessages = document.getElementById('gameChatMessages');
+        const gameChatInput = document.getElementById('gameChatInput');
+        const helpModal = document.getElementById('helpModal');
+
+        // Initialize the application
+        function init() {
+            // Set up event listeners
+            offlineModeToggle.addEventListener('change', toggleOfflineMode);
+            winPointsInput.addEventListener('change', updateWinPoints);
+            
+            // Load any saved data
+            const savedUsername = localStorage.getItem('username');
+            if (savedUsername) {
+                usernameInput.value = savedUsername;
+            }
+            
+            // Set up canvas context
+            window.canvasContext = gameCanvas.getContext('2d');
+        }
+
+        // Toggle offline mode
+        function toggleOfflineMode() {
+            gameState.offlineMode = offlineModeToggle.checked;
+            const loginForm = document.getElementById('loginForm');
+            
+            if (gameState.offlineMode) {
+                loginForm.style.display = 'none';
+                submitButton.textContent = 'Play Offline';
+                toggleLoginButton.style.display = 'none';
+            } else {
+                loginForm.style.display = 'block';
+                submitButton.textContent = gameState.isLoginMode ? 'Login' : 'Sign Up';
+                toggleLoginButton.style.display = 'block';
+            }
+        }
+
+        // Toggle login/signup mode
+        function toggleLoginMode() {
+            gameState.isLoginMode = !gameState.isLoginMode;
+            submitButton.textContent = gameState.isLoginMode ? 'Login' : 'Sign Up';
+            toggleLoginButton.textContent = gameState.isLoginMode 
+                ? 'Don\'t have an account? Sign Up' 
+                : 'Already have an account? Login';
+        }
+
+        // Handle form submission
+        function handleSubmit() {
+            if (gameState.offlineMode) {
+                // Play offline as guest
+                gameState.username = 'Guest';
+                showMainScreen();
+                return;
+            }
+            
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+            
+            if (!username) {
+                showError('Please enter a username');
+                return;
+            }
+            
+            if (!password) {
+                showError('Please enter a password');
+                return;
+            }
+            
+            // Simulate API call
+            simulateApiCall(username, password);
+        }
+
+        // Simulate API call for login/signup
+        function simulateApiCall(username, password) {
+            showError(''); // Clear any previous error
+            
+            // This is a simulation - in a real app, you would call your backend API
+            setTimeout(() => {
+                // Simulate successful login
+                if (username && password) {
+                    localStorage.setItem('username', username);
+                    gameState.username = username;
+                    showMainScreen();
+                } else {
+                    showError('Invalid username or password');
+                }
+            }, 500);
+        }
+
+        // Show error message
+        function showError(message) {
+            errorMessage.textContent = message;
+        }
+
+        // Show main screen
+        function showMainScreen() {
+            usernameScreen.classList.remove('active');
+            mainScreen.classList.add('active');
+            gameScreen.classList.remove('active');
+            
+            welcomeText.textContent = `Welcome, ${gameState.username}${gameState.offlineMode ? ' (Offline)' : ''}`;
+            
+            // Load game history
+            loadGameHistory();
+        }
+
+        // Show game screen
+        function showGameScreen() {
+            usernameScreen.classList.remove('active');
+            mainScreen.classList.remove('active');
+            gameScreen.classList.add('active');
+            
+            const opponent = gameState.opponentType === 'ai' 
+                ? `AI (${gameState.aiDifficulty})` 
+                : gameState.selectedOpponent;
+                
+            gameTitle.textContent = `Pong vs ${opponent}`;
+            opponentName.textContent = opponent;
+            
+            // Start the game
+            startPongGame();
+        }
+
+        // Handle opponent type change
+        function onOpponentTypeChange() {
+            gameState.opponentType = opponentTypeSelect.value;
+            
+            if (gameState.opponentType === 'ai') {
+                aiDifficultyGroup.style.display = 'block';
+                humanOpponentSection.style.display = 'none';
+            } else {
+                aiDifficultyGroup.style.display = 'none';
+                humanOpponentSection.style.display = 'block';
+                
+                // Simulate fetching online users
+                simulateOnlineUsers();
+            }
+        }
+
+        // Simulate online users
+        function simulateOnlineUsers() {
+            gameState.onlineUsers = ['Player1', 'Player2', 'Player3', 'Player4'];
+            
+            availablePlayers.innerHTML = '';
+            gameState.onlineUsers.forEach(user => {
+                if (user !== gameState.username) {
+                    const userElement = document.createElement('div');
+                    userElement.className = 'user-chip';
+                    userElement.textContent = user;
+                    userElement.addEventListener('click', () => selectOpponent(user, userElement));
+                    availablePlayers.appendChild(userElement);
+                }
+            });
+        }
+
+        // Select opponent
+        function selectOpponent(username, element) {
+            // Remove selected class from all chips
+            document.querySelectorAll('.user-chip').forEach(chip => {
+                chip.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked chip
+            element.classList.add('selected');
+            
+            gameState.selectedOpponent = username;
+        }
+
+        // Show available players
+        function showAvailablePlayers() {
+            simulateOnlineUsers();
+        }
+
+        // Send chat message
+        function sendChat() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+            
+            // Simulate sending chat
+            gameState.chatLog.push(`${gameState.username}: ${message}`);
+            updateChatMessages();
+            
+            chatInput.value = '';
+        }
+
+        // Update chat messages
+        function updateChatMessages() {
+            chatMessages.innerHTML = '';
+            gameState.chatLog.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                chatMessages.appendChild(messageElement);
+            });
+            
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Update win points
+        function updateWinPoints() {
+            gameState.winPoints = parseInt(winPointsInput.value) || 5;
+        }
+
+        // Load game history
+        function loadGameHistory() {
+            // Simulate loading game history
+            gameState.gameHistory = [
+                '2023-05-15 14:30 - Winner: Player1 | Loser: AI',
+                '2023-05-14 10:15 - Winner: Player2 | Loser: Player1',
+                '2023-05-13 16:45 - Winner: Player1 | Loser: Player3'
+            ];
+            
+            historyList.innerHTML = '';
+            gameState.gameHistory.forEach(game => {
+                const gameElement = document.createElement('div');
+                gameElement.className = 'history-item';
+                gameElement.textContent = game;
+                historyList.appendChild(gameElement);
+            });
+        }
+
+        // Start game
+        function startGame() {
+            if (gameState.opponentType === 'human' && !gameState.selectedOpponent) {
+                alert('Please select an opponent first');
+                return;
+            }
+            
+            showGameScreen();
+        }
+
+        // Exit game
+        function exitGame() {
+            stopGame();
+            showMainScreen();
+        }
+
+        // Show help modal
+        function showHelp() {
+            helpModal.style.display = 'flex';
+        }
+
+        // Close help modal
+        function closeHelp() {
+            helpModal.style.display = 'none';
+        }
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('username');
+            gameState.username = '';
+            usernameScreen.classList.add('active');
+            mainScreen.classList.remove('active');
+            gameScreen.classList.remove('active');
+        }
+
+        // Pong Game Implementation
+        let gameInterval;
+        let gameWidth = 700;
+        let gameHeight = 400;
+        let paddleHeight = 100;
+        let paddleWidth = 10;
+        let ballSize = 10;
+        let playerY = (gameHeight - paddleHeight) / 2;
+        let opponentY = (gameHeight - paddleHeight) / 2;
+        let ballX = gameWidth / 2;
+        let ballY = gameHeight / 2;
+        let ballSpeedX = 5;
+        let ballSpeedY = 3;
+        let playerScore = 0;
+        let opponentScore = 0;
+        let gameRunning = false;
+
+        // Start Pong game
+        function startPongGame() {
+            resetGame();
+            gameRunning = true;
+            
+            // Set up game loop
+            gameInterval = setInterval(updateGame, 16); // ~60 FPS
+            
+            // Set up mouse movement listener
+            gameCanvas.addEventListener('mousemove', handleMouseMove);
+            
+            // Set up touch movement listener for mobile
+            gameCanvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+        }
+
+        // Stop game
+        function stopGame() {
+            clearInterval(gameInterval);
+            gameRunning = false;
+            gameCanvas.removeEventListener('mousemove', handleMouseMove);
+            gameCanvas.removeEventListener('touchmove', handleTouchMove);
+        }
+
+        // Reset game
+        function resetGame() {
+            playerY = (gameHeight - paddleHeight) / 2;
+            opponentY = (gameHeight - paddleHeight) / 2;
+            ballX = gameWidth / 2;
+            ballY = gameHeight / 2;
+            ballSpeedX = (Math.random() > 0.5 ? 1 : -1) * 5;
+            ballSpeedY = (Math.random() > 0.5 ? 1 : -1) * 3;
+            playerScore = 0;
+            opponentScore = 0;
+            updateScoreDisplay();
+        }
+
+        // Update game state
+        function updateGame() {
+            // Move ball
+            ballX += ballSpeedX;
+            ballY += ballSpeedY;
+            
+            // Ball collision with top and bottom walls
+            if (ballY <= 0 || ballY >= gameHeight - ballSize) {
+                ballSpeedY = -ballSpeedY;
+            }
+            
+            // Ball collision with paddles
+            // Player paddle
+            if (ballX <= paddleWidth && 
+                ballY + ballSize >= playerY && 
+                ballY <= playerY + paddleHeight) {
+                ballSpeedX = Math.abs(ballSpeedX); // Move right
+                // Add some angle based on where the ball hit the paddle
+                const deltaY = ballY - (playerY + paddleHeight / 2);
+                ballSpeedY = deltaY * 0.2;
+            }
+            
+            // Opponent paddle (AI or human)
+            if (ballX >= gameWidth - paddleWidth - ballSize && 
+                ballY + ballSize >= opponentY && 
+                ballY <= opponentY + paddleHeight) {
+                ballSpeedX = -Math.abs(ballSpeedX); // Move left
+                // Add some angle based on where the ball hit the paddle
+                const deltaY = ballY - (opponentY + paddleHeight / 2);
+                ballSpeedY = deltaY * 0.2;
+            }
+            
+            // AI movement
+            if (gameState.opponentType === 'ai') {
+                moveAI();
+            }
+            
+            // Score points
+            if (ballX < 0) {
+                opponentScore++;
+                resetBall();
+            } else if (ballX > gameWidth) {
+                playerScore++;
+                resetBall();
+            }
+            
+            // Check win condition
+            if (playerScore >= gameState.winPoints || opponentScore >= gameState.winPoints) {
+                endGame();
+            }
+            
+            // Update score display
+            updateScoreDisplay();
+            
+            // Draw game
+            drawGame();
+        }
+
+        // Move AI based on difficulty
+        function moveAI() {
+            let aiSpeed;
+            switch (gameState.aiDifficulty) {
+                case 'easy':
+                    aiSpeed = 2;
+                    break;
+                case 'medium':
+                    aiSpeed = 4;
+                    break;
+                case 'hard':
+                    aiSpeed = 6;
+                    break;
+                default:
+                    aiSpeed = 4;
+            }
+            
+            // Simple AI to follow the ball
+            const opponentCenter = opponentY + paddleHeight / 2;
+            const ballCenter = ballY + ballSize / 2;
+            
+            if (opponentCenter < ballCenter - 10) {
+                opponentY += aiSpeed;
+            } else if (opponentCenter > ballCenter + 10) {
+                opponentY -= aiSpeed;
+            }
+            
+            // Keep AI paddle within bounds
+            opponentY = Math.max(0, Math.min(gameHeight - paddleHeight, opponentY));
+        }
+
+        // Reset ball after scoring
+        function resetBall() {
+            ballX = gameWidth / 2;
+            ballY = gameHeight / 2;
+            ballSpeedX = (Math.random() > 0.5 ? 1 : -1) * 5;
+            ballSpeedY = (Math.random() > 0.5 ? 1 : -1) * 3;
+        }
+
+        // Handle mouse movement for player paddle
+        function handleMouseMove(e) {
+            const rect = gameCanvas.getBoundingClientRect();
+            const mouseY = e.clientY - rect.top;
+            playerY = mouseY - paddleHeight / 2;
+            
+            // Keep paddle within bounds
+            playerY = Math.max(0, Math.min(gameHeight - paddleHeight, playerY));
+        }
+
+        // Handle touch movement for mobile
+        function handleTouchMove(e) {
+            e.preventDefault();
+            const rect = gameCanvas.getBoundingClientRect();
+            const touchY = e.touches[0].clientY - rect.top;
+            playerY = touchY - paddleHeight / 2;
+            
+            // Keep paddle within bounds
+            playerY = Math.max(0, Math.min(gameHeight - paddleHeight, playerY));
+        }
+
+        // Update score display
+        function updateScoreDisplay() {
+            scoreDisplay.textContent = `${playerScore} : ${opponentScore}`;
+        }
+
+        // Draw game elements
+        function drawGame() {
+            const ctx = window.canvasContext;
+            
+            // Clear canvas
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, gameWidth, gameHeight);
+            
+            // Draw center line
+            ctx.strokeStyle = '#fff';
+            ctx.setLineDash([10, 10]);
+            ctx.beginPath();
+            ctx.moveTo(gameWidth / 2, 0);
+            ctx.lineTo(gameWidth / 2, gameHeight);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // Draw paddles
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(0, playerY, paddleWidth, paddleHeight); // Player paddle
+            ctx.fillRect(gameWidth - paddleWidth, opponentY, paddleWidth, paddleHeight); // Opponent paddle
+            
+            // Draw ball
+            ctx.beginPath();
+            ctx.arc(ballX, ballY, ballSize / 2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw player names
+            ctx.font = '14px Arial';
+            ctx.fillText(gameState.username, 15, playerY - 5);
+            
+            const opponentName = gameState.opponentType === 'ai' 
+                ? `AI (${gameState.aiDifficulty})` 
+                : gameState.selectedOpponent;
+                
+            ctx.fillText(opponentName, gameWidth - paddleWidth - 100, opponentY - 5);
+        }
+
+        // End game
+        function endGame() {
+            stopGame();
+            
+            const winner = playerScore > opponentScore ? gameState.username : 
+                          (gameState.opponentType === 'ai' ? 'AI' : gameState.selectedOpponent);
+            
+            // Add to game history
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            
+            gameState.gameHistory.unshift(
+                `${dateStr} - Winner: ${winner} | Loser: ${winner === gameState.username ? 
+                (gameState.opponentType === 'ai' ? 'AI' : gameState.selectedOpponent) : gameState.username}`
+            );
+            
+            // Update UI
+            winnerMessage.textContent = `Winner: ${winner}`;
+            
+            // Show main screen after a delay
+            setTimeout(() => {
+                showMainScreen();
+                loadGameHistory();
+            }, 3000);
+        }
+
+        // Send game chat
+        function sendGameChat() {
+            const message = gameChatInput.value.trim();
+            if (!message) return;
+            
+            gameState.chatLog.push(`${gameState.username}: ${message}`);
+            updateGameChatMessages();
+            
+            gameChatInput.value = '';
+        }
+
+        // Update game chat messages
+        function updateGameChatMessages() {
+            gameChatMessages.innerHTML = '';
+            gameState.chatLog.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.textContent = message;
+                gameChatMessages.appendChild(messageElement);
+            });
+            
+            gameChatMessages.scrollTop = gameChatMessages.scrollHeight;
+        }
+
+        // Initialize the app when the page loads
+        window.onload = init;
+    </script>
+</body>
+</html>
