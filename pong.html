@@ -259,9 +259,7 @@
                 <p id="error-message" class="text-red-500 hidden"></p>
                 <div id="auth-fields" class="w-full flex flex-col space-y-4">
                     <input type="text" id="username" placeholder="Username" class="p-3 rounded-md bg-gray-700 border-none text-gray-200 focus:ring-2 focus:ring-green-400">
-                    <input type="password" id="password" placeholder="Password" class="p-3 rounded-md bg-gray-700 border-none text-gray-200 focus:ring-2 focus:ring-green-400">
                     <button id="auth-button" class="w-full p-3 rounded-lg bg-green-400 text-gray-900 font-bold hover:bg-green-500 transition-colors">Login</button>
-                    <button id="toggle-auth-button" class="w-full p-3 rounded-lg text-green-400 font-bold hover:underline">Don't have an account? Sign Up</button>
                 </div>
                 <div class="w-full flex items-center justify-center space-x-2">
                     <span class="text-sm">Play Offline:</span>
@@ -376,21 +374,7 @@
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, addDoc, collection, query, where, getDocs, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Firebase Global Variables
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
+    <script>
         // --- Global State ---
         let currentScreen = 'login';
         let username = '';
@@ -398,9 +382,6 @@
         let aiDifficulty = 'Medium';
         let winPoints = 5;
         let isOnline = false;
-        let userId = null;
-        let dbAuthReady = false;
-        let authStateReady = false;
 
         let onlineUsers = [];
         let gameHistory = [];
@@ -432,9 +413,7 @@
             game: document.getElementById('game-screen')
         };
         const loginUsernameInput = document.getElementById('username');
-        const loginPasswordInput = document.getElementById('password');
         const authButton = document.getElementById('auth-button');
-        const toggleAuthButton = document.getElementById('toggle-auth-button');
         const offlineSwitch = document.getElementById('offline-switch');
         const errorMessage = document.getElementById('error-message');
         const lobbyUsernameSpan = document.getElementById('lobby-username');
@@ -480,103 +459,37 @@
             document.getElementById(modalId).classList.add('hidden');
         }
 
-        // --- Firebase Auth & Firestore Setup ---
-        async function firebaseInitAndSignIn() {
-            try {
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (error) {
-                console.error("Firebase auth error during initial sign-in:", error);
-            }
-        }
-        
-        function getHistoryCollection() {
-            if (!userId) {
-                console.error("User ID is not set. Cannot get Firestore collection.");
-                return null;
-            }
-            const historyPath = `/artifacts/${appId}/users/${userId}/history`;
-            return collection(db, historyPath);
-        }
-
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                userId = user.uid;
-                dbAuthReady = true;
-                if (authStateReady) {
-                    loadGameHistory();
-                }
-            } else {
-                userId = null;
-                dbAuthReady = true;
-            }
-            authStateReady = true;
-        });
-
         // --- Login Screen Logic ---
-        let isLoginMode = true;
-        let isOfflineMode = false;
-
-        toggleAuthButton.addEventListener('click', () => {
-            isLoginMode = !isLoginMode;
-            authButton.textContent = isLoginMode ? 'Login' : 'Sign Up';
-            toggleAuthButton.textContent = isLoginMode ? "Don't have an account? Sign Up" : "Already have an account? Login";
-        });
-
         offlineSwitch.addEventListener('change', (e) => {
             isOfflineMode = e.target.checked;
-            authButton.textContent = isOfflineMode ? 'Play Offline' : (isLoginMode ? 'Login' : 'Sign Up');
-            document.getElementById('auth-fields').style.display = isOfflineMode ? 'none' : 'flex';
+            authButton.textContent = isOfflineMode ? 'Play Offline' : 'Login';
         });
 
-        authButton.addEventListener('click', async () => {
+        authButton.addEventListener('click', () => {
             errorMessage.classList.add('hidden');
+            
             if (isOfflineMode) {
                 username = "Guest";
                 isOnline = false;
-                await firebaseInitAndSignIn();
                 showLobbyScreen();
                 return;
             }
 
             const user = loginUsernameInput.value.trim();
-            const pass = loginPasswordInput.value;
-            if (!user || !pass) {
-                showError("Please enter username and password.");
+            if (!user) {
+                showError("Please enter a username.");
                 return;
             }
 
-            authButton.disabled = true;
-            try {
-                if (isLoginMode) {
-                    await signInWithEmailAndPassword(auth, user + '@pong.com', pass);
-                } else {
-                    await createUserWithEmailAndPassword(auth, user + '@pong.com', pass);
-                }
-                username = user;
-                isOnline = true;
-                showLobbyScreen();
-            } catch (error) {
-                console.error("Auth error:", error);
-                showError(error.code.replace('auth/', '').replace(/-/g, ' '));
-            } finally {
-                authButton.disabled = false;
-            }
+            username = user;
+            isOnline = true;
+            showLobbyScreen();
         });
 
         function showError(message) {
             errorMessage.textContent = message;
             errorMessage.classList.remove('hidden');
         }
-        
-        document.getElementById('logout-button')?.addEventListener('click', () => {
-            auth.signOut();
-            isOnline = false;
-            showScreen('login');
-        });
 
         // --- Lobby Screen Logic ---
         function showLobbyScreen() {
@@ -685,45 +598,20 @@
             });
         }
 
-        async function loadGameHistory() {
-            if (!isOnline || !dbAuthReady) {
-                gameHistory = [];
-                renderGameHistory();
-                return;
-            }
-            try {
-                const historyRef = getHistoryCollection();
-                const q = query(historyRef);
-                const querySnapshot = await getDocs(q);
-                gameHistory = [];
-                querySnapshot.forEach(doc => {
-                    const data = doc.data();
-                    if (data.timestamp) {
-                        const date = data.timestamp.toDate();
-                        gameHistory.push(`${date.toISOString().substring(0, 19)} - Winner: ${data.winner} | Loser: ${data.loser}`);
-                    }
-                });
-                gameHistory.sort((a, b) => b.localeCompare(a));
-                renderGameHistory();
-            } catch (e) {
-                console.error("Error loading history:", e);
-            }
+        function loadGameHistory() {
+            const historyJson = localStorage.getItem('pongGameHistory');
+            gameHistory = historyJson ? JSON.parse(historyJson) : [];
+            renderGameHistory();
         }
         
-        async function saveGameHistory(winner, loser) {
-            if (!isOnline || !dbAuthReady) return;
-            try {
-                const historyRef = getHistoryCollection();
-                await addDoc(historyRef, {
-                    winner: winner,
-                    loser: loser,
-                    timestamp: serverTimestamp()
-                });
-                console.log("History saved to Firestore.");
-                loadGameHistory();
-            } catch (e) {
-                console.error("Error saving history:", e);
+        function saveGameHistory(winner, loser) {
+            const historyEntry = `${new Date().toISOString().substring(0, 19)} - Winner: ${winner} | Loser: ${loser}`;
+            gameHistory.unshift(historyEntry);
+            if (gameHistory.length > 20) {
+                gameHistory = gameHistory.slice(0, 20);
             }
+            localStorage.setItem('pongGameHistory', JSON.stringify(gameHistory));
+            renderGameHistory();
         }
         
         function renderGameHistory() {
@@ -1068,8 +956,8 @@
         }
 
         // --- Initial Load ---
-        window.onload = async () => {
-            await firebaseInitAndSignIn();
+        window.onload = () => {
+            loadGameHistory();
             showScreen('login');
         };
     </script>
