@@ -1,0 +1,49 @@
+# This is a simple but powerful workflow name.
+name: Deploy static site to Pages
+
+# This section tells GitHub WHEN to run the script.
+on:
+  # Runs every time you push code to the "main" branch
+  push:
+    branches: ["main"]
+  # This adds a manual trigger button in the "Actions" tab of your repo.
+  workflow_dispatch:
+
+# These are the security permissions required for deployment.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# This setting ensures only one deployment runs at a time.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+# This defines the actual jobs to be performed.
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Download your code from the repository.
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      # 2. Prepare the final set of files to be hosted.
+      # This step ensures Jekyll doesn't interfere with your files.
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      
+      # 3. Upload your files to GitHub's servers.
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      
+      # 4. Deploy the files to your live site.
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
